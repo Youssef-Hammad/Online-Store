@@ -80,6 +80,8 @@
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
     <Compile Include="Store.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserInfo.cs" />
     <EmbeddedResource Include="addProduct.resx">
       <DependentUpon>addProduct.cs</DependentUpon>
     </EmbeddedResource>
