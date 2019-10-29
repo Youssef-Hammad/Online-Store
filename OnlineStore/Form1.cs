@@ -12,15 +12,36 @@ namespace OnlineStore
 {
     public partial class login : Form
     {
+        private UserInfo u_info;
+        private UserHandler u_handler;
+
         public login()
         {
             InitializeComponent();
+            u_info = new UserInfo();
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             registerForm rForm = new registerForm();
             rForm.ShowDialog();
+        }
+
+        private void lUsrnameTxt_TextChanged(object sender, EventArgs e)
+        {
+            u_info.SetUsername(lUsrnameTxt.Text);
+        }
+
+        private void lPwdTxt_TextChanged(object sender, EventArgs e)
+        {
+            u_info.SetUsername(lPwdTxt.Text);
+        }
+
+        private void lLoginBtn_Click(object sender, EventArgs e)
+        {
+            User user = new User(u_info);
+            //u_handler = new UserHandler();
+            //u_handler.Login(user);
         }
     }
 }
