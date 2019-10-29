@@ -20,7 +20,7 @@ namespace OnlineStore
             else
                 return false;
         }
-        public void closeConnection()
+        public void CloseConnection()
         {
             dbConnection.Close();
         }
