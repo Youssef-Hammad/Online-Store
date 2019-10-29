@@ -2,8 +2,19 @@ namespace OnlineStore
 {
     class Product
     {
-        private string p_name;
-        private float  p_price;
-        private string p_category;
+        private ProductInfo p_info;
+
+        public Product(ProductInfo pInfo)
+        {
+            p_info = pInfo;
+        }
+        public ProductInfo GetProductInfo()
+        {
+            return p_info;
+        }
+        public bool SetProductInfo(ProductInfo pInfo)
+        {
+            p_info = pInfo;
+        }
     }
 }
