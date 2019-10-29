@@ -23,7 +23,7 @@ namespace OnlineStore
             p_name = name;
             return true;
         }
-        public bool SetPrice(bool price)
+        public bool SetPrice(float price)
         {
             p_price = price;
             return true;

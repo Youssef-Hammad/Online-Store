@@ -12,7 +12,8 @@ namespace OnlineStore
         {
             return p_info;
         }
-        public bool SetProductInfo(ProductInfo pInfo)
+
+        public void SetProductInfo(ProductInfo pInfo)
         {
             p_info = pInfo;
         }
