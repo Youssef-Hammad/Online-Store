@@ -58,6 +58,7 @@
     <Compile Include="adminPanel.Designer.cs">
       <DependentUpon>adminPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="AuthenticationHandler.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
