@@ -10,17 +10,11 @@ using System.Windows.Forms;
 
 namespace OnlineStore
 {
-    public partial class login : Form
+    public partial class mainPlatform : Form
     {
-        public login()
+        public mainPlatform()
         {
             InitializeComponent();
-        }
-
-        private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            registerForm rForm = new registerForm();
-            rForm.ShowDialog();
         }
     }
 }

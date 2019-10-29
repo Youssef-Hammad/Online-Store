@@ -10,17 +10,17 @@ using System.Windows.Forms;
 
 namespace OnlineStore
 {
-    public partial class login : Form
+    public partial class adminPanel : Form
     {
-        public login()
+        public adminPanel()
         {
             InitializeComponent();
         }
 
-        private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void rRegisterBtn_Click(object sender, EventArgs e)
         {
-            registerForm rForm = new registerForm();
-            rForm.ShowDialog();
+            addProduct productForm = new addProduct();
+            productForm.ShowDialog();
         }
     }
 }
