@@ -7,7 +7,7 @@ namespace OnlineStore
     {
         SqlConnection dbConnection;
 
-        public AuthenticationHandler(string serverName)
+        public AuthenticationHandler(string serverName = null)  // = null for now
         {
             dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=emailApp;Integrated Security=True");
             dbConnection.Open();
