@@ -13,7 +13,7 @@ namespace OnlineStore
             dbConnection.Open();
         }
 
-        public void CreateAccount(User usr)
+        public bool CreateAccount(User usr)
         {
             string username = usr.GetUserInfo().GetUsername();
             string email = usr.GetUserInfo().GetEmail();
@@ -25,7 +25,9 @@ namespace OnlineStore
                 string arg = "values('" + username + "', '" + email + "', '" + pwd + "', '" + type + "');";
                 SqlCommand cmd = new SqlCommand(query + arg, dbConnection);
                 cmd.ExecuteNonQuery();
+                return true;
             }
+            return false;
         }
 
         public bool Login(User usr)
@@ -49,7 +51,6 @@ namespace OnlineStore
         {
             //TODO: doesn't need to be done in this sprint
         }
-
 
         public void CloseConnection()
         {
