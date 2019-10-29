@@ -12,9 +12,40 @@ namespace OnlineStore
 {
     public partial class addProduct : Form
     {
+        private ProductHandler p_handler;
+        private ProductInfo p_info;
+
         public addProduct()
         {
             InitializeComponent();
+            p_info = new ProductInfo();
+        }
+
+        private void pNameTxt_TextChanged(object sender, EventArgs e)
+        {
+            p_info.SetName(pNameTxt.Text);
+        }
+
+        private void pPriceTxt_TextChanged(object sender, EventArgs e)
+        {
+            String input = pPriceTxt.Text;
+            if (input.Contains("."))
+            {
+                input = input.Replace(".", ",");
+            }
+            float price = Convert.ToSingle(input);
+            p_info.SetPrice(price);
+        }
+
+        private void pCategoryTxt_TextChanged(object sender, EventArgs e)
+        {
+            p_info.SetCategory(pCategoryTxt.Text);
+        }
+
+        private void rRegisterBtn_Click(object sender, EventArgs e)
+        {
+            Product product = new Product(p_info);
+            p_handler.AddProduct(product);
         }
     }
 }
