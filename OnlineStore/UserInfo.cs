@@ -23,7 +23,7 @@
             return u_password;
         }
 
-        public UTYPE GetType()
+        public UTYPE GetUserType()
         {
             return u_type;
         }
@@ -43,7 +43,7 @@
             u_password = encryptedPassword;
         }
 
-        public void SetType(UTYPE type)
+        public void SetUserType(UTYPE type)
         {
             u_type = type;
         }

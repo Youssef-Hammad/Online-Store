@@ -45,6 +45,7 @@ namespace OnlineStore
         private void rRegisterBtn_Click(object sender, EventArgs e)
         {
             Product product = new Product(p_info);
+            MessageBox.Show(p_info.GetName() + " " + p_info.GetPrice() + " " + p_info.GetCategory());
             p_handler.AddProduct(product);
         }
     }

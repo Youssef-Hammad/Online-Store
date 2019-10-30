@@ -9,18 +9,12 @@ namespace OnlineStore
 {
     class MerchantHandler
     {
-        private SqlConnection conn;
-        private SqlCommand cmd;
-        private String connectionString;
-        //private Product product;
+        private SqlConnection dbConnection;
 
-        public MerchantHandler()
+        public MerchantHandler(string serverName)
         {
-            // edit connection string to real values
-            connectionString = "Data Source=ServerName;Initial Catalog=db.sql;User ID=UserName;Password=Password";
-
-            conn = new SqlConnection(connectionString);
-            conn.Open();
+            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
+            dbConnection.Open();
         }
 
         public List<String> GetMerchantStores(User merchant)
@@ -28,7 +22,7 @@ namespace OnlineStore
             String m_username = merchant.GetUserInfo().GetUsername();
             String query = "SELECT STORENAME from [merchantStores] as m where m.MERCHANTNAME = '" + m_username + "';";
 
-            cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<String> stores = new List<String>();
 
@@ -42,13 +36,13 @@ namespace OnlineStore
 
         public bool VerifyMerchant(User merchant)
         {
-            AuthenticationHandler a_handler = new AuthenticationHandler();
-            return a_handler.VerifyUser(merchant);
+            AuthenticationHandler AuthHandler = new AuthenticationHandler();
+            return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
         }
 
         public void CloseConnection()
         {
-            conn.Close();
+            dbConnection.Close();
         }
 
 

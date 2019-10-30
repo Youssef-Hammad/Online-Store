@@ -1,3 +1,5 @@
+using System.Data.SqlClient;
+
 namespace OnlineStore
 {
     class AdminHandler
@@ -6,16 +8,13 @@ namespace OnlineStore
 
         public AdminHandler(string serverName)
         {
-            // edit connection string to real values
-            connectionString = "Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password";
-
-            dbConnection = new SqlConnection(connectionString);
+            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
             dbConnection.Open();
         }
 
         public bool VerifyIsAdmin(User admin)
         {
-            if (admin.GetUserInfo().GetType() == ADMIN)
+            if (admin.GetUserInfo().GetUserType() == UTYPE.ADMIN)
                 return true;
             else
                 return false;

@@ -12,20 +12,13 @@ namespace OnlineStore
     class ProductHandler
     {
         private SqlConnection conn;
-        private SqlCommand cmd;
-        private String connectionString;
         private Product product;
 
-        public ProductHandler()
+        public ProductHandler(string serverName)
         {
-            // edit connection string to real values
-            connectionString = "Data Source=ServerName;Initial Catalog=db.sql;User ID=UserName;Password=Password";
-
-            conn = new SqlConnection(connectionString);
+            conn = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
             conn.Open();
         }
-
-        public SqlCommand Cmd { get => cmd; set => cmd = value; }
 
         public bool AddProduct(Product product)
         {
@@ -33,12 +26,12 @@ namespace OnlineStore
             float p_price = product.GetProductInfo().GetPrice();
             String p_category = product.GetProductInfo().GetCategory();
 
-            String query = "INSERT INTO products(NAME, PRICE, CATEGORY)VALUES(" + p_name + ", " + p_price + ", " + p_category + ")";
-            Cmd = new SqlCommand(query, conn);
+            String query = "INSERT INTO products(NAME, PRICE, CATEGORY) VALUES('" + p_name + "', " + p_price + ", '" + p_category + "')";
+            SqlCommand cmd = new SqlCommand(query, conn);
 
             try
             {
-                Cmd.ExecuteNonQuery();
+                cmd.ExecuteNonQuery();
                 return true;
             }
             catch (SqlException ex)

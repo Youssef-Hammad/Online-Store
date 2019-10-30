@@ -1,46 +1,42 @@
+using System.Data.SqlClient;
+
 namespace OnlineStore
 {
     class StoreHandler
     {
         private SqlConnection dbConnection;
-        private SqlCommand cmd;
 
         public StoreHandler(string serverName)
         {
-            // edit connection string to real values
-            connectionString = "Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password";
-
-            dbConnection = new SqlConnection(connectionString);
+            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
             dbConnection.Open();
         }
 
-        public SqlCommand Cmd { get => cmd; set => cmd = value; }
-
         public bool AddProduct(Store store, Product product)
         {
-            string pName = product.p_name;
-            float pPrice = product.p_price;
-            string pCategory = product.p_category;
+            string pName = product.GetProductInfo().GetName();
+            float pPrice = product.GetProductInfo().GetPrice();
+            string pCategory = product.GetProductInfo().GetCategory();
 
             string storeName = store.GetStoreName();
 
-            string query = "GET FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
+            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
 
-            dbConnection.CommandText = query;
-			if(dbConnection.ExecuteScalar()==null)
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+			if(cmd.ExecuteScalar()==null)
             {
                 query = "INSERT INTO storeProducts(STORENAME,PRODUCTNAME) VALUES('" + storeName + "','" + pName + "')";
 
-                Cmd = new SqlCommand(query, conn);
+                cmd = new SqlCommand(query, dbConnection);
 
                 try
                 {
-                    Cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     return true;
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
                     return false;
                 }
             }
@@ -52,36 +48,37 @@ namespace OnlineStore
 
 		public bool RemoveProduct(Store store,Product product)
         {
-            string pName = product.p_name;
-            float pPrice = product.p_price;
-            string pCategory = product.p_category;
+            string pName = product.GetProductInfo().GetName();
+            float pPrice = product.GetProductInfo().GetPrice();
+            string pCategory = product.GetProductInfo().GetCategory();
 
             string storeName = store.GetStoreName();
 
-            string query = "GET FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
+            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
 
-            dbConnection.CommandText = query;
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
 
-            if (dbConnection.ExecuteScalar() == null)
+            if (cmd.ExecuteScalar() == null)
                 return false;
 			else
             {
                 query = "DELETE FROM storeProducts WHERE STORENAME= '" + storeName + "' AND PRODUCTNAME='" + pName + "'";
 
-                Cmd = new SqlCommand(query, conn);
+                cmd = new SqlCommand(query, dbConnection);
 
                 try
                 {
-                    Cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery();
                     return true;
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
                     return false;
                 }
             }
         }
+
 		public void CloseConnection()
         {
             dbConnection.Close();
