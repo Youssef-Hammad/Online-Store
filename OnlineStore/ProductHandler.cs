@@ -11,13 +11,13 @@ namespace OnlineStore
 {
     class ProductHandler
     {
-        private SqlConnection conn;
-        private Product product;
+        private SqlConnection dbConnection;
+        //private Product product;
 
         public ProductHandler(string serverName)
         {
-            conn = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
-            conn.Open();
+            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
+            dbConnection.Open();
         }
 
         public bool AddProduct(Product product)
@@ -27,7 +27,7 @@ namespace OnlineStore
             String p_category = product.GetProductInfo().GetCategory();
 
             String query = "INSERT INTO products(NAME, PRICE, CATEGORY) VALUES('" + p_name + "', " + p_price + ", '" + p_category + "')";
-            SqlCommand cmd = new SqlCommand(query, conn);
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
 
             try
             {
@@ -43,7 +43,7 @@ namespace OnlineStore
 
         public void CloseConn()
         {
-            conn.Close();
+            dbConnection.Close();
         }
 
     }

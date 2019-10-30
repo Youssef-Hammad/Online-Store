@@ -40,7 +40,7 @@ namespace OnlineStore
         private void lLoginBtn_Click(object sender, EventArgs e)
         {
             User user = new User(u_info);
-            //u_handler = new UserHandler();
+            //u_handler = new UserHandler(/* server name */);
             //u_handler.Login(user);
         }
     }

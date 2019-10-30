@@ -48,5 +48,10 @@ namespace OnlineStore
             MessageBox.Show(p_info.GetName() + " " + p_info.GetPrice() + " " + p_info.GetCategory());
             p_handler.AddProduct(product);
         }
+
+        private void pNameTxt_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
