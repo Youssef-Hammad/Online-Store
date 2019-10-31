@@ -23,16 +23,6 @@ namespace OnlineStore
             u_info = new UserInfo();
         }
 
-        private void rFirstNameTxt_TextChanged(object sender, EventArgs e)
-        {
-            // no first name in user info
-        }
-
-        private void rLastNameTxt_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void rUsrnameTxt_TextChanged(object sender, EventArgs e)
         {
             u_info.SetUsername(rUsrnameTxt.Text);
