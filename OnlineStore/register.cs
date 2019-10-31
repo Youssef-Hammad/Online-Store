@@ -12,6 +12,7 @@ namespace OnlineStore
 {
     public partial class registerForm : Form
     {
+        private User user;
         private UserInfo u_info;
         private UserHandler u_handler;
         private String password;
@@ -63,6 +64,16 @@ namespace OnlineStore
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void rRegisterBtn_Click(object sender, EventArgs e)
+        {
+            user = new User(u_info);
+
+            // Remove comments when adding a server name
+
+            //u_handler = new UserHandler(/* srever name */);
+            //u_handler.CreateAccount(user);
         }
     }
 }

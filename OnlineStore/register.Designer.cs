@@ -146,6 +146,7 @@
             this.rRegisterBtn.TabIndex = 14;
             this.rRegisterBtn.Text = "register";
             this.rRegisterBtn.UseVisualStyleBackColor = false;
+            this.rRegisterBtn.Click += new System.EventHandler(this.rRegisterBtn_Click);
             // 
             // textBox1
             // 
