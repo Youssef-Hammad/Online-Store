@@ -6,9 +6,9 @@ namespace OnlineStore
     {
         private SqlConnection dbConnection;
 
-        public StoreHandler(string serverName)
+        public StoreHandler(string connString)
         {
-            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
+            dbConnection = new SqlConnection(connString);
             dbConnection.Open();
         }
 

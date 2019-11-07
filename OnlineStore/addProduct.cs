@@ -15,10 +15,13 @@ namespace OnlineStore
         private ProductHandler p_handler;
         private ProductInfo p_info;
 
+        static Form loginForm = Application.OpenForms["Form1"];
+
         public addProduct()
         {
             InitializeComponent();
             p_info = new ProductInfo();
+            p_handler = new ProductHandler(((login)loginForm).connString);
         }
 
         private void pNameTxt_TextChanged(object sender, EventArgs e)
@@ -50,6 +53,11 @@ namespace OnlineStore
         }
 
         private void pNameTxt_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void addProduct_Load(object sender, EventArgs e)
         {
 
         }

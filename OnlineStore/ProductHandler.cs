@@ -14,9 +14,9 @@ namespace OnlineStore
         private SqlConnection dbConnection;
         //private Product product;
 
-        public ProductHandler(string serverName)
+        public ProductHandler(string connString)
         {
-            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
+            dbConnection = new SqlConnection(connString);
             dbConnection.Open();
         }
 

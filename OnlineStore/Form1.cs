@@ -15,10 +15,14 @@ namespace OnlineStore
         private UserInfo u_info;
         private UserHandler u_handler;
 
+        public String sqlServerName;
+        public String connString;
+
         public login()
         {
             InitializeComponent();
             u_info = new UserInfo();
+            connString = "Data Source=" + sqlServerName + ";Initial Catalog=emailApp;Integrated Security=True";
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -40,8 +44,10 @@ namespace OnlineStore
         private void lLoginBtn_Click(object sender, EventArgs e)
         {
             User user = new User(u_info);
-            //u_handler = new UserHandler(/* server name */);
-            //u_handler.Login(user);
+            u_handler = new UserHandler(connString);
+            u_handler.Login(user);
+            MessageBox.Show("ok");
         }
+
     }
 }

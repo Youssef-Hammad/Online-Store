@@ -6,10 +6,10 @@ namespace OnlineStore
     {
         SqlConnection dbConnection;
         AuthenticationHandler authHandler;
-        public UserHandler(string serverName)
+        public UserHandler(string connString)
         {
-            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=emailApp;Integrated Security=True");
-            authHandler = new AuthenticationHandler(serverName);
+            dbConnection = new SqlConnection(connString);
+            authHandler = new AuthenticationHandler(connString);
             dbConnection.Open();
         }
 

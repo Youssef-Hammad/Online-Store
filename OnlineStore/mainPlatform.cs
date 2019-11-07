@@ -16,5 +16,10 @@ namespace OnlineStore
         {
             InitializeComponent();
         }
+
+        private void mainPlatform_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

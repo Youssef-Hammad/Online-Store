@@ -11,9 +11,9 @@ namespace OnlineStore
     {
         private SqlConnection dbConnection;
 
-        public MerchantHandler(string serverName)
+        public MerchantHandler(string connString)
         {
-            dbConnection = new SqlConnection("Data Source=" + serverName + ";Initial Catalog=db.sql;User ID=UserName;Password=Password");
+            dbConnection = new SqlConnection(connString);
             dbConnection.Open();
         }
 
@@ -36,7 +36,7 @@ namespace OnlineStore
 
         public bool VerifyMerchant(User merchant)
         {
-            AuthenticationHandler AuthHandler = new AuthenticationHandler();
+            AuthenticationHandler AuthHandler = new AuthenticationHandler(dbConnection.ConnectionString);
             return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
         }
 
