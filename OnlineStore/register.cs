@@ -16,6 +16,7 @@ namespace OnlineStore
         private UserInfo u_info;
         private UserHandler u_handler;
         private String password;
+        private String passToVerify;
 
         public registerForm()
         {
@@ -40,15 +41,7 @@ namespace OnlineStore
 
         private void rVerifyPwdTxt_TextChanged(object sender, EventArgs e)
         {
-            String passToVerify = rVerifyPwdTxt.Text;
-            if(password.Equals(passToVerify))
-            {
-                u_info.SetPassword(password);
-            }
-            else
-            {
-                textBox1.Text = "Passwords don't match";
-            }
+            passToVerify = rVerifyPwdTxt.Text;
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -58,12 +51,26 @@ namespace OnlineStore
 
         private void rRegisterBtn_Click(object sender, EventArgs e)
         {
-            user = new User(u_info);
+            if (rEmailTxt.Text.Trim() == string.Empty || rPwdTxt.Text.Trim() == string.Empty
+                || rVerifyPwdTxt.Text.Trim() == string.Empty || rUsrnameTxt.Text.Trim() == string.Empty)
+            {
+                MessageBox.Show("Fill empty fields");
+                return;
+            }
+            if(!password.Equals(passToVerify))
+            {
+                textBox1.Text = "passwords don't match";
+            }
+            else
+            {
+                textBox1.Text = string.Empty;
+                u_info.SetPassword(password);
+                user = new User(u_info);
+                // Remove comments when adding a server name
 
-            // Remove comments when adding a server name
-
-            //u_handler = new UserHandler(/* srever name */);
-            //u_handler.CreateAccount(user);
+                //u_handler = new UserHandler(/* srever name */);
+                //u_handler.CreateAccount(user);
+            }
         }
     }
 }
