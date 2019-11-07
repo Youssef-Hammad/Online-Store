@@ -46,59 +46,59 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addProduct.cs">
+    <Compile Include="GUI forms\addProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addProduct.Designer.cs">
+    <Compile Include="GUI forms\addProduct.Designer.cs">
       <DependentUpon>addProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="AdminHandler.cs" />
-    <Compile Include="adminPanel.cs">
+    <Compile Include="handlers\AdminHandler.cs" />
+    <Compile Include="GUI forms\adminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="adminPanel.Designer.cs">
+    <Compile Include="GUI forms\adminPanel.Designer.cs">
       <DependentUpon>adminPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="AuthenticationHandler.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="handlers\AuthenticationHandler.cs" />
+    <Compile Include="GUI forms\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
+    <Compile Include="GUI forms\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="mainPlatform.cs">
+    <Compile Include="GUI forms\mainPlatform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainPlatform.Designer.cs">
+    <Compile Include="GUI forms\mainPlatform.Designer.cs">
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </Compile>
-    <Compile Include="MerchantHandler.cs" />
-    <Compile Include="Product.cs" />
-    <Compile Include="ProductHandler.cs" />
-    <Compile Include="ProductInfo.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="handlers\MerchantHandler.cs" />
+    <Compile Include="classes\Product.cs" />
+    <Compile Include="handlers\ProductHandler.cs" />
+    <Compile Include="classes\ProductInfo.cs" />
+    <Compile Include="classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="register.cs">
+    <Compile Include="GUI forms\register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="register.Designer.cs">
+    <Compile Include="GUI forms\register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
-    <Compile Include="Store.cs" />
-    <Compile Include="StoreHandler.cs" />
-    <Compile Include="User.cs" />
-    <Compile Include="UserHandler.cs" />
-    <Compile Include="UserInfo.cs" />
-    <EmbeddedResource Include="addProduct.resx">
+    <Compile Include="classes\Store.cs" />
+    <Compile Include="handlers\StoreHandler.cs" />
+    <Compile Include="classes\User.cs" />
+    <Compile Include="handlers\UserHandler.cs" />
+    <Compile Include="classes\UserInfo.cs" />
+    <EmbeddedResource Include="GUI forms\addProduct.resx">
       <DependentUpon>addProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="adminPanel.resx">
+    <EmbeddedResource Include="GUI forms\adminPanel.resx">
       <DependentUpon>adminPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
+    <EmbeddedResource Include="GUI forms\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainPlatform.resx">
+    <EmbeddedResource Include="GUI forms\mainPlatform.resx">
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -110,7 +110,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="register.resx">
+    <EmbeddedResource Include="GUI forms\register.resx">
       <DependentUpon>register.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -126,5 +126,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
