@@ -1,10 +1,11 @@
-namespace OnlineStore
+namespace OnlineStore.classes
 {
     class ProductInfo
     {
         private string p_name;
         private float p_price;
         private string p_category;
+        private Brand p_brand;
 
         public string GetName()
         {
@@ -21,22 +22,29 @@ namespace OnlineStore
             return p_category;
         }
 
-        public bool SetName(string name)
+        public void SetName(string name)
         {
             p_name = name;
-            return true;
         }
 
-        public bool SetPrice(float price)
+        public void SetPrice(float price)
         {
             p_price = price;
-            return true;
         }
 
-        public bool SetCategory(string category)
+        public void SetCategory(string category)
         {
             p_category = category;
-            return true;
+        }
+
+        public void SetBrand(BrandInfo bInfo)
+        {
+            p_brand.SetBrandInfo(bInfo);
+        }
+
+        public BrandInfo GetBrand()
+        {
+            return p_brand.GetBrandInfo();
         }
     }
 }
