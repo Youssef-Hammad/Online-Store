@@ -26,7 +26,7 @@ namespace OnlineStore
 
         public bool VerifyUsername(string username)
         {
-            string query = "SELECT count(USERID) from [USER] where USERNAME = '" + username + "';";
+            string query = "SELECT count(USERNAME) from [USER] where USERNAME = '" + username + "';";
             SqlCommand cmd = new SqlCommand(query, dbConnection);
             int usernameCheck = Convert.ToInt16(cmd.ExecuteScalar());
             if (usernameCheck == 1)
@@ -36,7 +36,7 @@ namespace OnlineStore
 
         public bool VerifyEmail(string email)
         {
-            string query = "SELECT count(USERID) from [USER] where EMAIL = '" + email + "';";
+            string query = "SELECT count(USERNAME) from [USER] where EMAIL = '" + email + "';";
             SqlCommand cmd = new SqlCommand(query, dbConnection);
             int emailCheck = Convert.ToInt16(cmd.ExecuteScalar());
             if (emailCheck == 1)
@@ -48,9 +48,9 @@ namespace OnlineStore
         {
             string query = "";
             if(VerifyEmail(usrORemail))
-                query = "SELECT count(USERID) from [USER] where EMAIL = '" + usrORemail + "' AND PASSWORD = '" + encryptedPwd + "';";
+                query = "SELECT count(USERNAME) from [USER] where EMAIL = '" + usrORemail + "' AND [PASSWORD] = '" + encryptedPwd + "';";
             if(VerifyUsername(usrORemail))
-                query = "SELECT count(USERID) from [USER] where USERNAME = '" + usrORemail + "' AND PASSWORD = '" + encryptedPwd + "';";
+                query = "SELECT count(USERNAME) from [USER] where USERNAME = '" + usrORemail + "' AND [PASSWORD] = '" + encryptedPwd + "';";
 
             SqlCommand cmd = new SqlCommand(query, dbConnection);
             int pwdCheck = Convert.ToInt16(cmd.ExecuteScalar());

@@ -15,14 +15,14 @@ namespace OnlineStore
         private UserInfo u_info;
         private UserHandler u_handler;
 
-        public String sqlServerName;
+        public String sqlServerName = "DESKTOP-LULK971\\SQLEXPRESS";
         public String connString;
 
         public login()
         {
             InitializeComponent();
             u_info = new UserInfo();
-            connString = "Data Source=" + sqlServerName + ";Initial Catalog=emailApp;Integrated Security=True";
+            connString = "Data Source=" + sqlServerName + ";Initial Catalog=OnlineStore;Integrated Security=True";
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -49,5 +49,9 @@ namespace OnlineStore
             MessageBox.Show("ok");
         }
 
+        private void login_Load(object sender, EventArgs e)
+        {
+            MessageBox.Show(connString);
+        }
     }
 }

@@ -18,10 +18,10 @@ namespace OnlineStore
             string username = usr.GetUserInfo().GetUsername();
             string email = usr.GetUserInfo().GetEmail();
             string pwd = usr.GetUserInfo().GetPassword();
-            int type = (int)usr.GetUserInfo().GetUserType();
+            byte type = (byte)usr.GetUserInfo().GetUserType();
             if(!authHandler.VerifyEmail(email) && !authHandler.VerifyUsername(username))
             {
-                string query = "insert into [USER](USERNAME, EMAIL, PASSWORD, TYPE) ";
+                string query = "insert into [USER](USERNAME, EMAIL, [PASSWORD], UTYPE) ";
                 string arg = "values('" + username + "', '" + email + "', '" + pwd + "', '" + type + "');";
                 SqlCommand cmd = new SqlCommand(query + arg, dbConnection);
                 cmd.ExecuteNonQuery();

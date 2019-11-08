@@ -13,8 +13,7 @@ namespace OnlineStore
     public partial class registerForm : Form
     {
         private User user;
-        private UserInfo u_info;
-        private UserHandler u_handler;
+        private UserInfo u_info; 
         private String password;
         private String passToVerify;
 
@@ -52,25 +51,41 @@ namespace OnlineStore
         private void rRegisterBtn_Click(object sender, EventArgs e)
         {
             if (rEmailTxt.Text.Trim() == string.Empty || rPwdTxt.Text.Trim() == string.Empty
-                || rVerifyPwdTxt.Text.Trim() == string.Empty || rUsrnameTxt.Text.Trim() == string.Empty)
+                || rVerifyPwdTxt.Text.Trim() == string.Empty || rUsrnameTxt.Text.Trim() == string.Empty || (MrB.Checked == false && CrB.Checked == false))
             {
                 MessageBox.Show("Fill empty fields");
                 return;
             }
             if(!password.Equals(passToVerify))
             {
-                textBox1.Text = "passwords don't match";
+                errMsg.Text = "passwords don't match";
             }
             else
             {
-                textBox1.Text = string.Empty;
+                errMsg.Text = string.Empty;
                 u_info.SetPassword(password);
-                user = new User(u_info);
-                // Remove comments when adding a server name
+                if (CrB.Checked)
+                    u_info.SetUserType(UTYPE.CONSUMER);
+                else u_info.SetUserType(UTYPE.MERCHANT);
 
-                //u_handler = new UserHandler(/* srever name */);
-                //u_handler.CreateAccount(user);
+                user = new User(u_info);
+
+                Form loginForm = Application.OpenForms["login"];
+                String connString = ((login)loginForm).connString;
+
+                UserHandler u_handler = new UserHandler(connString);
+                if (u_handler.CreateAccount(user))
+                {
+                    MessageBox.Show("Registration successful");
+                    this.Close();
+                }
+                else MessageBox.Show("Registration Failed");
             }
+        }
+
+        private void registerForm_Load(object sender, EventArgs e)
+        {
+            CrB.Checked = true;
         }
     }
 }
