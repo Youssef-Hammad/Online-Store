@@ -61,7 +61,7 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Online store";
-            this.Load += new System.EventHandler(this.mainPlatform_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.mainPlatform_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

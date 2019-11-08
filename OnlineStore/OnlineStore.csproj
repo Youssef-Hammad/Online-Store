@@ -55,6 +55,12 @@
     <Compile Include="GUI forms\addProduct.Designer.cs">
       <DependentUpon>addProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\merchantPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\merchantPanel.Designer.cs">
+      <DependentUpon>merchantPanel.cs</DependentUpon>
+    </Compile>
     <Compile Include="handlers\AdminHandler.cs" />
     <Compile Include="GUI forms\adminPanel.cs">
       <SubType>Form</SubType>
@@ -103,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\mainPlatform.resx">
       <DependentUpon>mainPlatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\merchantPanel.resx">
+      <DependentUpon>merchantPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

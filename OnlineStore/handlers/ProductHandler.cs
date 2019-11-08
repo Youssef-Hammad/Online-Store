@@ -36,14 +36,23 @@ namespace OnlineStore
             }
         }
 
-        public void CloseConnection()
+        public void Dispose()
         {
-            dbConnection.Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing == true)
+            {
+                dbConnection.Close();
+            }
         }
 
         ~ProductHandler()
         {
-            this.CloseConnection();
+            Dispose(false);
         }
     }
 

@@ -22,11 +22,6 @@ namespace OnlineStore
             this.connString = connString;
         }
 
-        private void mainPlatform_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void mControlPanelBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             if(currUser.GetUserInfo().GetUserType() == UTYPE.ADMIN)
@@ -34,6 +29,16 @@ namespace OnlineStore
                 adminPanel adminCP = new adminPanel(connString);
                 adminCP.Show();
             }
+            if(currUser.GetUserInfo().GetUserType() == UTYPE.MERCHANT)
+            {
+                merchantPanel merchantCP = new merchantPanel(currUser, connString);
+                merchantCP.Show();
+            }
+        }
+
+        private void mainPlatform_FormClosed(object sender, FormClosedEventArgs e)
+        {
+                Application.Exit();
         }
     }
 }

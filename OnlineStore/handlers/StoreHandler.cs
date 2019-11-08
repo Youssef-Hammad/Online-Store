@@ -81,14 +81,23 @@ namespace OnlineStore
             }
         }
 
-		public void CloseConnection()
+        public void Dispose()
         {
-            dbConnection.Close();
+            Dispose(true);
+            System.GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing == true)
+            {
+                dbConnection.Close();
+            }
         }
 
         ~StoreHandler()
         {
-            this.CloseConnection();
+            Dispose(false);
         }
     }
 }

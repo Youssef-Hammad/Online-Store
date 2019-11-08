@@ -1,8 +1,9 @@
 ﻿using System.Data.SqlClient;
+using System;
 
 namespace OnlineStore
 {
-    class UserHandler
+    class UserHandler : IDisposable
     {
         SqlConnection dbConnection;
         AuthenticationHandler authHandler;
@@ -52,14 +53,23 @@ namespace OnlineStore
             //TODO: doesn't need to be done in this sprint
         }
 
-        public void CloseConnection()
+        public void Dispose()
         {
-            dbConnection.Close();
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if(disposing == true)
+            {
+                dbConnection.Close();
+            }
         }
 
         ~UserHandler()
         {
-            this.CloseConnection();
+            Dispose(false);
         }
     }
 }
