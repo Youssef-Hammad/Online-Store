@@ -6,19 +6,26 @@ using System.Threading.Tasks;
 
 namespace OnlineStore.classes
 {
-    enum STYPE { sports, entertainment, clothes, technology };
+    enum STYPE { na = 0, sports, entertainment, clothes, technology };  // na for non applicable
 
     class StoreInfo
     {
-        private String s_name;
-        private String s_location;
+        private string s_name;
+        private string s_location;
         private STYPE s_type;
 
-        public void SetName(String sName)
+        StoreInfo(string sName = null, string sLoc = null, STYPE sType = 0)
+        {
+            s_name = sName;
+            s_location = sLoc;
+            s_type = sType;
+        }
+
+        public void SetName(string sName)
         {
             s_name = sName;
         }
-        public void SetLocation(String sLoc)
+        public void SetLocation(string sLoc)
         {
             s_location = sLoc;
         }
@@ -27,11 +34,11 @@ namespace OnlineStore.classes
             s_type = sType;
         }
 
-        public String GetName()
+        public string GetName()
         {
             return s_name;
         }
-        public String GetLocaction()
+        public string GetLocaction()
         {
             return s_location;
         }
