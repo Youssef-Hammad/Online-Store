@@ -24,10 +24,5 @@ namespace OnlineStore
             addProduct productForm = new addProduct(connString);
             productForm.ShowDialog();
         }
-
-        private void adminPanel_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

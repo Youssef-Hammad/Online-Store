@@ -1,6 +1,6 @@
 ﻿namespace OnlineStore
 {
-    enum STYPE { na = 0, sports, entertainment, clothes, technology };  // na for non applicable
+    enum STYPE { NA, sports, entertainment, clothes, technology };  // na for non applicable
 
     class StoreInfo
     {
@@ -8,11 +8,11 @@
         private string s_location;
         private STYPE s_type;
 
-        StoreInfo(string sName = null, string sLoc = null, STYPE sType = 0)
+        public StoreInfo()
         {
-            s_name = sName;
-            s_location = sLoc;
-            s_type = sType;
+            s_name = string.Empty;
+            s_location = string.Empty;
+            s_type = STYPE.NA;
         }
 
         public void SetName(string sName)

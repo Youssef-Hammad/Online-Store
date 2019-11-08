@@ -38,15 +38,5 @@ namespace OnlineStore
             if (p_handler.AddProduct(product))
                 MessageBox.Show("add operation was successful");
         }
-
-        private void pNameTxt_TextChanged_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void addProduct_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

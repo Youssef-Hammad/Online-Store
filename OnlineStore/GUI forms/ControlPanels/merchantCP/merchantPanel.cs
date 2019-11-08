@@ -21,10 +21,5 @@ namespace OnlineStore
             currUser = newUser;
             this.connString = connString;
         }
-
-        private void merchantPanel_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

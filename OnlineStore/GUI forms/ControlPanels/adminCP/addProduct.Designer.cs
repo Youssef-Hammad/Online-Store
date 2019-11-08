@@ -101,7 +101,6 @@
             this.pNameTxt.Size = new System.Drawing.Size(186, 20);
             this.pNameTxt.TabIndex = 16;
             this.pNameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.pNameTxt.TextChanged += new System.EventHandler(this.pNameTxt_TextChanged_1);
             // 
             // label1
             // 
@@ -156,7 +155,6 @@
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Add Product (admin)";
-            this.Load += new System.EventHandler(this.addProduct_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

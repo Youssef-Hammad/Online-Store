@@ -5,7 +5,15 @@ namespace OnlineStore
         private string p_name;
         private float p_price;
         private string p_category;
-        private Brand p_brand = new Brand();
+        private Brand p_brand;
+
+        public ProductInfo()
+        {
+            p_name = string.Empty;
+            p_price = 0;
+            p_category = string.Empty;
+            p_brand = new Brand();
+        }
 
         public string GetName()
         {

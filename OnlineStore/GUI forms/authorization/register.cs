@@ -45,11 +45,6 @@ namespace OnlineStore
             passToVerify = rVerifyPwdTxt.Text;
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void rRegisterBtn_Click(object sender, EventArgs e)
         {
             if (rEmailTxt.Text.Trim() == string.Empty || rPwdTxt.Text.Trim() == string.Empty

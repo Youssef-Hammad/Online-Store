@@ -8,6 +8,7 @@ namespace OnlineStore
         {
             p_info = pInfo;
         }
+
         public ProductInfo GetProductInfo()
         {
             return p_info;

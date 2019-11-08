@@ -5,16 +5,17 @@
         string b_name;
         string b_category;
 
-        public BrandInfo(string bName = null, string bCat = null)
+        public BrandInfo()
         {
-            b_name = bName;
-            b_category = bCat;
+            b_name = string.Empty;
+            b_category = string.Empty;
         }
 
         public void SetName(string bName)
         {
             b_name = bName;
         }
+
         public void SetCategory(string bCat)
         {
             b_category = bCat;
@@ -24,6 +25,7 @@
         {
             return b_name;
         }
+
         public string GetCategory()
         {
             return b_category;

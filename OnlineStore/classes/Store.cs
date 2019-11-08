@@ -4,7 +4,7 @@ namespace OnlineStore
     {
         private StoreInfo s_info;
 
-        Store(StoreInfo sInfo = null)
+        public Store(StoreInfo sInfo = null)
         {
             s_info = sInfo;
         }
