@@ -36,11 +36,15 @@ namespace OnlineStore
             }
         }
 
-        public void CloseConn()
+        public void CloseConnection()
         {
             dbConnection.Close();
         }
 
+        ~ProductHandler()
+        {
+            this.CloseConnection();
+        }
     }
 
 }

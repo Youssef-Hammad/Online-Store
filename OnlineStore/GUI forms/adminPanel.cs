@@ -12,9 +12,11 @@ namespace OnlineStore
 {
     public partial class adminPanel : Form
     {
-        public adminPanel()
+        private String connString;
+        public adminPanel(String connString)
         {
             InitializeComponent();
+            this.connString = connString;
         }
 
         private void rRegisterBtn_Click(object sender, EventArgs e)

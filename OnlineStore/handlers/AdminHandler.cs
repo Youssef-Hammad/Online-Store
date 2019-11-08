@@ -23,5 +23,10 @@ namespace OnlineStore
         {
             dbConnection.Close();
         }
+
+        ~AdminHandler()
+        {
+            this.CloseConnection();
+        }
     }
 }

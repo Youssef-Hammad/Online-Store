@@ -85,5 +85,10 @@ namespace OnlineStore
         {
             dbConnection.Close();
         }
+
+        ~StoreHandler()
+        {
+            this.CloseConnection();
+        }
     }
 }

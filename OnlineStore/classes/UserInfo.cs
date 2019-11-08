@@ -1,7 +1,7 @@
 ﻿namespace OnlineStore
 {
-    enum UTYPE { ADMIN, MERCHANT, CONSUMER };
-    class UserInfo
+    public enum UTYPE { ADMIN, MERCHANT, CONSUMER };
+    public class UserInfo
     {
         private string u_username;
         private string u_email;

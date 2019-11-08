@@ -42,6 +42,9 @@ namespace OnlineStore
             dbConnection.Close();
         }
 
-
+        ~MerchantHandler()
+        {
+            this.CloseConnection();
+        }
     }
 }

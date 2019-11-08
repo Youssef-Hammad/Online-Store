@@ -16,11 +16,13 @@ namespace OnlineStore
         private UserInfo u_info; 
         private String password;
         private String passToVerify;
+        private String connString;
 
-        public registerForm()
+        public registerForm(String connString)
         {
             InitializeComponent();
             u_info = new UserInfo();
+            this.connString = connString;
         }
 
         private void rUsrnameTxt_TextChanged(object sender, EventArgs e)
@@ -69,9 +71,6 @@ namespace OnlineStore
                 else u_info.SetUserType(UTYPE.MERCHANT);
 
                 user = new User(u_info);
-
-                Form loginForm = Application.OpenForms["login"];
-                String connString = ((login)loginForm).connString;
 
                 UserHandler u_handler = new UserHandler(connString);
                 if (u_handler.CreateAccount(user))

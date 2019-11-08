@@ -15,6 +15,8 @@ namespace OnlineStore
         private UserInfo u_info;
         private UserHandler u_handler;
 
+
+        // DON'T FORGET TO CHANGE SERVER NAME TO YOUR SERVER NAME BEFORE TRYING TO RUN
         public String sqlServerName = "DESKTOP-LULK971\\SQLEXPRESS";
         public String connString;
 
@@ -22,36 +24,31 @@ namespace OnlineStore
         {
             InitializeComponent();
             u_info = new UserInfo();
+
+            // THE NAME OF YOUR DATABASE HAS TO BE "OnlineStore"
             connString = "Data Source=" + sqlServerName + ";Initial Catalog=OnlineStore;Integrated Security=True";
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            registerForm rForm = new registerForm();
+            registerForm rForm = new registerForm(connString);
             rForm.ShowDialog();
-        }
-
-        private void lUsrnameTxt_TextChanged(object sender, EventArgs e)
-        {
-            u_info.SetUsername(lUsrnameTxt.Text);
-        }
-
-        private void lPwdTxt_TextChanged(object sender, EventArgs e)
-        {
-            u_info.SetUsername(lPwdTxt.Text);
         }
 
         private void lLoginBtn_Click(object sender, EventArgs e)
         {
-            User user = new User(u_info);
+            u_info.SetUsername(lUsrnameTxt.Text);
+            u_info.SetPassword(lPwdTxt.Text);
+            User newUser = new User(u_info);
             u_handler = new UserHandler(connString);
-            u_handler.Login(user);
-            MessageBox.Show("ok");
-        }
 
-        private void login_Load(object sender, EventArgs e)
-        {
-            MessageBox.Show(connString);
+            if (u_handler.Login(newUser))
+            {
+                mainPlatform mPlatform = new mainPlatform(newUser, connString);
+                mPlatform.Show();
+                this.Hide();
+            }
+            else MessageBox.Show("Login failed, check credentials");
         }
     }
 }

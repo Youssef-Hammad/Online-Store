@@ -1,7 +1,7 @@
 ﻿namespace OnlineStore
 {
 
-    class User
+    public class User
     {
         private UserInfo u_info;
 

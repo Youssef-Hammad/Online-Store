@@ -12,14 +12,28 @@ namespace OnlineStore
 {
     public partial class mainPlatform : Form
     {
-        public mainPlatform()
+        private User currUser;
+        private String connString;
+
+        public mainPlatform(User newUser, String connString)
         {
             InitializeComponent();
+            currUser = newUser;
+            this.connString = connString;
         }
 
         private void mainPlatform_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void mControlPanelBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            if(currUser.GetUserInfo().GetUserType() == UTYPE.ADMIN)
+            {
+                adminPanel adminCP = new adminPanel(connString);
+                adminCP.Show();
+            }
         }
     }
 }
