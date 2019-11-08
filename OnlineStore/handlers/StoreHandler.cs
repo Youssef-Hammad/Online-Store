@@ -1,6 +1,6 @@
 using System.Data.SqlClient;
 
-namespace OnlineStore
+namespace OnlineStore.classes
 {
     class StoreHandler
     {
@@ -18,14 +18,15 @@ namespace OnlineStore
             float pPrice = product.GetProductInfo().GetPrice();
             string pCategory = product.GetProductInfo().GetCategory();
 
-            string storeName = store.GetStoreName();
+            StoreInfo sInfo = store.GetStoreInfo();
+            string sName = sInfo.GetName();
 
-            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
+            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME = '" + pName + "'";
 
             SqlCommand cmd = new SqlCommand(query, dbConnection);
 			if(cmd.ExecuteScalar()==null)
             {
-                query = "INSERT INTO storeProducts(STORENAME,PRODUCTNAME) VALUES('" + storeName + "','" + pName + "')";
+                query = "INSERT INTO storeProducts(STORENAME,PRODUCTNAME) VALUES('" + sName + "','" + pName + "')";
 
                 cmd = new SqlCommand(query, dbConnection);
 
@@ -52,9 +53,10 @@ namespace OnlineStore
             float pPrice = product.GetProductInfo().GetPrice();
             string pCategory = product.GetProductInfo().GetCategory();
 
-            string storeName = store.GetStoreName();
+            StoreInfo sInfo = store.GetStoreInfo();
+            string sName = sInfo.GetName();
 
-            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + storeName + "' AND PRODUCTNAME = '" + pName + "'";
+            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME = '" + pName + "'";
 
             SqlCommand cmd = new SqlCommand(query, dbConnection);
 
@@ -62,7 +64,7 @@ namespace OnlineStore
                 return false;
 			else
             {
-                query = "DELETE FROM storeProducts WHERE STORENAME= '" + storeName + "' AND PRODUCTNAME='" + pName + "'";
+                query = "DELETE FROM storeProducts WHERE STORENAME= '" + sName + "' AND PRODUCTNAME='" + pName + "'";
 
                 cmd = new SqlCommand(query, dbConnection);
 

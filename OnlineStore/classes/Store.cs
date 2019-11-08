@@ -1,19 +1,19 @@
 
 
-namespace OnlineStore
+namespace OnlineStore.classes
 {
     class Store
     {
-        private string s_StoreName;
+        private StoreInfo s_info;
 
-        public void SetStoreName(string newName)
+        public void SetStoreInfo(StoreInfo sInfo)
         {
-            s_StoreName = newName;
+            s_info = sInfo;
         }
 
-        public string GetStoreName()
+        public StoreInfo GetStoreInfo()
         {
-            return s_StoreName;
+            return s_info;
         }
     }
 }
