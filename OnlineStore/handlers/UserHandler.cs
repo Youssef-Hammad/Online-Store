@@ -1,6 +1,6 @@
 ﻿using System.Data.SqlClient;
 
-namespace OnlineStore.classes
+namespace OnlineStore
 {
     class UserHandler
     {

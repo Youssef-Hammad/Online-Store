@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OnlineStore.classes
+﻿namespace OnlineStore
 {
     enum STYPE { na = 0, sports, entertainment, clothes, technology };  // na for non applicable
 

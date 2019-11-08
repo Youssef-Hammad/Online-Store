@@ -1,4 +1,4 @@
-namespace OnlineStore.classes
+namespace OnlineStore
 {
     class Product
     {
