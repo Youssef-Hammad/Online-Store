@@ -44,6 +44,8 @@ namespace OnlineStore
 
             if (u_handler.Login(newUser))
             {
+                u_info.SetUserType(u_handler.GetUserType(newUser));
+                newUser.SetUserInfo(u_info);
                 mainPlatform mPlatform = new mainPlatform(newUser, connString);
                 mPlatform.Show();
                 this.Hide();

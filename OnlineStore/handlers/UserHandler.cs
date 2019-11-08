@@ -38,6 +38,19 @@ namespace OnlineStore
             else return false;
         }
 
+        public UTYPE GetUserType(User usr)
+        {
+            UTYPE retType = UTYPE.CONSUMER;
+            string query = "select UTYPE from [USER] where [USERNAME] = '" + usr.GetUserInfo().GetUsername() + "';";
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            if(reader.Read())
+                retType = (UTYPE)reader.GetByte(0);
+
+            reader.Close();
+            return retType;
+        }
+
         public void EditUsername(string newUsername)
         {
             //TODO: doesn't need to be done in this sprint
