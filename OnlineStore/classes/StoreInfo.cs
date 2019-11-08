@@ -36,7 +36,7 @@
         {
             return s_location;
         }
-        public STYPE GetType()
+        public STYPE GetStoreType()
         {
             return s_type;
         }

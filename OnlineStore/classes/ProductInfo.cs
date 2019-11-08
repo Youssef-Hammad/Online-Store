@@ -5,7 +5,7 @@ namespace OnlineStore
         private string p_name;
         private float p_price;
         private string p_category;
-        private Brand p_brand;
+        private Brand p_brand = new Brand();
 
         public string GetName()
         {

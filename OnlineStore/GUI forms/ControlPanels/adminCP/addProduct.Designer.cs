@@ -28,27 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.rRegisterBtn = new System.Windows.Forms.Button();
+            this.rAddProductBtn = new System.Windows.Forms.Button();
             this.pCategoryTxt = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.pPriceTxt = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pNameTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.pBrandTxt = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // rRegisterBtn
+            // rAddProductBtn
             // 
-            this.rRegisterBtn.BackColor = System.Drawing.Color.LightCoral;
-            this.rRegisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rRegisterBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.rRegisterBtn.Location = new System.Drawing.Point(12, 246);
-            this.rRegisterBtn.Name = "rRegisterBtn";
-            this.rRegisterBtn.Size = new System.Drawing.Size(186, 25);
-            this.rRegisterBtn.TabIndex = 27;
-            this.rRegisterBtn.Text = "add product";
-            this.rRegisterBtn.UseVisualStyleBackColor = false;
-            this.rRegisterBtn.Click += new System.EventHandler(this.rRegisterBtn_Click);
+            this.rAddProductBtn.BackColor = System.Drawing.Color.LightCoral;
+            this.rAddProductBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rAddProductBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.rAddProductBtn.Location = new System.Drawing.Point(12, 273);
+            this.rAddProductBtn.Name = "rAddProductBtn";
+            this.rAddProductBtn.Size = new System.Drawing.Size(186, 25);
+            this.rAddProductBtn.TabIndex = 27;
+            this.rAddProductBtn.Text = "add product";
+            this.rAddProductBtn.UseVisualStyleBackColor = false;
+            this.rAddProductBtn.Click += new System.EventHandler(this.rAddProductBtn_Click);
             // 
             // pCategoryTxt
             // 
@@ -59,7 +61,6 @@
             this.pCategoryTxt.Size = new System.Drawing.Size(186, 20);
             this.pCategoryTxt.TabIndex = 20;
             this.pCategoryTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.pCategoryTxt.TextChanged += new System.EventHandler(this.pCategoryTxt_TextChanged);
             // 
             // label3
             // 
@@ -87,9 +88,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(10, 86);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 15);
+            this.label2.Size = new System.Drawing.Size(80, 15);
             this.label2.TabIndex = 17;
-            this.label2.Text = "Product price";
+            this.label2.Text = "Product Price";
             // 
             // pNameTxt
             // 
@@ -108,17 +109,39 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(10, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 15);
+            this.label1.Size = new System.Drawing.Size(86, 15);
             this.label1.TabIndex = 15;
-            this.label1.Text = "Product name";
+            this.label1.Text = "Product Name";
+            // 
+            // pBrandTxt
+            // 
+            this.pBrandTxt.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.pBrandTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pBrandTxt.Location = new System.Drawing.Point(12, 236);
+            this.pBrandTxt.Name = "pBrandTxt";
+            this.pBrandTxt.Size = new System.Drawing.Size(186, 20);
+            this.pBrandTxt.TabIndex = 29;
+            this.pBrandTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(15, 219);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(122, 15);
+            this.label4.TabIndex = 28;
+            this.label4.Text = "Product Brand Name";
             // 
             // addProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(211, 292);
-            this.Controls.Add(this.rRegisterBtn);
+            this.ClientSize = new System.Drawing.Size(211, 313);
+            this.Controls.Add(this.pBrandTxt);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.rAddProductBtn);
             this.Controls.Add(this.pCategoryTxt);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pPriceTxt);
@@ -141,12 +164,14 @@
 
         #endregion
 
-        private System.Windows.Forms.Button rRegisterBtn;
+        private System.Windows.Forms.Button rAddProductBtn;
         private System.Windows.Forms.TextBox pCategoryTxt;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox pPriceTxt;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox pNameTxt;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox pBrandTxt;
+        private System.Windows.Forms.Label label4;
     }
 }

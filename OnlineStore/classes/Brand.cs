@@ -4,7 +4,7 @@
     {
         BrandInfo b_info;
 
-        Brand(BrandInfo bInfo = null)
+        public Brand(BrandInfo bInfo = null)
         {
             b_info = bInfo;
         }

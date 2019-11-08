@@ -20,8 +20,9 @@ namespace OnlineStore
             String p_name = product.GetProductInfo().GetName();
             float p_price = product.GetProductInfo().GetPrice();
             String p_category = product.GetProductInfo().GetCategory();
+            string b_name = product.GetProductInfo().GetBrand().GetName();
 
-            String query = "INSERT INTO products(NAME, PRICE, CATEGORY) VALUES('" + p_name + "', " + p_price + ", '" + p_category + "')";
+            String query = "INSERT INTO APPROVEDPRODUCTS(BRANDNAME, PRODUCTNAME, PRODUCTPRICE, PRODUCTCAT) VALUES('" + b_name + "', '" + p_name + "', " + p_price + ", '" + p_category + "');";
             SqlCommand cmd = new SqlCommand(query, dbConnection);
 
             try

@@ -5,7 +5,7 @@
         string b_name;
         string b_category;
 
-        BrandInfo(string bName = null, string bCat = null)
+        public BrandInfo(string bName = null, string bCat = null)
         {
             b_name = bName;
             b_category = bCat;

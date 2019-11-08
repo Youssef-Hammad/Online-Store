@@ -49,36 +49,36 @@
     <Compile Include="classes\Brand.cs" />
     <Compile Include="classes\BrandInfo.cs" />
     <Compile Include="classes\StoreInfo.cs" />
-    <Compile Include="GUI forms\addProduct.cs">
+    <Compile Include="GUI forms\ControlPanels\adminCP\addProduct.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\addProduct.Designer.cs">
+    <Compile Include="GUI forms\ControlPanels\adminCP\addProduct.Designer.cs">
       <DependentUpon>addProduct.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI forms\merchantPanel.cs">
+    <Compile Include="GUI forms\ControlPanels\merchantCP\merchantPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\merchantPanel.Designer.cs">
+    <Compile Include="GUI forms\ControlPanels\merchantCP\merchantPanel.Designer.cs">
       <DependentUpon>merchantPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="handlers\AdminHandler.cs" />
-    <Compile Include="GUI forms\adminPanel.cs">
+    <Compile Include="GUI forms\ControlPanels\adminCP\adminPanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\adminPanel.Designer.cs">
+    <Compile Include="GUI forms\ControlPanels\adminCP\adminPanel.Designer.cs">
       <DependentUpon>adminPanel.cs</DependentUpon>
     </Compile>
     <Compile Include="handlers\AuthenticationHandler.cs" />
-    <Compile Include="GUI forms\Form1.cs">
+    <Compile Include="GUI forms\authorization\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\Form1.Designer.cs">
+    <Compile Include="GUI forms\authorization\Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI forms\mainPlatform.cs">
+    <Compile Include="GUI forms\landing\mainPlatform.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\mainPlatform.Designer.cs">
+    <Compile Include="GUI forms\landing\mainPlatform.Designer.cs">
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </Compile>
     <Compile Include="handlers\MerchantHandler.cs" />
@@ -87,10 +87,10 @@
     <Compile Include="classes\ProductInfo.cs" />
     <Compile Include="classes\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GUI forms\register.cs">
+    <Compile Include="GUI forms\authorization\register.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI forms\register.Designer.cs">
+    <Compile Include="GUI forms\authorization\register.Designer.cs">
       <DependentUpon>register.cs</DependentUpon>
     </Compile>
     <Compile Include="classes\Store.cs" />
@@ -98,19 +98,19 @@
     <Compile Include="classes\User.cs" />
     <Compile Include="handlers\UserHandler.cs" />
     <Compile Include="classes\UserInfo.cs" />
-    <EmbeddedResource Include="GUI forms\addProduct.resx">
+    <EmbeddedResource Include="GUI forms\ControlPanels\adminCP\addProduct.resx">
       <DependentUpon>addProduct.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI forms\adminPanel.resx">
+    <EmbeddedResource Include="GUI forms\ControlPanels\adminCP\adminPanel.resx">
       <DependentUpon>adminPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI forms\Form1.resx">
+    <EmbeddedResource Include="GUI forms\authorization\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI forms\mainPlatform.resx">
+    <EmbeddedResource Include="GUI forms\landing\mainPlatform.resx">
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI forms\merchantPanel.resx">
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\merchantPanel.resx">
       <DependentUpon>merchantPanel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -122,7 +122,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="GUI forms\register.resx">
+    <EmbeddedResource Include="GUI forms\authorization\register.resx">
       <DependentUpon>register.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">

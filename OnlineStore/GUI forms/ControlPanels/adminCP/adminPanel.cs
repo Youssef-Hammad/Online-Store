@@ -21,7 +21,7 @@ namespace OnlineStore
 
         private void rRegisterBtn_Click(object sender, EventArgs e)
         {
-            addProduct productForm = new addProduct();
+            addProduct productForm = new addProduct(connString);
             productForm.ShowDialog();
         }
 
