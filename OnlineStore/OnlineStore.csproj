@@ -81,6 +81,7 @@
     <Compile Include="GUI forms\landing\mainPlatform.Designer.cs">
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </Compile>
+    <Compile Include="handlers\StatisticsHandler.cs" />
     <Compile Include="handlers\MerchantHandler.cs" />
     <Compile Include="classes\Product.cs" />
     <Compile Include="handlers\ProductHandler.cs" />

@@ -29,7 +29,9 @@ namespace OnlineStore
             p_info.SetName(pNameTxt.Text);
             p_info.SetPrice(float.Parse(pPriceTxt.Text));
             p_info.SetCategory(pCategoryTxt.Text);
-            BrandInfo bInfo = new BrandInfo(pBrandTxt.Text, pCategoryTxt.Text);
+            BrandInfo bInfo = new BrandInfo();//(pBrandTxt.Text, pCategoryTxt.Text);
+            bInfo.SetName(pBrandTxt.Text);
+            bInfo.SetCategory(pCategoryTxt.Text);
             Brand newBrand = new Brand(bInfo);
             p_info.SetBrand(bInfo);
 
