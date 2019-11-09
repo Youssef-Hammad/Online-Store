@@ -1,3 +1,4 @@
+using System;
 using System.Data.SqlClient;
 
 namespace OnlineStore
@@ -10,6 +11,70 @@ namespace OnlineStore
         {
             dbConnection = new SqlConnection(connString);
             dbConnection.Open();
+        }
+
+        public bool alreadyExists(Store store)
+        {
+            string storeName = store.GetStoreInfo().GetName();
+            string storeLocation = store.GetStoreInfo().GetLocaction();
+
+            string queryCheckExisting = "SELECT * FROM STORES WHERE STORENAME = '" + storeName + "' AND STORELOC = '" + storeLocation + "'";
+
+            SqlCommand commandCheckExisting = new SqlCommand(queryCheckExisting, dbConnection);
+
+            string queryCheckPendingExisting = "SELECT * FROM PENDINGSTORES WHERE STORENAME = '" + storeName + "' AND STORELOC = '"+storeLocation+"'";
+
+            SqlCommand commandCheckPendingExisting = new SqlCommand(queryCheckPendingExisting, dbConnection);
+
+            bool exist = true, pending = true;
+
+            SqlDataReader reader = commandCheckExisting.ExecuteReader();
+
+            if (!reader.Read())
+                exist = false;
+            reader.Close();
+            reader = commandCheckPendingExisting.ExecuteReader();
+
+            if (!reader.Read())
+                pending = false;
+
+            reader.Close();
+            return (pending || exist);//returns true if store exists in STORES or in PENDINGSTORES
+        }
+
+        public bool AddStore(Store store, User merchant)
+        {
+            string storeName = store.GetStoreInfo().GetName();
+            string storeLocation = store.GetStoreInfo().GetLocaction();
+
+            int storeType=0;
+            STYPE tempType = store.GetStoreInfo().GetStoreType();
+            if (tempType == (STYPE)1)
+                storeType = 1;
+            else if (tempType == (STYPE)2)
+                storeType = 2;
+            else if (tempType == (STYPE)3)
+                storeType = 3;
+            else if (tempType == (STYPE)4)
+                storeType = 4;
+
+
+            string ownerName = merchant.GetUserInfo().GetUsername();
+
+            string queryInsertStore= "INSERT INTO PENDINGSTORES(STORENAME,OWNERNAME,STORELOC,STYPE) VALUES('"+storeName+"','"+ownerName+"','"+storeLocation+"',"+storeType.ToString()+")";
+
+            SqlCommand commandInsertStore = new SqlCommand(queryInsertStore, dbConnection);
+
+            try
+            {
+                commandInsertStore.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         public bool AddProduct(Store store, Product product)

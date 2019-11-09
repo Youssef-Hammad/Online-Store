@@ -21,5 +21,11 @@ namespace OnlineStore
             currUser = newUser;
             this.connString = connString;
         }
+
+        private void rAddStoreBtn_Click(object sender, EventArgs e)
+        {
+            addStoreToPending pendingPanel = new addStoreToPending(connString,currUser);
+            pendingPanel.Show();
+        }
     }
 }

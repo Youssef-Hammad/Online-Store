@@ -40,5 +40,10 @@ namespace OnlineStore
             if (p_handler.AddProduct(product))
                 MessageBox.Show("add operation was successful");
         }
+
+        private void pCategoryTxt_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

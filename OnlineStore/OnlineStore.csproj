@@ -55,6 +55,12 @@
     <Compile Include="GUI forms\ControlPanels\adminCP\addProduct.Designer.cs">
       <DependentUpon>addProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.Designer.cs">
+      <DependentUpon>addStoreToPending.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI forms\ControlPanels\merchantCP\merchantPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -108,6 +114,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\authorization\Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.resx">
+      <DependentUpon>addStoreToPending.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\landing\mainPlatform.resx">
       <DependentUpon>mainPlatform.cs</DependentUpon>
