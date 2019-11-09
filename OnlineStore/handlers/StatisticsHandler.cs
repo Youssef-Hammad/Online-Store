@@ -85,7 +85,9 @@ namespace OnlineStore
 
                 SqlCommand commandProducts = new SqlCommand(queryProducts, dbConnection);
 
-                while(reader.Read())
+                reader = commandProducts.ExecuteReader();
+
+                while (reader.Read())
                 {
                     queryBrandInfo = "SELECT * FROM BRAND WHERE BRANDNAME = '" + reader.GetString(0) + "'";
                     SqlCommand commandBrand = new SqlCommand(queryBrandInfo, dbConnection);
