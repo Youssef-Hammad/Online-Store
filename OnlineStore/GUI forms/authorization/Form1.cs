@@ -17,7 +17,8 @@ namespace OnlineStore
 
 
         // DON'T FORGET TO CHANGE SERVER NAME TO YOUR SERVER NAME BEFORE TRYING TO RUN
-        public String sqlServerName = "LAPTOP-1IE4L68L\\SQLEXPRESS";
+
+        public String sqlServerName = "DESKTOP-VQEBF0F\\SQLEXPRESS";
         public String connString;
 
         public login()

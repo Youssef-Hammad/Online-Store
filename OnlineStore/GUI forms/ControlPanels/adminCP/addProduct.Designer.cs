@@ -35,8 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.pNameTxt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pBrandTxt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // rAddProductBtn
@@ -45,7 +45,7 @@
             this.rAddProductBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rAddProductBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.rAddProductBtn.Location = new System.Drawing.Point(16, 336);
-            this.rAddProductBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.rAddProductBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rAddProductBtn.Name = "rAddProductBtn";
             this.rAddProductBtn.Size = new System.Drawing.Size(248, 31);
             this.rAddProductBtn.TabIndex = 27;
@@ -57,8 +57,8 @@
             // 
             this.pCategoryTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pCategoryTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pCategoryTxt.Location = new System.Drawing.Point(16, 210);
-            this.pCategoryTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pCategoryTxt.Location = new System.Drawing.Point(16, 199);
+            this.pCategoryTxt.Margin = new System.Windows.Forms.Padding(4);
             this.pCategoryTxt.Name = "pCategoryTxt";
             this.pCategoryTxt.Size = new System.Drawing.Size(247, 22);
             this.pCategoryTxt.TabIndex = 20;
@@ -69,7 +69,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(20, 190);
+            this.label3.Location = new System.Drawing.Point(13, 177);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(124, 18);
@@ -81,7 +81,7 @@
             this.pPriceTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pPriceTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pPriceTxt.Location = new System.Drawing.Point(16, 128);
-            this.pPriceTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pPriceTxt.Margin = new System.Windows.Forms.Padding(4);
             this.pPriceTxt.Name = "pPriceTxt";
             this.pPriceTxt.Size = new System.Drawing.Size(247, 22);
             this.pPriceTxt.TabIndex = 18;
@@ -103,7 +103,7 @@
             this.pNameTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pNameTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pNameTxt.Location = new System.Drawing.Point(16, 53);
-            this.pNameTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pNameTxt.Margin = new System.Windows.Forms.Padding(4);
             this.pNameTxt.Name = "pNameTxt";
             this.pNameTxt.Size = new System.Drawing.Size(247, 22);
             this.pNameTxt.TabIndex = 16;
@@ -120,27 +120,27 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Product Name";
             // 
-            // pBrandTxt
-            // 
-            this.pBrandTxt.BackColor = System.Drawing.Color.WhiteSmoke;
-            this.pBrandTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pBrandTxt.Location = new System.Drawing.Point(16, 290);
-            this.pBrandTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.pBrandTxt.Name = "pBrandTxt";
-            this.pBrandTxt.Size = new System.Drawing.Size(247, 22);
-            this.pBrandTxt.TabIndex = 29;
-            this.pBrandTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(20, 270);
+            this.label4.Location = new System.Drawing.Point(13, 252);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(147, 18);
             this.label4.TabIndex = 28;
             this.label4.Text = "Product Brand Name";
+            // 
+            // comboBox1
+            // 
+            this.comboBox1.AllowDrop = true;
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox1.FormattingEnabled = true;
+            this.comboBox1.Location = new System.Drawing.Point(12, 273);
+            this.comboBox1.Name = "comboBox1";
+            this.comboBox1.Size = new System.Drawing.Size(247, 24);
+            this.comboBox1.TabIndex = 29;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // addProduct
             // 
@@ -148,7 +148,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(281, 385);
-            this.Controls.Add(this.pBrandTxt);
+            this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.rAddProductBtn);
             this.Controls.Add(this.pCategoryTxt);
@@ -158,7 +158,7 @@
             this.Controls.Add(this.pNameTxt);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "addProduct";
@@ -180,7 +180,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox pNameTxt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox pBrandTxt;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox comboBox2;
     }
 }
