@@ -18,7 +18,7 @@ namespace OnlineStore
 
         // DON'T FORGET TO CHANGE SERVER NAME TO YOUR SERVER NAME BEFORE TRYING TO RUN
 
-        public String sqlServerName = "DESKTOP-VQEBF0F\\SQLEXPRESS";
+        public String sqlServerName = "LAPTOP-1IE4L68L\\SQLEXPRESS";
         public String connString;
 
         public login()
@@ -27,7 +27,7 @@ namespace OnlineStore
             u_info = new UserInfo();
 
             // THE NAME OF YOUR DATABASE HAS TO BE "OnlineStore"
-            connString = "Data Source=" + sqlServerName + ";Initial Catalog=OnlineStore;Integrated Security=True";
+            connString = "Data Source=" + sqlServerName + ";Initial Catalog=OnlineStore;Integrated Security=True;MultipleActiveResultSets=True";
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

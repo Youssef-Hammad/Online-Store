@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.rAddStoreBtn = new System.Windows.Forms.Button();
+            this.LiveStatistics = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rAddStoreBtn
@@ -36,7 +37,7 @@
             this.rAddStoreBtn.BackColor = System.Drawing.Color.LightCoral;
             this.rAddStoreBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rAddStoreBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.rAddStoreBtn.Location = new System.Drawing.Point(368, 197);
+            this.rAddStoreBtn.Location = new System.Drawing.Point(33, 98);
             this.rAddStoreBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rAddStoreBtn.Name = "rAddStoreBtn";
             this.rAddStoreBtn.Size = new System.Drawing.Size(248, 31);
@@ -45,22 +46,37 @@
             this.rAddStoreBtn.UseVisualStyleBackColor = false;
             this.rAddStoreBtn.Click += new System.EventHandler(this.rAddStoreBtn_Click);
             // 
+            // LiveStatistics
+            // 
+            this.LiveStatistics.BackColor = System.Drawing.Color.LightCoral;
+            this.LiveStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.LiveStatistics.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.LiveStatistics.Location = new System.Drawing.Point(33, 227);
+            this.LiveStatistics.Margin = new System.Windows.Forms.Padding(4);
+            this.LiveStatistics.Name = "LiveStatistics";
+            this.LiveStatistics.Size = new System.Drawing.Size(248, 31);
+            this.LiveStatistics.TabIndex = 29;
+            this.LiveStatistics.Text = "Live Statistics";
+            this.LiveStatistics.UseVisualStyleBackColor = false;
+            this.LiveStatistics.Click += new System.EventHandler(this.LiveStatisticsBtn_Click);
+            // 
             // merchantPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1043, 553);
+            this.ClientSize = new System.Drawing.Size(316, 406);
+            this.Controls.Add(this.LiveStatistics);
             this.Controls.Add(this.rAddStoreBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "merchantPanel";
             this.Opacity = 0.9D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
-            this.Text = "merchant CPanel";
+            this.Text = "Merchant CPanel";
             this.ResumeLayout(false);
 
         }
@@ -68,5 +84,6 @@
         #endregion
 
         private System.Windows.Forms.Button rAddStoreBtn;
+        private System.Windows.Forms.Button LiveStatistics;
     }
 }
