@@ -44,6 +44,7 @@ namespace OnlineStore
             }
             return brands;
         }
+
         public void Dispose()
         {
             Dispose(true);

@@ -13,7 +13,7 @@ namespace OnlineStore
             dbConnection.Open();
         }
 
-        public bool alreadyExists(Store store)
+        public bool AlreadyExists(Store store)
         {
             string storeName = store.GetStoreInfo().GetName();
             string storeLocation = store.GetStoreInfo().GetLocaction();
