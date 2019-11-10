@@ -31,6 +31,8 @@ namespace OnlineStore
         {
             // TODO: This line of code loads data into the 'onlineStoreDataSet.PENDINGSTORES' table. You can move, or remove it, as needed.
             this.pENDINGSTORESTableAdapter.Fill(this.onlineStoreDataSet.PENDINGSTORES);
+            // TODO: This line of code loads data into the 'onlineStoreDataSet.PENDINGSTORES' table. You can move, or remove it, as needed.
+            this.pENDINGSTORESTableAdapter.Fill(this.onlineStoreDataSet.PENDINGSTORES);
 
         }
 
