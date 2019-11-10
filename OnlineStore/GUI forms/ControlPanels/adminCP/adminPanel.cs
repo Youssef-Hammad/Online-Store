@@ -24,11 +24,5 @@ namespace OnlineStore
             addProduct productForm = new addProduct(connString);
             productForm.ShowDialog();
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            addBrand brandForm = new addBrand(connString);
-            brandForm.ShowDialog();
-        }
     }
 }

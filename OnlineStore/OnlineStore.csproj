@@ -49,12 +49,6 @@
     <Compile Include="classes\Brand.cs" />
     <Compile Include="classes\BrandInfo.cs" />
     <Compile Include="classes\StoreInfo.cs" />
-    <Compile Include="GUI forms\ControlPanels\adminCP\addBrand.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="GUI forms\ControlPanels\adminCP\addBrand.Designer.cs">
-      <DependentUpon>addBrand.cs</DependentUpon>
-    </Compile>
     <Compile Include="GUI forms\ControlPanels\adminCP\addProduct.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -112,9 +106,6 @@
     <Compile Include="classes\User.cs" />
     <Compile Include="handlers\UserHandler.cs" />
     <Compile Include="classes\UserInfo.cs" />
-    <EmbeddedResource Include="GUI forms\ControlPanels\adminCP\addBrand.resx">
-      <DependentUpon>addBrand.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\adminCP\addProduct.resx">
       <DependentUpon>addProduct.cs</DependentUpon>
     </EmbeddedResource>
