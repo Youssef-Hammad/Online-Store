@@ -40,10 +40,10 @@
             this.rAddProductBtn.BackColor = System.Drawing.Color.LightCoral;
             this.rAddProductBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rAddProductBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.rAddProductBtn.Location = new System.Drawing.Point(20, 341);
+            this.rAddProductBtn.Location = new System.Drawing.Point(13, 169);
             this.rAddProductBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rAddProductBtn.Name = "rAddProductBtn";
-            this.rAddProductBtn.Size = new System.Drawing.Size(248, 31);
+            this.rAddProductBtn.Size = new System.Drawing.Size(247, 31);
             this.rAddProductBtn.TabIndex = 30;
             this.rAddProductBtn.Text = "add product";
             this.rAddProductBtn.UseVisualStyleBackColor = false;
@@ -53,7 +53,7 @@
             // 
             this.pCategoryTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.pCategoryTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pCategoryTxt.Location = new System.Drawing.Point(20, 113);
+            this.pCategoryTxt.Location = new System.Drawing.Point(13, 52);
             this.pCategoryTxt.Margin = new System.Windows.Forms.Padding(4);
             this.pCategoryTxt.Name = "pCategoryTxt";
             this.pCategoryTxt.Size = new System.Drawing.Size(247, 22);
@@ -65,7 +65,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(17, 91);
+            this.label3.Location = new System.Drawing.Point(13, 30);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 18);
@@ -77,7 +77,7 @@
             // 
             this.textBox1.BackColor = System.Drawing.Color.WhiteSmoke;
             this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.textBox1.Location = new System.Drawing.Point(20, 196);
+            this.textBox1.Location = new System.Drawing.Point(13, 126);
             this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(247, 22);
@@ -88,7 +88,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 174);
+            this.label1.Location = new System.Drawing.Point(13, 104);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 18);
@@ -99,13 +99,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(281, 385);
+            this.ClientSize = new System.Drawing.Size(281, 219);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.rAddProductBtn);
             this.Controls.Add(this.pCategoryTxt);
             this.Controls.Add(this.label3);
             this.Name = "addBrand";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "add brand (admin)";
             this.ResumeLayout(false);
             this.PerformLayout();

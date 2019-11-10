@@ -1,6 +1,6 @@
 namespace OnlineStore
 {
-    class Store
+    public class Store
     {
         private StoreInfo s_info;
 

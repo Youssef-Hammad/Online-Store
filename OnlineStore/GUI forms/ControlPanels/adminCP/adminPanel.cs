@@ -30,5 +30,11 @@ namespace OnlineStore
             addBrand brandForm = new addBrand(connString);
             brandForm.ShowDialog();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            viewPendindStores storesForm = new viewPendindStores(connString);
+            storesForm.ShowDialog();
+        }
     }
 }

@@ -111,7 +111,7 @@ namespace OnlineStore
                 }
                 else
                 {
-                    if(sHandler.AddStore(tempStore,currUser))
+                    if(sHandler.AddPendingStore(tempStore,currUser))
                     {
                         MessageBox.Show("Store Successfully Added!");
                         this.Hide();

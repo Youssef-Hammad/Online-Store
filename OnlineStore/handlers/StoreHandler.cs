@@ -42,22 +42,11 @@ namespace OnlineStore
             return (pending || exist);//returns true if store exists in STORES or in PENDINGSTORES
         }
 
-        public bool AddStore(Store store, User merchant)
+        public bool AddPendingStore(Store store, User merchant)
         {
             string storeName = store.GetStoreInfo().GetName();
             string storeLocation = store.GetStoreInfo().GetLocaction();
-
-            int storeType=0;
-            STYPE tempType = store.GetStoreInfo().GetStoreType();
-            if (tempType == (STYPE)1)
-                storeType = 1;
-            else if (tempType == (STYPE)2)
-                storeType = 2;
-            else if (tempType == (STYPE)3)
-                storeType = 3;
-            else if (tempType == (STYPE)4)
-                storeType = 4;
-
+            int storeType = (int)store.GetStoreInfo().GetStoreType();
 
             string ownerName = merchant.GetUserInfo().GetUsername();
 
@@ -72,9 +61,52 @@ namespace OnlineStore
             }
             catch (SqlException ex)
             {
+                //System.Windows.Forms.MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
+        public bool AddApprovedStore(Store store, string ownerName)
+        {
+            string storeName = store.GetStoreInfo().GetName();
+            string storeLoc = store.GetStoreInfo().GetLocaction();
+            int storeType = (int)store.GetStoreInfo().GetStoreType();
+
+            string query = "INSERT INTO STORES VALUES ('" + storeName + "','" + storeLoc + "','" + ownerName + "','" + storeType + "');";
+
+            SqlCommand commandInsertStore = new SqlCommand(query, dbConnection);
+
+            try
+            {
+                commandInsertStore.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
                 System.Windows.Forms.MessageBox.Show(ex.Message);
                 return false;
             }
+
+        }
+
+        public bool RemoveFromPending(Store store)
+        {
+            string storeName = store.GetStoreInfo().GetName();
+            string storeLoc = store.GetStoreInfo().GetLocaction();
+
+            string query = "DELETE FROM PENDINGSTORES WHERE STORENAME = '" + storeName + "' AND STORELOC = '" + storeLoc + "';";
+            SqlCommand commandInsertStore = new SqlCommand(query, dbConnection);
+            try
+            {
+                commandInsertStore.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                System.Windows.Forms.MessageBox.Show(ex.Message);
+                return false;
+            }
+
         }
 
         public bool AddProduct(Store store, Product product)

@@ -1,8 +1,8 @@
 ﻿namespace OnlineStore
 {
-    enum STYPE { NA, sports, entertainment, clothes, technology };  // na for non applicable
+    public enum STYPE { NA, sports, entertainment, clothes, technology };  // na for non applicable
 
-    class StoreInfo
+    public class StoreInfo
     {
         private string s_name;
         private string s_location;

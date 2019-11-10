@@ -99,6 +99,7 @@
             // 
             // storeTypesMenu
             // 
+            this.storeTypesMenu.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeTypesMenu.FormattingEnabled = true;
             this.storeTypesMenu.Items.AddRange(new object[] {
             "Clothes",
@@ -125,12 +126,12 @@
             this.rAddStoreBtn.UseVisualStyleBackColor = false;
             this.rAddStoreBtn.Click += new System.EventHandler(this.rAddStoreBtn_Click);
             // 
-            // storeNameEmptyText
+            // storeErrorLabel
             // 
             this.storeErrorLabel.AutoSize = true;
             this.storeErrorLabel.ForeColor = System.Drawing.Color.Red;
             this.storeErrorLabel.Location = new System.Drawing.Point(46, 283);
-            this.storeErrorLabel.Name = "storeNameEmptyText";
+            this.storeErrorLabel.Name = "storeErrorLabel";
             this.storeErrorLabel.Size = new System.Drawing.Size(182, 17);
             this.storeErrorLabel.TabIndex = 29;
             this.storeErrorLabel.Text = "Store Name can\'t be empty!";
