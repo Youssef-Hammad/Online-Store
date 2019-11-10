@@ -63,5 +63,10 @@ namespace OnlineStore
         {
 
         }
+
+        private void addProduct_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
