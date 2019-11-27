@@ -57,7 +57,7 @@ namespace OnlineStore
 
         private void ShowStatisticsBtn_Click(object sender, EventArgs e)
         {
-            SoldOutListView.Clear();
+            
             int numberOfViews = statHandler.GetProductViews(merchStoreList);
             int numberOfPurchases = statHandler.GetNumberOfPurchases(merchStoreList);
 
@@ -72,14 +72,16 @@ namespace OnlineStore
             {
                 string listOutput = "Product: " + iterator.Key.GetProductInfo().GetName() + ". Belonging to Store: " + iterator.Value.GetStoreInfo().GetName() + " Located at: " + iterator.Value.GetStoreInfo().GetLocaction();
                 ListViewItem listViewItem = new ListViewItem(listOutput);
-                SoldOutListView.Items.Add(listViewItem);
+                SoldoutListView.Items.Add(listViewItem);
             }
 
         }
 
-        private void SoldOutListView_SelectedIndexChanged(object sender, EventArgs e)
+        private void SoldoutListView_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }
+
+        
     }
 }
