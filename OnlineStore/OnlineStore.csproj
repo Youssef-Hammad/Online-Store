@@ -91,6 +91,18 @@
     <Compile Include="GUI forms\ControlPanels\merchantCP\merchantPanel.Designer.cs">
       <DependentUpon>merchantPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\landing\UserMainPlatform.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\landing\UserMainPlatform.Designer.cs">
+      <DependentUpon>UserMainPlatform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI forms\UserFunctions\PurchaseItemForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\UserFunctions\PurchaseItemForm.Designer.cs">
+      <DependentUpon>PurchaseItemForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="handlers\AdminHandler.cs" />
     <Compile Include="GUI forms\ControlPanels\adminCP\adminPanel.cs">
       <SubType>Form</SubType>
@@ -164,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\merchantPanel.resx">
       <DependentUpon>merchantPanel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\landing\UserMainPlatform.resx">
+      <DependentUpon>UserMainPlatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\UserFunctions\PurchaseItemForm.resx">
+      <DependentUpon>PurchaseItemForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

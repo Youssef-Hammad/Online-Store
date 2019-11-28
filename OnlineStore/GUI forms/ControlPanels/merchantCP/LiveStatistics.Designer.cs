@@ -122,6 +122,7 @@
             this.SoldoutListView.Size = new System.Drawing.Size(771, 381);
             this.SoldoutListView.TabIndex = 30;
             this.SoldoutListView.UseCompatibleStateImageBehavior = false;
+            this.SoldoutListView.SelectedIndexChanged += new System.EventHandler(this.SoldoutListView_SelectedIndexChanged_1);
             // 
             // Results
             // 
