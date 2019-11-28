@@ -63,6 +63,7 @@
             this.Controls.Add(this.Approve);
             this.Name = "action";
             this.Text = "action";
+            this.Load += new System.EventHandler(this.action_Load);
             this.ResumeLayout(false);
 
         }

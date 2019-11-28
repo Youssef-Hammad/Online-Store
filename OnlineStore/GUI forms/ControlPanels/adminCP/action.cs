@@ -51,5 +51,10 @@ namespace OnlineStore
                 MessageBox.Show("Removing from pending sfailed");
             }
         }
+
+        private void action_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

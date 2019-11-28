@@ -36,5 +36,12 @@ namespace OnlineStore
             viewPendindStores storesForm = new viewPendindStores(connString);
             storesForm.ShowDialog();
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Statitistics statsForm = new Statitistics(connString);
+            statsForm.ShowDialog();
+
+        }
     }
 }
