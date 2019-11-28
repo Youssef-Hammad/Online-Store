@@ -82,6 +82,9 @@ namespace OnlineStore
 
         }
 
-        
+        private void SoldoutListView_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
