@@ -61,13 +61,19 @@ namespace OnlineStore
                 this.Hide();
             }
             else MessageBox.Show("Login failed, check credentials");*/
-            string p = "{\"USERNAME\":\"zeby\",\"EMAIL\":\"zeby@kebir.orgy\",\"PASSWORD\":\"bezyakbar\",\"UTYPE\":0}";
+            string p = "{\"USERNAME\":\"zeby2\",\"EMAIL\":\"zeby2@kebir.orgy\",\"PASSWORD\":\"bezyakbar\",\"UTYPE\":0}";
             string p2 = "username=zeby";
             HttpHandler hHandler= new HttpHandler("user",p);
             string responseMsg = hHandler.POST();
+            hHandler = new HttpHandler("user", p2);
             Console.WriteLine(responseMsg);
 
             Console.ReadLine();
+
+            string responseMsg2 = hHandler.GET();
+            Console.WriteLine(responseMsg2);
+            Console.ReadLine();
+
         }
 
         private void login_Load(object sender, EventArgs e)

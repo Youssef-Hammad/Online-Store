@@ -22,7 +22,7 @@ namespace OnlineStore
             secString = "CWyNnomeXehvyucs";
             param = tmpParam;
         }
-
+        override
         public string ToString()
         {
             return baseURL + "/" + entity + "/" + secString;
@@ -30,7 +30,7 @@ namespace OnlineStore
 
         public string POST()
         {
-            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(ToString());
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(this.ToString());
             Console.WriteLine(param);
             var Data = Encoding.ASCII.GetBytes(param);
             req.Method = "POST";
