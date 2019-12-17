@@ -136,6 +136,7 @@
       <DependentUpon>mainPlatform.cs</DependentUpon>
     </Compile>
     <Compile Include="handlers\BrandHandler.cs" />
+    <Compile Include="handlers\HttpHandler.cs" />
     <Compile Include="handlers\StatisticsHandler.cs" />
     <Compile Include="handlers\MerchantHandler.cs" />
     <Compile Include="classes\Product.cs" />

@@ -38,7 +38,7 @@ namespace OnlineStore
 
         private void lLoginBtn_Click(object sender, EventArgs e)
         {
-            u_info.SetUsername(lUsrnameTxt.Text);
+            /*u_info.SetUsername(lUsrnameTxt.Text);
             u_info.SetPassword(lPwdTxt.Text);
             User newUser = new User(u_info);
             u_handler = new UserHandler(connString);
@@ -60,7 +60,14 @@ namespace OnlineStore
                 }
                 this.Hide();
             }
-            else MessageBox.Show("Login failed, check credentials");
+            else MessageBox.Show("Login failed, check credentials");*/
+            string p = "{\"USERNAME\":\"zeby\",\"EMAIL\":\"zeby@kebir.orgy\",\"PASSWORD\":\"bezyakbar\",\"UTYPE\":0}";
+            string p2 = "username=zeby";
+            HttpHandler hHandler= new HttpHandler("user",p);
+            string responseMsg = hHandler.POST();
+            Console.WriteLine(responseMsg);
+
+            Console.ReadLine();
         }
 
         private void login_Load(object sender, EventArgs e)

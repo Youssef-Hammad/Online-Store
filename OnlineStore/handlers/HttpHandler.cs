@@ -46,5 +46,16 @@ namespace OnlineStore
             string resString = new StreamReader(res.GetResponseStream()).ReadToEnd();
             return resString;
         }
+        public string GET()
+        {
+            HttpWebRequest req = (HttpWebRequest)WebRequest.Create(ToString());
+            req.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            using(HttpWebResponse response=(HttpWebResponse)req.GetResponse())
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
+        }
     }
 }
