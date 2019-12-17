@@ -14,19 +14,26 @@ namespace OnlineStore
             dbConnection.Open();
         }
 
-        public List<String> GetMerchantStores(User merchant)
+        public List<Store> GetMerchantStores(User merchant)
         {
             String m_username = merchant.GetUserInfo().GetUsername();
-            String query = "SELECT STORENAME from [merchantStores] as m where m.MERCHANTNAME = '" + m_username + "';";
+            String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
             SqlCommand cmd = new SqlCommand(query, dbConnection);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<String> stores = new List<String>();
+            List<Store> stores = new List<Store>();
+            StoreInfo storeInfo = new StoreInfo();
 
             while (reader.Read())
             {
-                stores.Add(reader.GetString(0));
+                storeInfo.SetName(reader.GetString(1));
+                storeInfo.SetLocation(reader.GetString(2));
+                int type = reader.GetByte(4);
+                storeInfo.SetType((STYPE)type);
+                Store store = new Store(storeInfo);
+                stores.Add(store);
             }
+            reader.Close();
 
             return stores;
         }

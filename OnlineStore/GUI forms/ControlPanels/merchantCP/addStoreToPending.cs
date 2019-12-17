@@ -104,7 +104,7 @@ namespace OnlineStore
 
                 Store tempStore = new Store(sInfo);
 
-                if (sHandler.alreadyExists(tempStore))
+                if (sHandler.AlreadyExists(tempStore))
                 {
                     storeErrorLabel.Text = "Store already pending or exists";
                     storeErrorLabel.Show();
