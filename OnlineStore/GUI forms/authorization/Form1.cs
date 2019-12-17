@@ -27,7 +27,11 @@ namespace OnlineStore
             u_info = new UserInfo();
 
             // THE NAME OF YOUR DATABASE HAS TO BE "OnlineStore"
+<<<<<<< HEAD
             connString = "Data Source=" + sqlServerName + ";Initial Catalog=DB_A5061A_okboomer;User Id=DB_A5061A_okboomer_admin;Password=okboomerserver0;";
+=======
+            connString = "Data Source=" + sqlServerName + ";Initial Catalog=DB_A5061A_okboomer;User Id=DB_A5061A_okboomer_admin;Password=okboomerserver0;MultipleActiveResultSets=true;";
+>>>>>>> 5896ff46d1245a018bd428b1c158a80a82e848e6
         }
 
         private void registerBtn_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -47,11 +51,25 @@ namespace OnlineStore
             {
                 u_info.SetUserType(u_handler.GetUserType(newUser));
                 newUser.SetUserInfo(u_info);
-                mainPlatform mPlatform = new mainPlatform(newUser, connString);
-                mPlatform.Show();
+                if (u_info.GetUserType() == UTYPE.CONSUMER)
+                {
+                    UserMainPlatform uPlatform = new UserMainPlatform(newUser, connString);
+                    uPlatform.Show();
+
+                }
+                else
+                {
+                    mainPlatform mPlatform = new mainPlatform(newUser, connString);
+                    mPlatform.Show();
+                }
                 this.Hide();
             }
             else MessageBox.Show("Login failed, check credentials");
+        }
+
+        private void login_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

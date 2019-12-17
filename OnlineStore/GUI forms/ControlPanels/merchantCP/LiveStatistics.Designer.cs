@@ -34,7 +34,8 @@
             this.showViewsCheckBox = new System.Windows.Forms.CheckBox();
             this.showPurchasesCheckBox = new System.Windows.Forms.CheckBox();
             this.ShowStatisticsBtn = new System.Windows.Forms.Button();
-            this.SoldOutListView = new System.Windows.Forms.ListView();
+            this.SoldoutListView = new System.Windows.Forms.ListView();
+            this.Results = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // NumberOfViewsLabel
@@ -108,22 +109,32 @@
             this.ShowStatisticsBtn.UseVisualStyleBackColor = false;
             this.ShowStatisticsBtn.Click += new System.EventHandler(this.ShowStatisticsBtn_Click);
             // 
-            // SoldOutListView
+            // SoldoutListView
             // 
-            this.SoldOutListView.HideSelection = false;
-            this.SoldOutListView.Location = new System.Drawing.Point(31, 194);
-            this.SoldOutListView.Name = "SoldOutListView";
-            this.SoldOutListView.Size = new System.Drawing.Size(771, 367);
-            this.SoldOutListView.TabIndex = 30;
-            this.SoldOutListView.UseCompatibleStateImageBehavior = false;
-            this.SoldOutListView.SelectedIndexChanged += new System.EventHandler(this.SoldOutListView_SelectedIndexChanged);
+            this.SoldoutListView.BackColor = System.Drawing.SystemColors.Window;
+            this.SoldoutListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Results});
+            this.SoldoutListView.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SoldoutListView.FullRowSelect = true;
+            this.SoldoutListView.HideSelection = false;
+            this.SoldoutListView.Location = new System.Drawing.Point(31, 194);
+            this.SoldoutListView.Name = "SoldoutListView";
+            this.SoldoutListView.Size = new System.Drawing.Size(771, 381);
+            this.SoldoutListView.TabIndex = 30;
+            this.SoldoutListView.UseCompatibleStateImageBehavior = false;
+            this.SoldoutListView.SelectedIndexChanged += new System.EventHandler(this.SoldoutListView_SelectedIndexChanged_1);
+            // 
+            // Results
+            // 
+            this.Results.Text = "Results:";
+            this.Results.Width = 730;
             // 
             // LiveStatistics
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(827, 587);
-            this.Controls.Add(this.SoldOutListView);
+            this.Controls.Add(this.SoldoutListView);
             this.Controls.Add(this.ShowStatisticsBtn);
             this.Controls.Add(this.showPurchasesCheckBox);
             this.Controls.Add(this.showViewsCheckBox);
@@ -146,6 +157,7 @@
         private System.Windows.Forms.CheckBox showViewsCheckBox;
         private System.Windows.Forms.CheckBox showPurchasesCheckBox;
         private System.Windows.Forms.Button ShowStatisticsBtn;
-        private System.Windows.Forms.ListView SoldOutListView;
+        private System.Windows.Forms.ListView SoldoutListView;
+        private System.Windows.Forms.ColumnHeader Results;
     }
 }

@@ -40,5 +40,15 @@ namespace OnlineStore
         {
                 Application.Exit();
         }
+
+        private void mainPlatform_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void mainPlatform_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }

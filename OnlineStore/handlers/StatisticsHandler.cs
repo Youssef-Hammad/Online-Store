@@ -133,6 +133,148 @@ namespace OnlineStore
             return returnList;
         }
 
+        public int SumUser()
+        {
+            string query = "SELECT COUNT(*) FROM [USER] WHERE UTYPE = 2;";
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            return count;
+        }
+
+        public string MaxUser()
+        {
+            string query = "SELECT u.USERNAME, u.EMAIL, MAX(p.QTY) " +
+                            "FROM [USER] as u, PURCHASEHISTORY as p " +
+                            "WHERE u.USERNAME = p.USERNAME " +
+                            "GROUP BY u.USERNAME, u.EMAIL;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if(reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
+        public string MinUser()
+        {
+            string query = "SELECT u.USERNAME, u.EMAIL, MIN(p.QTY) " +
+                            "FROM [USER] as u, PURCHASEHISTORY as p " +
+                            "WHERE u.USERNAME = p.USERNAME " +
+                            "GROUP BY u.USERNAME, u.EMAIL;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if (reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
+        public string AvgUser()
+        {
+            string query = "SELECT u.USERNAME, u.EMAIL, AVG(p.QTY) " +
+                            "FROM [USER] as u, PURCHASEHISTORY as p " +
+                            "WHERE u.USERNAME = p.USERNAME " +
+                            "GROUP BY u.USERNAME, u.EMAIL;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if (reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
+        public int SumProduct()
+        {
+            string query = "SELECT COUNT(*) FROM PURCHASEHISTORY;";
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            int count = Convert.ToInt32(cmd.ExecuteScalar());
+            return count;
+        }
+
+        public string MaxProduct()
+        {
+            string query = "SELECT a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT,  MAX(p.QTY) " +
+                           "FROM APPROVEDPRODUCTS AS a, PURCHASEHISTORY AS p " +
+                           "WHERE a.PID = p.PID " +
+                           "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if (reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString() + " " + reader[3].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
+        public string MinProduct()
+        {
+            string query = "SELECT a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT,  MIN(p.QTY) " +
+                           "FROM APPROVEDPRODUCTS AS a, PURCHASEHISTORY AS p " +
+                           "WHERE a.PID = p.PID " +
+                           "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if (reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString() + " " + reader[3].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
+        public string AvgProduct()
+        {
+            string query = "SELECT a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT,  AVG(p.QTY) " +
+                           "FROM APPROVEDPRODUCTS AS a, PURCHASEHISTORY AS p " +
+                           "WHERE a.PID = p.PID " +
+                           "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
+
+            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            string output = "";
+            if (reader.HasRows)
+            {
+                output += reader[0].ToString() + " " + reader[1].ToString() + " " + reader[2].ToString() + " " + reader[3].ToString();
+                return output;
+            }
+
+            output = "No data in the database";
+            return output;
+        }
+
         public void Dispose()
         {
             Dispose(true);
