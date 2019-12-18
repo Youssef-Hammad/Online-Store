@@ -1,39 +1,31 @@
-﻿using System.Data.SqlClient;
-using System;
+﻿using System.Net;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace OnlineStore
 {
-    class UserHandler : IDisposable
+    class UserHandler : WebServiceHandler
     {
-        SqlConnection dbConnection;
-        AuthenticationHandler authHandler;
-        public UserHandler(string connString)
-        {
-            dbConnection = new SqlConnection(connString);
-            authHandler = new AuthenticationHandler(connString);
-            dbConnection.Open();
-        }
-
         public bool CreateAccount(User usr)
         {
             string username = usr.GetUserInfo().GetUsername();
             string email = usr.GetUserInfo().GetEmail();
-            string pwd = usr.GetUserInfo().GetPassword();
+            string password = usr.GetUserInfo().GetPassword();
             byte type = (byte)usr.GetUserInfo().GetUserType();
-            if(!authHandler.VerifyEmail(email) && !authHandler.VerifyUsername(username))
-            {
-                string query = "insert into [USER](USERNAME, EMAIL, [PASSWORD], UTYPE) ";
-                string arg = "values('" + username + "', '" + email + "', '" + pwd + "', '" + type + "');";
-                SqlCommand cmd = new SqlCommand(query + arg, dbConnection);
-                cmd.ExecuteNonQuery();
+            this.entity = "user";
+            this.param = $"{{\"USERNAME\":\"{username}\",\"EMAIL\":\"{email}\",\"PASSWORD\":\"{password}\",\"UTYPE\":{type}}}";
+            if (this.POST().StatusCode == HttpStatusCode.OK)
                 return true;
-            }
-            return false;
+            else return false;
         }
 
         public bool Login(User usr)
         {
-            if (authHandler.VerifyUser(usr))
+            string username = usr.GetUserInfo().GetUsername();
+            string password = usr.GetUserInfo().GetPassword();
+            this.entity = "user";
+            this.param = $"username={username};password={password}";
+            if(this.GET().StatusCode == HttpStatusCode.OK)
                 return true;
             else return false;
         }
@@ -41,48 +33,14 @@ namespace OnlineStore
         public UTYPE GetUserType(User usr)
         {
             UTYPE retType = UTYPE.CONSUMER;
-            string query = "select UTYPE from [USER] where [USERNAME] = '" + usr.GetUserInfo().GetUsername() + "';";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            if(reader.Read())
-                retType = (UTYPE)reader.GetByte(0);
+            string username = usr.GetUserInfo().GetUsername();
+            this.entity = "user";
+            this.param = $"username={username}";
 
-            reader.Close();
+            dynamic responseBody = JsonConvert.DeserializeObject(this.GetResponseBody(this.GET()));
+
+            retType = responseBody[0].UTYPE;
             return retType;
-        }
-
-        public void EditUsername(string newUsername)
-        {
-            //TODO: doesn't need to be done in this sprint
-        }
-
-        public void EditEmail(string newEmail)
-        {
-            //TODO: doesn't need to be done in this sprint
-        }
-
-        public void EditPassword(string newEncryptedPassword)
-        {
-            //TODO: doesn't need to be done in this sprint
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if(disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
-        ~UserHandler()
-        {
-            Dispose(false);
         }
     }
 }
