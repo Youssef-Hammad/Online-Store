@@ -41,7 +41,7 @@ namespace OnlineStore
             u_info.SetUsername(lUsrnameTxt.Text);
             u_info.SetPassword(lPwdTxt.Text);
             User newUser = new User(u_info);
-            u_handler = new UserHandler();
+            u_handler = new UserHandler(connString);
 
             if (u_handler.Login(newUser))
             {

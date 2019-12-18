@@ -67,7 +67,7 @@ namespace OnlineStore
 
                 user = new User(u_info);
 
-                UserHandler u_handler = new UserHandler();
+                UserHandler u_handler = new UserHandler(connString);
                 if (u_handler.CreateAccount(user))
                 {
                     MessageBox.Show("Registration successful");
