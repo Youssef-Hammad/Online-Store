@@ -14,7 +14,7 @@ namespace OnlineStore
             byte type = (byte)usr.GetUserInfo().GetUserType();
             this.entity = "user";
             this.param = $"{{\"USERNAME\":\"{username}\",\"EMAIL\":\"{email}\",\"PASSWORD\":\"{password}\",\"UTYPE\":{type}}}";
-            if (this.POST().StatusCode == HttpStatusCode.OK)
+            if (this.POST().StatusCode == HttpStatusCode.Created)
                 return true;
             else return false;
         }
