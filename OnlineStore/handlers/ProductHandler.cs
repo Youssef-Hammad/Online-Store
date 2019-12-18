@@ -76,7 +76,7 @@ namespace OnlineStore
 
             Console.WriteLine(counter);
             Console.WriteLine(productList.Count);
-            Console.WriteLine(productList[productList.Count - 2].GetProductInfo().GetName());
+            //Console.WriteLine(productList[productList.Count - 2].GetProductInfo().GetName());
 
             return productList;
         }

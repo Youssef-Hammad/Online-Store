@@ -123,6 +123,12 @@ if exists (select 1
    drop table "USER"
 go
 
+if exists (select 1
+			from sysobjects
+			where id = object_id('COLLABS')
+			and	  type = 'U')
+	drop table COLLABS
+
 /*==============================================================*/
 /* Table: APPROVEDPRODUCTS                                      */
 /*==============================================================*/
@@ -218,6 +224,14 @@ create table "USER" (
    constraint PK_USER primary key (USERNAME)
 )
 go
+
+
+create table COLLABS (
+	OUSERNAME		varchar(30)			not null,
+	CUSERNAME		varchar(30)			not null,
+	primary key (OUSERNAME, CUSERNAME)
+)
+
 
 alter table APPROVEDPRODUCTS
    add constraint FK_APPROVED_REFERENCE_BRAND foreign key (BRANDNAME)

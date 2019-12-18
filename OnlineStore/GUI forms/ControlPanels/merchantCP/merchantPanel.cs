@@ -14,12 +14,21 @@ namespace OnlineStore
     {
         private String connString;
         private User currUser;
+        private List<string> accessibleStores;
 
         public merchantPanel(User newUser, String connString)
         {
             InitializeComponent();
             currUser = newUser;
             this.connString = connString;
+            if(currUser.GetUserInfo().GetUserType() == UTYPE.COLLABORATOR)
+            {
+                rAddStoreBtn.Enabled = false;
+                LiveStatistics.Enabled = false;
+                button1.Enabled = false;
+                CollaboratorHandler cHandler = new CollaboratorHandler(connString);
+                accessibleStores = cHandler.GetAccessibleStores(currUser.GetUserInfo().GetUsername());
+            }
         }
 
         private void rAddStoreBtn_Click(object sender, EventArgs e)
@@ -32,6 +41,12 @@ namespace OnlineStore
         {
             LiveStatistics LiveStatisticsWindow = new LiveStatistics(connString, currUser);
             LiveStatisticsWindow.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            addCollaborator addCollab = new addCollaborator(currUser, connString);
+            addCollab.Show();
         }
     }
 }

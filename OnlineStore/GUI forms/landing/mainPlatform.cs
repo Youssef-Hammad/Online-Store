@@ -29,7 +29,7 @@ namespace OnlineStore
                 adminPanel adminCP = new adminPanel(connString);
                 adminCP.Show();
             }
-            if(currUser.GetUserInfo().GetUserType() == UTYPE.MERCHANT)
+            if(currUser.GetUserInfo().GetUserType() == UTYPE.MERCHANT || currUser.GetUserInfo().GetUserType() == UTYPE.COLLABORATOR)
             {
                 merchantPanel merchantCP = new merchantPanel(currUser, connString);
                 merchantCP.Show();
