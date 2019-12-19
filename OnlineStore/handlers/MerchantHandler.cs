@@ -6,12 +6,14 @@ namespace OnlineStore
 {
     class MerchantHandler
     {
-        private SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public MerchantHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public List<Store> GetMerchantStores(User merchant)
@@ -19,7 +21,7 @@ namespace OnlineStore
             String m_username = merchant.GetUserInfo().GetUsername();
             String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<Store> stores = new List<Store>();
             StoreInfo storeInfo = new StoreInfo();
@@ -40,27 +42,13 @@ namespace OnlineStore
 
         public bool VerifyMerchant(User merchant)
         {
-            AuthenticationHandler AuthHandler = new AuthenticationHandler(dbConnection.ConnectionString);
+            AuthenticationHandler AuthHandler = new AuthenticationHandler(sqlConnection.ConnectionString);
             return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
         }
 
         ~MerchantHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
 }

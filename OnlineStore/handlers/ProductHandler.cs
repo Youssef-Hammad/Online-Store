@@ -7,13 +7,14 @@ namespace OnlineStore
 {
     class ProductHandler
     {
-        private SqlConnection dbConnection;
-        //private Product product;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public ProductHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public bool AddProduct(Product product)
@@ -24,7 +25,7 @@ namespace OnlineStore
             string b_name = product.GetProductInfo().GetBrand().GetName();
 
             String query = "INSERT INTO APPROVEDPRODUCTS(BRANDNAME, PRODUCTNAME, PRODUCTPRICE, PRODUCTCAT) VALUES('" + b_name + "', '" + p_name + "', " + p_price + ", '" + p_category + "');";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
 
             try
             {
@@ -43,7 +44,7 @@ namespace OnlineStore
             ProductInfo productInfo = new ProductInfo();
 
             String query = "SELECT * FROM APPROVEDPRODUCTS";
-            SqlCommand cmd = new SqlCommand(query,dbConnection);
+            SqlCommand cmd = new SqlCommand(query, dbConnection.GetSqlConnection());
             SqlDataReader reader = cmd.ExecuteReader();
             BrandInfo brandInfo = new BrandInfo();
             int counter = 0;
@@ -55,7 +56,7 @@ namespace OnlineStore
                 productInfo.SetPrice((float)reader.GetDouble(3));
                 productInfo.SetCategory(reader.GetString(4));
                 String brandQuery = "SELECT * FROM BRAND WHERE BRANDNAME = '" + reader.GetString(1) + "'";
-                SqlCommand brandCmd = new SqlCommand(brandQuery,dbConnection);
+                SqlCommand brandCmd = new SqlCommand(brandQuery, dbConnection.GetSqlConnection());
                 SqlDataReader brandReader = brandCmd.ExecuteReader();
                 while(brandReader.Read())
                 {
@@ -84,7 +85,7 @@ namespace OnlineStore
         public void BuyProduct(string productName,string brandName)
         {
             string query = "SELECT PID FROM APPROVEDPRODUCTS WHERE BRANDNAME = '" + brandName + "' AND PRODUCTNAME = '" + productName + "'";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             int productID = 0;
 
@@ -95,7 +96,7 @@ namespace OnlineStore
             }
             reader.Close();
             string stockQuery = "SELECT QTY FROM PRODUCTSTOCK WHERE PID = " + productID.ToString();
-            SqlCommand stockCmd = new SqlCommand(stockQuery, dbConnection);
+            SqlCommand stockCmd = new SqlCommand(stockQuery, sqlConnection);
             SqlDataReader stockReader = stockCmd.ExecuteReader();
             int quantity = 0;
             while (stockReader.Read())
@@ -105,7 +106,7 @@ namespace OnlineStore
             }
             quantity--;
             string updateQuery = "UPDATE PRODUCTSTOCK SET QTY = " + quantity + " WHERE PID = " + productID;
-            SqlCommand updateCmd = new SqlCommand(updateQuery, dbConnection);
+            SqlCommand updateCmd = new SqlCommand(updateQuery, sqlConnection);
             updateCmd.ExecuteNonQuery();
         }
 
@@ -113,14 +114,14 @@ namespace OnlineStore
         {
             String query = "SELECT * FROM APPROVEDPRODUCTS WHERE BRANDNAME = '" + product.GetProductInfo().GetBrand().GetName() + "' AND PRODUCTNAME = '"+product.GetProductInfo().GetName()+"'";
             int productID=0;
-            SqlCommand cmd = new SqlCommand(query,dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
                 productID = reader.GetInt32(0);
             reader.Close();
 
             String quantityQuery = "SELECT * FROM PRODUCTSTOCK WHERE PID = " + productID.ToString();
-            SqlCommand cmdQuantity = new SqlCommand(quantityQuery,dbConnection);
+            SqlCommand cmdQuantity = new SqlCommand(quantityQuery, sqlConnection);
             SqlDataReader quantityReader = cmdQuantity.ExecuteReader();
             int quantity = 0;
             while (quantityReader.Read())
@@ -130,24 +131,9 @@ namespace OnlineStore
             return quantity;
         }   
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
         ~ProductHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
-
 }
