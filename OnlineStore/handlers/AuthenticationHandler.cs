@@ -5,12 +5,14 @@ namespace OnlineStore
 {
     class AuthenticationHandler
     {
-        SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public AuthenticationHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public bool VerifyUser(User user)
@@ -27,7 +29,7 @@ namespace OnlineStore
         public bool VerifyUsername(string username)
         {
             string query = "SELECT count(USERNAME) from [USER] where USERNAME = '" + username + "';";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             int usernameCheck = Convert.ToInt16(cmd.ExecuteScalar());
             if (usernameCheck == 1)
                 return true;
@@ -37,7 +39,7 @@ namespace OnlineStore
         public bool VerifyEmail(string email)
         {
             string query = "SELECT count(USERNAME) from [USER] where EMAIL = '" + email + "';";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             int emailCheck = Convert.ToInt16(cmd.ExecuteScalar());
             if (emailCheck == 1)
                 return true;
@@ -52,30 +54,16 @@ namespace OnlineStore
             if(VerifyUsername(usrORemail))
                 query = "SELECT count(USERNAME) from [USER] where USERNAME = '" + usrORemail + "' AND [PASSWORD] = '" + encryptedPwd + "';";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             int pwdCheck = Convert.ToInt16(cmd.ExecuteScalar());
             if (pwdCheck == 1)
                 return true;
             return false;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
         ~AuthenticationHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
 }

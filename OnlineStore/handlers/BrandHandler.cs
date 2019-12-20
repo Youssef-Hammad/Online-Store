@@ -10,12 +10,14 @@ namespace OnlineStore
 {
     class BrandHandler
     {
-        SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public BrandHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public bool AddBrand(Brand brand)
@@ -27,14 +29,14 @@ namespace OnlineStore
             string query = "IF NOT EXISTS (SELECT * FROM BRAND WHERE BRANDNAME = '" + brandName + "' AND BRANDCAT = '" + brandCat + "')" + 
                            "Begin INSERT INTO BRAND VALUES ('" + brandName + "','" + brandCat + "') End";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             return cmd.ExecuteNonQuery() > 0;       // this return the number of affected rows, if > 0, brand added and no duplications found
         }
 
         public List<string> GetBrandsNames()
         {
             string query = "SELECT BRANDNAME FROM BRAND;";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
 
             var reader = cmd.ExecuteReader();
             List<string> brands = new List<String>();
@@ -45,22 +47,9 @@ namespace OnlineStore
             return brands;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
         ~BrandHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
 
     }

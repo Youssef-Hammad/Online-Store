@@ -9,12 +9,14 @@ namespace OnlineStore
 {
     class StatisticsHandler
     {
-        private SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public StatisticsHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public int GetNumberOfPurchases(List<Store> storeList)
@@ -27,7 +29,7 @@ namespace OnlineStore
             {
                 queryStoreID = "SELECT SID FROM STORES WHERE STORENAME = '" + iterator.GetStoreInfo().GetName() + "' AND STORELOC = '" + iterator.GetStoreInfo().GetLocaction() + "'";
 
-                SqlCommand commandStoreID = new SqlCommand(queryStoreID, dbConnection);
+                SqlCommand commandStoreID = new SqlCommand(queryStoreID, sqlConnection);
                 reader = commandStoreID.ExecuteReader();
 
                 if (!reader.Read())
@@ -37,7 +39,7 @@ namespace OnlineStore
 
                 reader.Close();
 
-                SqlCommand commandCount = new SqlCommand(queryCount, dbConnection);
+                SqlCommand commandCount = new SqlCommand(queryCount, sqlConnection);
 
                 returnValue += Convert.ToInt32(commandCount.ExecuteScalar());
 
@@ -55,7 +57,7 @@ namespace OnlineStore
             {
                 queryStoreID = "SELECT SID FROM STORES WHERE STORENAME = '" + iterator.GetStoreInfo().GetName() + "' AND STORELOC = '" + iterator.GetStoreInfo().GetLocaction() + "'";
 
-                SqlCommand commandStoreID = new SqlCommand(queryStoreID, dbConnection);
+                SqlCommand commandStoreID = new SqlCommand(queryStoreID, sqlConnection);
                 reader = commandStoreID.ExecuteReader();
                 if (!reader.Read())
                     return 0;
@@ -63,7 +65,7 @@ namespace OnlineStore
 
                 reader.Close();
 
-                SqlCommand commandProdutViews = new SqlCommand(queryProductViews, dbConnection);
+                SqlCommand commandProdutViews = new SqlCommand(queryProductViews, sqlConnection);
                 reader = commandProdutViews.ExecuteReader();
 
                 if (!reader.Read())
@@ -90,7 +92,7 @@ namespace OnlineStore
             {
                 queryStoreID = "SELECT SID FROM STORES WHERE STORENAME = '" + iterator.GetStoreInfo().GetName() + "' AND STORELOC = '" + iterator.GetStoreInfo().GetLocaction() + "'";
 
-                SqlCommand commandStoreID = new SqlCommand(queryStoreID, dbConnection);
+                SqlCommand commandStoreID = new SqlCommand(queryStoreID, sqlConnection);
                 reader = commandStoreID.ExecuteReader();
 
                 if (!reader.Read())
@@ -100,14 +102,14 @@ namespace OnlineStore
 
                 reader.Close();
 
-                SqlCommand commandProducts = new SqlCommand(queryProducts, dbConnection);
+                SqlCommand commandProducts = new SqlCommand(queryProducts, sqlConnection);
 
                 reader = commandProducts.ExecuteReader();
 
                 while (reader.Read())
                 {
                     queryBrandInfo = "SELECT * FROM BRAND WHERE BRANDNAME = '" + reader.GetString(0) + "'";
-                    SqlCommand commandBrand = new SqlCommand(queryBrandInfo, dbConnection);
+                    SqlCommand commandBrand = new SqlCommand(queryBrandInfo, sqlConnection);
                     readerBrand = commandBrand.ExecuteReader();
 
                     if (!readerBrand.Read())
@@ -136,7 +138,7 @@ namespace OnlineStore
         public int SumUser()
         {
             string query = "SELECT COUNT(*) FROM [USER] WHERE UTYPE = 2;";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             int count = Convert.ToInt32(cmd.ExecuteScalar());
             return count;
         }
@@ -148,7 +150,7 @@ namespace OnlineStore
                             "WHERE u.USERNAME = p.USERNAME " +
                             "GROUP BY u.USERNAME, u.EMAIL;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -169,7 +171,7 @@ namespace OnlineStore
                             "WHERE u.USERNAME = p.USERNAME " +
                             "GROUP BY u.USERNAME, u.EMAIL;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -190,7 +192,7 @@ namespace OnlineStore
                             "WHERE u.USERNAME = p.USERNAME " +
                             "GROUP BY u.USERNAME, u.EMAIL;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -207,7 +209,7 @@ namespace OnlineStore
         public int SumProduct()
         {
             string query = "SELECT COUNT(*) FROM PURCHASEHISTORY;";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             int count = Convert.ToInt32(cmd.ExecuteScalar());
             return count;
         }
@@ -219,7 +221,7 @@ namespace OnlineStore
                            "WHERE a.PID = p.PID " +
                            "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -240,7 +242,7 @@ namespace OnlineStore
                            "WHERE a.PID = p.PID " +
                            "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -261,7 +263,7 @@ namespace OnlineStore
                            "WHERE a.PID = p.PID " +
                            "GROUP BY a.PRODUCTNAME, a.PRODUCTPRICE, a.PRODUCTCAT;";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
 
             string output = "";
@@ -275,23 +277,9 @@ namespace OnlineStore
             return output;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
         ~StatisticsHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
 
     }

@@ -4,12 +4,14 @@ namespace OnlineStore
 {
     class AdminHandler
     {
-        private SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public AdminHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public bool VerifyIsAdmin(User admin)
@@ -20,23 +22,9 @@ namespace OnlineStore
                 return false;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            System.GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
         ~AdminHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
 }

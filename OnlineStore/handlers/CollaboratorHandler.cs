@@ -6,12 +6,14 @@ namespace OnlineStore
 {
     class CollaboratorHandler
     {
-        private SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public CollaboratorHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
 
@@ -20,11 +22,11 @@ namespace OnlineStore
             try
             {
                 string query = "INSERT INTO COLLABS(OUSERNAME, CUSERNAME) VALUES('" + ownerUsername + "', '" + collaboratorUsername + "');";
-                SqlCommand cmd = new SqlCommand(query, dbConnection);
+                SqlCommand cmd = new SqlCommand(query, sqlConnection);
                 cmd.ExecuteNonQuery();
 
                 query = "UPDATE [USER] SET UTYPE = 3 WHERE USERNAME = '" + collaboratorUsername + "';";
-                cmd = new SqlCommand(query, dbConnection);
+                cmd = new SqlCommand(query, sqlConnection);
                 cmd.ExecuteNonQuery();
                 return true;
             }
@@ -37,7 +39,7 @@ namespace OnlineStore
         public bool VerifyIsCollaborator(string ownerUsername, string collaboratorUsername)
         {
             string query = "SELECT * FROM COLLABS WHERE OUSERNAME = '" + ownerUsername + "' AND CUSERNAME = '" + collaboratorUsername + "'";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
 
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -52,36 +54,22 @@ namespace OnlineStore
             List<string> storeNames = new List<string>();
             string ownerUsername = "";
             string query = "SELECT OUSERNAME FROM COLLABS WHERE CUSERNAME = '" + collaboratorUsername + "';";
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             while (reader.Read())
                 ownerUsername = reader.GetString(0);
 
             query = "SELECT STORENAME FROM STORES WHERE OWNERUSER = '" + ownerUsername + "';";
-            cmd = new SqlCommand(query, dbConnection);
+            cmd = new SqlCommand(query, sqlConnection);
             while (reader.Read())
                 storeNames.Add(reader.GetString(0));
 
             return storeNames;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            System.GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                dbConnection.Close();
-            }
-        }
-
         ~CollaboratorHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
 }

@@ -25,7 +25,6 @@ namespace OnlineStore
 
             BrandHandler b_handler = new BrandHandler(connString);
             List<String> brandsNames = b_handler.GetBrandsNames();
-            b_handler.Dispose();
 
             foreach (var brandName in brandsNames)
             {
