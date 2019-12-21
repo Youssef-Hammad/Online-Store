@@ -15,7 +15,7 @@ namespace OnlineStore
         private User currUser;
         private String connString;
         private ProductHandler productHandler;
-        private List<Product> productList;
+        private List<string> productList;
 
         public UserMainPlatform(User newUser, String connString)
         {
@@ -25,12 +25,12 @@ namespace OnlineStore
             purchaseErrorLabel.Hide();
             productHandler = new ProductHandler(connString);
 
-            productList = this.productHandler.GetAllApprovedProducts();
+            productList = this.productHandler.GetAllApprovedProductsNames();
 
             foreach (var iterator in productList)
             {
                 //Console.WriteLine(iterator.GetProductInfo().GetName());
-                ItemsComboBox.Items.Add(iterator.GetProductInfo().GetName());
+                ItemsComboBox.Items.Add(iterator);
             }
         }
 
@@ -57,16 +57,11 @@ namespace OnlineStore
             }
             else
             {
-                foreach (var iterator in productList)
-                {
-                    if (iterator.GetProductInfo().GetName() == ItemsComboBox.Text)
-                    {
-                        int quantity = productHandler.GetQuantity(iterator);
-                        PurchaseItemForm purchaseItemForm = new PurchaseItemForm(currUser, connString, iterator.GetProductInfo().GetName(), iterator.GetProductInfo().GetBrand().GetName(), quantity);
-                        purchaseItemForm.Show();
-                        break;
-                    }
-                }
+                Product chosenProduct = productHandler.GetProductWithName(ItemsComboBox.Text);
+                int quantity = productHandler.GetQuantity(chosenProduct);
+                Console.WriteLine(chosenProduct.GetProductInfo().GetName() + " " + quantity.ToString());
+                PurchaseItemForm purchaseItemForm = new PurchaseItemForm(currUser, connString, chosenProduct.GetProductInfo().GetName(), chosenProduct.GetProductInfo().GetBrand().GetName(), quantity);
+                purchaseItemForm.Show();
             }
         }
 

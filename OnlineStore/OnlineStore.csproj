@@ -95,6 +95,12 @@
     <Compile Include="GUI forms\ControlPanels\merchantCP\addCollaborator.Designer.cs">
       <DependentUpon>addCollaborator.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\addProductToStore.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\addProductToStore.Designer.cs">
+      <DependentUpon>addProductToStore.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -198,6 +204,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\addCollaborator.resx">
       <DependentUpon>addCollaborator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\addProductToStore.resx">
+      <DependentUpon>addProductToStore.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.resx">
       <DependentUpon>addStoreToPending.cs</DependentUpon>

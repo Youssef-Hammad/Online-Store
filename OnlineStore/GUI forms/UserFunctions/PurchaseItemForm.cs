@@ -25,6 +25,7 @@ namespace OnlineStore
             this.connString = connString;
             productName = p_name;
             productBrand = p_brand;
+            quantity = p_quantity;
             ItemNameLabel.Text = "Product Name: "+productName;
             FetchedBrandNameLabel.Text = "Brand: "+productBrand;
             FetchedQuantityLabel.Text = "Quantity: "+quantity.ToString();
@@ -85,10 +86,10 @@ namespace OnlineStore
                     }
                     else
                     {
+                        ProductHandler pHandler = new ProductHandler(connString);
+                        pHandler.BuyProduct(productName, productBrand, QuantityInt);
                         this.Hide();
                         MessageBox.Show("Product Successfully Purchased!");
-                        ProductHandler pHandler = new ProductHandler(connString);
-                        pHandler.BuyProduct(productName,productBrand);
 
                     }
                 }

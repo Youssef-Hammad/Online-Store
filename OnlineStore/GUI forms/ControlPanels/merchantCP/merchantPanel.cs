@@ -48,5 +48,16 @@ namespace OnlineStore
             addCollaborator addCollab = new addCollaborator(currUser, connString);
             addCollab.Show();
         }
+
+        private void addProductBtn_Click(object sender, EventArgs e)
+        {
+            addProductToStore addProduct = new addProductToStore(currUser, connString);
+            addProduct.Show();
+        }
+
+        private void merchantPanel_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
