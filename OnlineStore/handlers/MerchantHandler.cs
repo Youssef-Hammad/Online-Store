@@ -7,12 +7,14 @@ namespace OnlineStore
 {
     class MerchantHandler
     {
-        private SqlConnection dbConnection;
+        private DBConnection dbConnection;
+        private SqlConnection sqlConnection;
 
         public MerchantHandler(string connString)
         {
-            dbConnection = new SqlConnection(connString);
+            dbConnection = new DBConnection(connString);
             dbConnection.Open();
+            sqlConnection = dbConnection.GetSqlConnection();
         }
 
         public List<Store> GetMerchantStores(User merchant)
@@ -20,7 +22,7 @@ namespace OnlineStore
             String m_username = merchant.GetUserInfo().GetUsername();
             String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<Store> stores = new List<Store>();
             StoreInfo storeInfo = new StoreInfo();
@@ -51,7 +53,7 @@ namespace OnlineStore
             String m_username = merchant.GetUserInfo().GetUsername();
             String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
-            SqlCommand cmd = new SqlCommand(query, dbConnection);
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<string> stores = new List<string>();
             int idx = 0;
@@ -74,7 +76,7 @@ namespace OnlineStore
             ProductInfo productInfo = new ProductInfo();
             StoreInfo storeInfo = new StoreInfo();
             string productQuery = "SELECT * FROM APPROVEDPRODUCTS WHERE PRODUCTNAME = '" + productName + "'";
-            SqlCommand productCmd = new SqlCommand(productQuery, dbConnection);
+            SqlCommand productCmd = new SqlCommand(productQuery, sqlConnection);
             SqlDataReader productReader = productCmd.ExecuteReader();
             if (productReader.Read())
             {
@@ -102,7 +104,7 @@ namespace OnlineStore
                 return false;
             }
             string storeQuery = "SELECT * FROM STORES WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchant.GetUserInfo().GetUsername() + "'";
-            SqlCommand storeCmd = new SqlCommand(storeQuery, dbConnection);
+            SqlCommand storeCmd = new SqlCommand(storeQuery, sqlConnection);
             SqlDataReader storeReader = storeCmd.ExecuteReader();
             if (storeReader.Read())
             {
@@ -116,7 +118,7 @@ namespace OnlineStore
                 return false;
             }
             string insertQuery = "INSERT INTO PRODUCTSTOCK(SID,PID,QTY) VALUES(" + storeID.ToString() + "," + productID.ToString() + "," + quantity.ToString() + ")";
-            SqlCommand insertCmd = new SqlCommand(insertQuery, dbConnection);
+            SqlCommand insertCmd = new SqlCommand(insertQuery, sqlConnection);
             try
             {
                 insertCmd.ExecuteNonQuery();
@@ -130,7 +132,7 @@ namespace OnlineStore
         }
         public bool VerifyMerchant(User merchant)
         {
-            AuthenticationHandler AuthHandler = new AuthenticationHandler(dbConnection.ConnectionString);
+            AuthenticationHandler AuthHandler = new AuthenticationHandler(sqlConnection.ConnectionString);
             return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
         }
 
@@ -144,7 +146,7 @@ namespace OnlineStore
         {
             if (disposing == true)
             {
-                dbConnection.Close();
+                sqlConnection.Close();
             }
         }
 
