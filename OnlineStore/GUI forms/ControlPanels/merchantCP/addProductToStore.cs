@@ -28,13 +28,13 @@ namespace OnlineStore
             merchHandler = new MerchantHandler(connString);
             productHandler = new ProductHandler(connString);
             storeList = merchHandler.GetMerchantStoreNames(currUser);
-            foreach(string iterator in storeList)
+            foreach (string iterator in storeList)
             {
                 //Console.WriteLine(iterator.GetStoreInfo().GetName());
                 storeComboBox.Items.Add(iterator);
             }
             productList = productHandler.GetAllApprovedProductsNames();
-            foreach(string iterator in productList)
+            foreach (string iterator in productList)
             {
                 productComboBox.Items.Add(iterator);
             }
@@ -67,16 +67,16 @@ namespace OnlineStore
                 string productName = productComboBox.Text;
                 string storeName = storeComboBox.Text;
                 string quantity = stockTextBox.Text;
-                if(productHandler.isValidQuantity(quantity))
+                if (productHandler.isValidQuantity(quantity))
                 {
-                    if(merchHandler.AddProductToStore(productName,storeName,merchant,Int32.Parse(quantity)))
+                    if (merchHandler.AddProductToStore(productName, storeName, merchant, Int32.Parse(quantity)))
                     {
                         MessageBox.Show("Product Added Successfully");
                         this.Hide();
                     }
                     else
                     {
-                        MessageBox.Show("Product Already Exists");
+                        MessageBox.Show("Product Already Exists In Chosen Store");
                     }
                 }
                 else

@@ -17,7 +17,7 @@ namespace OnlineStore
         private String productName;
         private String productBrand;
         private int quantity;
-        
+
         public PurchaseItemForm(User newUser, String connString, String p_name, String p_brand, int p_quantity)
         {
             InitializeComponent();
@@ -26,9 +26,9 @@ namespace OnlineStore
             productName = p_name;
             productBrand = p_brand;
             quantity = p_quantity;
-            ItemNameLabel.Text = "Product Name: "+productName;
-            FetchedBrandNameLabel.Text = "Brand: "+productBrand;
-            FetchedQuantityLabel.Text = "Quantity: "+quantity.ToString();
+            ItemNameLabel.Text = "Product Name: " + productName;
+            FetchedBrandNameLabel.Text = "Brand: " + productBrand;
+            FetchedQuantityLabel.Text = "Quantity: " + quantity.ToString();
             ItemPictureBtn.Text = productName;
             purchaseErrorLabel.Hide();
         }
@@ -45,17 +45,17 @@ namespace OnlineStore
 
         private void PurchaseBtn_Click(object sender, EventArgs e)
         {
-            if(QuantityTextBox.Text == "")
+            if (QuantityTextBox.Text == "")
             {
                 purchaseErrorLabel.Text = "Please fill out the Quantity Text Box to continue";
                 purchaseErrorLabel.Show();
             }
-            else if(AddressTextBox.Text == "")
+            else if (AddressTextBox.Text == "")
             {
                 purchaseErrorLabel.Text = "Please fill out the Address Text Box to continue";
                 purchaseErrorLabel.Show();
             }
-            else if(AgreementsCheckBox.Checked == false)
+            else if (AgreementsCheckBox.Checked == false)
             {
                 purchaseErrorLabel.Text = "Please Agree to the terms and conditions to continue";
                 purchaseErrorLabel.Show();
@@ -66,21 +66,21 @@ namespace OnlineStore
                 bool ValidQuantity = true;
                 for (int i = 0; i < QuantityStr.Length; i++)
                 {
-                    if(QuantityStr[i]<'0'||QuantityStr[i]>'9')
+                    if (QuantityStr[i] < '0' || QuantityStr[i] > '9')
                     {
                         ValidQuantity = false;
                         break;
                     }
                 }
-                if(ValidQuantity)
+                if (ValidQuantity)
                 {
                     int QuantityInt = Convert.ToInt32(QuantityStr);
-                    if(QuantityInt>quantity)//compares input quantity with available quantity
+                    if (QuantityInt > quantity)//compares input quantity with available quantity
                     {
                         purchaseErrorLabel.Text = "The quantity available is not sufficient for your input";
                         purchaseErrorLabel.Show();
                     }
-                    else if(QuantityInt<=0)
+                    else if (QuantityInt <= 0)
                     {
                         purchaseErrorLabel.Text = "Invalid Number, minimum quantity is 1";
                     }

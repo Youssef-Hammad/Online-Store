@@ -46,12 +46,12 @@ namespace OnlineStore
 
         private void ItemsComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void PurchaseBtn_Click(object sender, EventArgs e)
         {
-            if(ItemsComboBox.Text == "")
+            if (ItemsComboBox.Text == "")
             {
                 purchaseErrorLabel.Show();
             }

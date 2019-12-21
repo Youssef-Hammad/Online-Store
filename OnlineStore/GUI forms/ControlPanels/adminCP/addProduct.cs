@@ -25,6 +25,7 @@ namespace OnlineStore
 
             BrandHandler b_handler = new BrandHandler(connString);
             List<String> brandsNames = b_handler.GetBrandsNames();
+            //b_handler.Dispose();
 
             foreach (var brandName in brandsNames)
             {
@@ -55,7 +56,7 @@ namespace OnlineStore
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void pCategoryTxt_TextChanged(object sender, EventArgs e)
