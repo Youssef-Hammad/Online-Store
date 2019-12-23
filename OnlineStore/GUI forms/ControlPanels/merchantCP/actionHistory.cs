@@ -74,14 +74,11 @@ namespace OnlineStore
                 string storeId = row.Cells[1].Value.ToString();
                 string productName = row.Cells[2].Value.ToString();
                 string actionStatement = row.Cells[3].Value.ToString();
+                
+                // [IN PROGRESS]
 
-                STYPE storeType = (STYPE)Enum.Parse(typeof(STYPE), row.Cells[3].Value.ToString());
-                s_info.SetType(storeType);
-                Store store = new Store(s_info);
-                action actionForm = new action(connString, store, ownerName);
-                actionForm.ShowDialog();
-
-                viewPendindStores_Load(sender, e);  // to update datagrid view after taking an action accept/decline
+                //action actionForm = new action(connString, store, ownerName);
+                //actionForm.ShowDialog();
             }
         }
     }
