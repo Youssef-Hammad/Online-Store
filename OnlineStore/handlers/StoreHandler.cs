@@ -123,7 +123,7 @@ namespace OnlineStore
             string query = "SELECT FROM storesProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME = '" + pName + "'";
 
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
-			if(cmd.ExecuteScalar()==null)
+			if(cmd.ExecuteScalar() == null)
             {
                 query = "INSERT INTO storeProducts(STORENAME,PRODUCTNAME) VALUES('" + sName + "','" + pName + "')";
 

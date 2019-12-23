@@ -45,7 +45,6 @@ namespace OnlineStore
             {
                 Console.WriteLine(stores[i].GetStoreInfo().GetName());
             }
-
             return stores;
         }
 

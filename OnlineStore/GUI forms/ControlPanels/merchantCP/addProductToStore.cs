@@ -27,7 +27,7 @@ namespace OnlineStore
             this.merchant = currUser;
             merchHandler = new MerchantHandler(connString);
             productHandler = new ProductHandler(connString);
-            storeList = merchHandler.GetMerchantStoreNames(currUser);
+            storeList = merchHandler.GetMerchantStoresNames(currUser);
             foreach (string iterator in storeList)
             {
                 //Console.WriteLine(iterator.GetStoreInfo().GetName());
@@ -71,6 +71,7 @@ namespace OnlineStore
                 {
                     if (merchHandler.AddProductToStore(productName, storeName, merchant, Int32.Parse(quantity)))
                     {
+
                         MessageBox.Show("Product Added Successfully");
                         this.Hide();
                     }
