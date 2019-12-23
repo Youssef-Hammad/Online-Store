@@ -60,7 +60,7 @@ namespace OnlineStore
                 Product chosenProduct = productHandler.GetProductWithName(ItemsComboBox.Text);
                 int quantity = productHandler.GetQuantity(chosenProduct);
                 Console.WriteLine(chosenProduct.GetProductInfo().GetName() + " " + quantity.ToString());
-                PurchaseItemForm purchaseItemForm = new PurchaseItemForm(currUser, connString, chosenProduct.GetProductInfo().GetName(), chosenProduct.GetProductInfo().GetBrand().GetName(), quantity);
+                PurchaseItemForm purchaseItemForm = new PurchaseItemForm(currUser, connString, chosenProduct.GetProductInfo().GetName(), chosenProduct.GetProductInfo().GetBrand().GetName(), quantity, chosenProduct.GetProductInfo().GetPrice());
                 purchaseItemForm.Show();
             }
         }

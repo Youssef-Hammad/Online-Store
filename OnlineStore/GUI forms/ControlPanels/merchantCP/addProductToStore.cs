@@ -71,7 +71,6 @@ namespace OnlineStore
                 {
                     if (merchHandler.AddProductToStore(productName, storeName, merchant, Int32.Parse(quantity)))
                     {
-
                         MessageBox.Show("Product Added Successfully");
                         this.Hide();
                     }

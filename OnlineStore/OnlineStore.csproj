@@ -146,6 +146,12 @@
     <Compile Include="GUI forms\landing\UserMainPlatform.Designer.cs">
       <DependentUpon>UserMainPlatform.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\UserFunctions\ConfirmPurchaseWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\UserFunctions\ConfirmPurchaseWindow.Designer.cs">
+      <DependentUpon>ConfirmPurchaseWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI forms\UserFunctions\PurchaseItemForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\landing\UserMainPlatform.resx">
       <DependentUpon>UserMainPlatform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\UserFunctions\ConfirmPurchaseWindow.resx">
+      <DependentUpon>ConfirmPurchaseWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\UserFunctions\PurchaseItemForm.resx">
       <DependentUpon>PurchaseItemForm.cs</DependentUpon>

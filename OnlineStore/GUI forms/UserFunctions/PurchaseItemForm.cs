@@ -16,9 +16,10 @@ namespace OnlineStore
         private String connString;
         private String productName;
         private String productBrand;
+        private float productPrice;
         private int quantity;
 
-        public PurchaseItemForm(User newUser, String connString, String p_name, String p_brand, int p_quantity)
+        public PurchaseItemForm(User newUser, String connString, String p_name, String p_brand, int p_quantity, float p_price)
         {
             InitializeComponent();
             currUser = newUser;
@@ -26,9 +27,11 @@ namespace OnlineStore
             productName = p_name;
             productBrand = p_brand;
             quantity = p_quantity;
+            productPrice = p_price;
             ItemNameLabel.Text = "Product Name: " + productName;
             FetchedBrandNameLabel.Text = "Brand: " + productBrand;
             FetchedQuantityLabel.Text = "Quantity: " + quantity.ToString();
+            priceLabel.Text = "Price: " + productPrice.ToString();
             ItemPictureBtn.Text = productName;
             purchaseErrorLabel.Hide();
         }
@@ -87,10 +90,13 @@ namespace OnlineStore
                     else
                     {
                         ProductHandler pHandler = new ProductHandler(connString);
-                        pHandler.BuyProduct(productName, productBrand, QuantityInt);
+                        /*pHandler.BuyProduct(productName, productBrand, QuantityInt);
                         this.Hide();
-                        MessageBox.Show("Product Successfully Purchased!");
+                        MessageBox.Show("Product Successfully Purchased!");*/
+                        float discountPrice = (pHandler.GetDiscountPercent(currUser,quantity) / (float)100) * (productPrice * QuantityInt);
 
+                        ConfirmPurchaseWindow confirmPurchaseWindow = new ConfirmPurchaseWindow(currUser, connString, productName,productBrand, productPrice * QuantityInt, discountPrice, QuantityInt);
+                        confirmPurchaseWindow.Show();
                     }
                 }
                 else
@@ -112,6 +118,11 @@ namespace OnlineStore
         }
 
         private void QuantityTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void priceLabel_Click(object sender, EventArgs e)
         {
 
         }

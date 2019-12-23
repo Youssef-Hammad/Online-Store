@@ -39,6 +39,7 @@
             this.FetchedBrandNameLabel = new System.Windows.Forms.Label();
             this.PurchaseBtn = new System.Windows.Forms.Button();
             this.purchaseErrorLabel = new System.Windows.Forms.Label();
+            this.priceLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // ItemPictureBtn
@@ -63,7 +64,7 @@
             // QuantityLabel
             // 
             this.QuantityLabel.AutoSize = true;
-            this.QuantityLabel.Location = new System.Drawing.Point(13, 257);
+            this.QuantityLabel.Location = new System.Drawing.Point(14, 307);
             this.QuantityLabel.Name = "QuantityLabel";
             this.QuantityLabel.Size = new System.Drawing.Size(69, 17);
             this.QuantityLabel.TabIndex = 2;
@@ -71,7 +72,7 @@
             // 
             // QuantityTextBox
             // 
-            this.QuantityTextBox.Location = new System.Drawing.Point(88, 257);
+            this.QuantityTextBox.Location = new System.Drawing.Point(79, 307);
             this.QuantityTextBox.Name = "QuantityTextBox";
             this.QuantityTextBox.Size = new System.Drawing.Size(195, 22);
             this.QuantityTextBox.TabIndex = 3;
@@ -80,7 +81,7 @@
             // AddressLabel
             // 
             this.AddressLabel.AutoSize = true;
-            this.AddressLabel.Location = new System.Drawing.Point(16, 302);
+            this.AddressLabel.Location = new System.Drawing.Point(14, 350);
             this.AddressLabel.Name = "AddressLabel";
             this.AddressLabel.Size = new System.Drawing.Size(68, 17);
             this.AddressLabel.TabIndex = 4;
@@ -88,7 +89,7 @@
             // 
             // AddressTextBox
             // 
-            this.AddressTextBox.Location = new System.Drawing.Point(88, 302);
+            this.AddressTextBox.Location = new System.Drawing.Point(79, 347);
             this.AddressTextBox.Name = "AddressTextBox";
             this.AddressTextBox.Size = new System.Drawing.Size(195, 22);
             this.AddressTextBox.TabIndex = 5;
@@ -96,7 +97,7 @@
             // AgreementsCheckBox
             // 
             this.AgreementsCheckBox.AutoSize = true;
-            this.AgreementsCheckBox.Location = new System.Drawing.Point(19, 360);
+            this.AgreementsCheckBox.Location = new System.Drawing.Point(16, 385);
             this.AgreementsCheckBox.Name = "AgreementsCheckBox";
             this.AgreementsCheckBox.Size = new System.Drawing.Size(249, 21);
             this.AgreementsCheckBox.TabIndex = 6;
@@ -127,7 +128,7 @@
             this.PurchaseBtn.BackColor = System.Drawing.Color.LightCoral;
             this.PurchaseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.PurchaseBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.PurchaseBtn.Location = new System.Drawing.Point(53, 406);
+            this.PurchaseBtn.Location = new System.Drawing.Point(53, 430);
             this.PurchaseBtn.Margin = new System.Windows.Forms.Padding(4);
             this.PurchaseBtn.Name = "PurchaseBtn";
             this.PurchaseBtn.Size = new System.Drawing.Size(248, 31);
@@ -140,18 +141,29 @@
             // 
             this.purchaseErrorLabel.AutoSize = true;
             this.purchaseErrorLabel.ForeColor = System.Drawing.Color.Red;
-            this.purchaseErrorLabel.Location = new System.Drawing.Point(16, 384);
+            this.purchaseErrorLabel.Location = new System.Drawing.Point(13, 409);
             this.purchaseErrorLabel.Name = "purchaseErrorLabel";
             this.purchaseErrorLabel.Size = new System.Drawing.Size(342, 17);
             this.purchaseErrorLabel.TabIndex = 32;
             this.purchaseErrorLabel.Text = "Please Agree to the terms and conditions to continue";
             this.purchaseErrorLabel.Click += new System.EventHandler(this.purchaseErrorLabel_Click);
             // 
+            // priceLabel
+            // 
+            this.priceLabel.AutoSize = true;
+            this.priceLabel.Location = new System.Drawing.Point(87, 237);
+            this.priceLabel.Name = "priceLabel";
+            this.priceLabel.Size = new System.Drawing.Size(46, 17);
+            this.priceLabel.TabIndex = 33;
+            this.priceLabel.Text = "label1";
+            this.priceLabel.Click += new System.EventHandler(this.priceLabel_Click);
+            // 
             // PurchaseItemForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 450);
+            this.ClientSize = new System.Drawing.Size(369, 474);
+            this.Controls.Add(this.priceLabel);
             this.Controls.Add(this.purchaseErrorLabel);
             this.Controls.Add(this.PurchaseBtn);
             this.Controls.Add(this.FetchedBrandNameLabel);
@@ -184,5 +196,6 @@
         private System.Windows.Forms.Label FetchedBrandNameLabel;
         private System.Windows.Forms.Button PurchaseBtn;
         private System.Windows.Forms.Label purchaseErrorLabel;
+        private System.Windows.Forms.Label priceLabel;
     }
 }

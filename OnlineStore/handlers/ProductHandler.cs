@@ -18,6 +18,28 @@ namespace OnlineStore
             sqlConnection = dbConnection.GetSqlConnection();
         }
 
+        public bool isFirstPurchase(User user)
+        {
+            string purchaseHistryQuery = "SELECT * FROM PURCHASEHISTORY WHERE USERNAME = '" + user.GetUserInfo().GetUsername() + "'";
+            SqlCommand purchaseHistryCmd = new SqlCommand(purchaseHistryQuery, sqlConnection);
+            SqlDataReader historyReader = purchaseHistryCmd.ExecuteReader();
+            if (historyReader.Read())
+                return false;
+            return true;
+        }
+
+        public int GetDiscountPercent(User user,int qty)
+        {
+            int returnPercent = 0;
+            if (user.GetUserInfo().GetUserType() == UTYPE.MERCHANT)
+                returnPercent += 15;
+            if (isFirstPurchase(user))
+                returnPercent += 5;
+            if (qty >= 2)
+                returnPercent += 10;
+            return returnPercent;
+        }
+
         public bool AddProduct(Product product)
         {
             String p_name = product.GetProductInfo().GetName();
@@ -134,7 +156,7 @@ namespace OnlineStore
             Product returnedProduct = new Product(productInfo);
             return returnedProduct;
         }
-        public void BuyProduct(string productName,string brandName,int qty)
+        public void BuyProduct(string username,float price,string productName,string brandName,int qty)
         {
             string query = "SELECT PID FROM APPROVEDPRODUCTS WHERE BRANDNAME = '" + brandName + "' AND PRODUCTNAME = '" + productName + "'";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
@@ -162,6 +184,10 @@ namespace OnlineStore
             string updateQuery = "UPDATE PRODUCTSTOCK SET QTY = " + quantity.ToString() + " WHERE PID = " + productID.ToString() +" AND SID = "+storeID.ToString();
             SqlCommand updateCmd = new SqlCommand(updateQuery, sqlConnection);
             updateCmd.ExecuteNonQuery();
+
+            string purchaseHistoryQuery = "INSERT INTO PURCHASEHISTORY(USERNAME,PID,SID,QTY,COST) VALUES('" + username + "'," + productID.ToString() + "," + storeID.ToString() + "," + qty.ToString() + "," + price.ToString() + ")";
+            SqlCommand purchaseHistoryCmd = new SqlCommand(purchaseHistoryQuery, sqlConnection);
+            purchaseHistoryCmd.ExecuteNonQuery();
         }
 
         public bool isValidQuantity(string quantity)
