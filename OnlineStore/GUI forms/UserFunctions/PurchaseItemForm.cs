@@ -93,7 +93,7 @@ namespace OnlineStore
                         /*pHandler.BuyProduct(productName, productBrand, QuantityInt);
                         this.Hide();
                         MessageBox.Show("Product Successfully Purchased!");*/
-                        float discountPrice = (pHandler.GetDiscountPercent(currUser,quantity) / (float)100) * (productPrice * QuantityInt);
+                        float discountPrice = (pHandler.GetDiscountPercent(currUser,QuantityInt) / (float)100) * (productPrice * QuantityInt);
 
                         ConfirmPurchaseWindow confirmPurchaseWindow = new ConfirmPurchaseWindow(currUser, connString, productName,productBrand, productPrice * QuantityInt, discountPrice, QuantityInt);
                         confirmPurchaseWindow.Show();
