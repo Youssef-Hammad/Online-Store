@@ -26,11 +26,11 @@ namespace OnlineStore.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-VQEBF0F\\SQLEXPRESS;Initial Catalog=OnlineStore;Integrated Sec" +
-            "urity=True")]
-        public string OnlineStoreConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=SQL6007.site4now.net;Persist Security Info=True;User ID=DB_A5061A_okb" +
+            "oomer_admin;Password=okboomerserver0")]
+        public string okboomer_connectionstring {
             get {
-                return ((string)(this["OnlineStoreConnectionString"]));
+                return ((string)(this["okboomer_connectionstring"]));
             }
         }
     }

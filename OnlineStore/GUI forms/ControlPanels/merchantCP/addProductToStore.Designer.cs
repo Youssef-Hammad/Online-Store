@@ -40,6 +40,7 @@
             // 
             // productComboBox
             // 
+            this.productComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.productComboBox.FormattingEnabled = true;
             this.productComboBox.Location = new System.Drawing.Point(128, 48);
             this.productComboBox.Name = "productComboBox";
@@ -67,6 +68,7 @@
             // 
             // storeComboBox
             // 
+            this.storeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.storeComboBox.FormattingEnabled = true;
             this.storeComboBox.Location = new System.Drawing.Point(128, 101);
             this.storeComboBox.Name = "storeComboBox";

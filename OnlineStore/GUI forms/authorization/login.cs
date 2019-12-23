@@ -14,10 +14,6 @@ namespace OnlineStore
     {
         private UserInfo u_info;
         private UserHandler u_handler;
-
-
-        // DON'T FORGET TO CHANGE SERVER NAME TO YOUR SERVER NAME BEFORE TRYING TO RUN
-
         public String sqlServerName = "SQL6007.site4now.net";
         public String connString;
 
@@ -64,6 +60,11 @@ namespace OnlineStore
         }
 
         private void login_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lUsrnameTxt_TextChanged(object sender, EventArgs e)
         {
 
         }

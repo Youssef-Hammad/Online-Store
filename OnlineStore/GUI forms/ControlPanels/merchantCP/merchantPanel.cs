@@ -49,7 +49,14 @@ namespace OnlineStore
             addCollab.Show();
         }
 
-        private void addProductBtn_Click(object sender, EventArgs e)
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            actionHistory actionHistoryWindow = new actionHistory(connString, currUser);
+            actionHistoryWindow.Show();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
         {
             addProductToStore addProduct = new addProductToStore(currUser, connString);
             addProduct.Show();

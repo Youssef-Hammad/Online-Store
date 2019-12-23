@@ -168,7 +168,7 @@ go
 /* Table: PRODUCTSTOCK                                          */
 /*==============================================================*/
 create table PRODUCTSTOCK (
-   [SID]                  int                  not null,
+   [SID]                int                  not null,
    PID                  int                  not null,
    QTY                  int                  not null default 0,
    constraint PK_PRODUCTSTOCK primary key (SID, PID)
@@ -182,7 +182,7 @@ create table PURCHASEHISTORY (
    HID                  int   identity(1,1)  not null,
    USERNAME             varchar(30)          not null,
    PID                  int                  not null,
-   [SID]                  int                  not null,
+   [SID]                int                  not null,
    QTY                  int                  not null,
    COST                 float                not null,
    constraint PK_PURCHASEHISTORY primary key (HID)
@@ -219,7 +219,7 @@ go
 create table "USER" (
    USERNAME             varchar(30)          not null,
    EMAIL                varchar(60)          not null,
-   [PASSWORD]             varchar(30)          not null,
+   [PASSWORD]           varchar(30)          not null,
    UTYPE                tinyint              not null,
    constraint PK_USER primary key (USERNAME)
 )
@@ -231,6 +231,23 @@ create table COLLABS (
 	CUSERNAME		varchar(30)			not null,
 	primary key (OUSERNAME, CUSERNAME)
 )
+
+create table STOREACTIONS (
+	AID				int	identity(1,1)	not null,
+	[SID]			int					not null,
+	PID				int					not null,
+	[STATEMENT]		varchar(60)			not null,
+	primary key (AID)
+)
+
+alter table STOREACTIONS
+	add constraint FK_STOREACTIONS_REFERENCE_STORES foreign key ([SID])
+		references STORES ([SID])
+
+alter table STOREACTIONS
+    add constraint FK_STOREACTIONS_REFERENCE_APPROVEDPRODUCT foreign key (PID)
+		references APPROVEDPRODUCTS (PID)
+
 
 
 alter table APPROVEDPRODUCTS

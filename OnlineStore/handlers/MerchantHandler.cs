@@ -48,25 +48,23 @@ namespace OnlineStore
 
             return stores;
         }
-        public List<string> GetMerchantStoreNames(User merchant)
+
+        public List<string> GetMerchantStoresNames(User merchant)
         {
-            String m_username = merchant.GetUserInfo().GetUsername();
-            String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
+            string m_username = merchant.GetUserInfo().GetUsername();
+            string query = "SELECT STORENAME FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
-            List<string> stores = new List<string>();
-            int idx = 0;
+            List<string> storesNames = new List<string>();
+
             while (reader.Read())
             {
-                //Console.WriteLine(store.GetStoreInfo().GetName());
-                stores.Add(reader.GetString(1));
-                //Console.WriteLine(stores[idx].GetStoreInfo().GetName());
-                idx++;
+                storesNames.Add(reader.GetString(0));
             }
             reader.Close();
 
-            return stores;
+            return storesNames;
         }
 
         public bool AddProductToStore(string productName, string storeName, User merchant, int quantity)
@@ -130,29 +128,16 @@ namespace OnlineStore
                 return false;
             }
         }
+
         public bool VerifyMerchant(User merchant)
         {
             AuthenticationHandler AuthHandler = new AuthenticationHandler(sqlConnection.ConnectionString);
             return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing == true)
-            {
-                sqlConnection.Close();
-            }
-        }
-
         ~MerchantHandler()
         {
-            Dispose(false);
+            dbConnection.Dispose(false);
         }
     }
 }

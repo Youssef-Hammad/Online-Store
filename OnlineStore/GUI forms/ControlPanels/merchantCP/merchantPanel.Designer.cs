@@ -31,7 +31,8 @@
             this.rAddStoreBtn = new System.Windows.Forms.Button();
             this.LiveStatistics = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.addProductBtn = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // rAddStoreBtn
@@ -39,7 +40,7 @@
             this.rAddStoreBtn.BackColor = System.Drawing.Color.LightCoral;
             this.rAddStoreBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rAddStoreBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.rAddStoreBtn.Location = new System.Drawing.Point(33, 98);
+            this.rAddStoreBtn.Location = new System.Drawing.Point(33, 42);
             this.rAddStoreBtn.Margin = new System.Windows.Forms.Padding(4);
             this.rAddStoreBtn.Name = "rAddStoreBtn";
             this.rAddStoreBtn.Size = new System.Drawing.Size(248, 31);
@@ -53,7 +54,7 @@
             this.LiveStatistics.BackColor = System.Drawing.Color.LightCoral;
             this.LiveStatistics.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.LiveStatistics.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.LiveStatistics.Location = new System.Drawing.Point(33, 226);
+            this.LiveStatistics.Location = new System.Drawing.Point(33, 115);
             this.LiveStatistics.Margin = new System.Windows.Forms.Padding(4);
             this.LiveStatistics.Name = "LiveStatistics";
             this.LiveStatistics.Size = new System.Drawing.Size(248, 31);
@@ -67,7 +68,7 @@
             this.button1.BackColor = System.Drawing.Color.LightCoral;
             this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.button1.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.button1.Location = new System.Drawing.Point(33, 292);
+            this.button1.Location = new System.Drawing.Point(33, 192);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(248, 31);
@@ -76,19 +77,33 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // addProductBtn
+            // button2
             // 
-            this.addProductBtn.BackColor = System.Drawing.Color.LightCoral;
-            this.addProductBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addProductBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.addProductBtn.Location = new System.Drawing.Point(33, 162);
-            this.addProductBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.addProductBtn.Name = "addProductBtn";
-            this.addProductBtn.Size = new System.Drawing.Size(248, 31);
-            this.addProductBtn.TabIndex = 31;
-            this.addProductBtn.Text = "Add Product";
-            this.addProductBtn.UseVisualStyleBackColor = false;
-            this.addProductBtn.Click += new System.EventHandler(this.addProductBtn_Click);
+            this.button2.BackColor = System.Drawing.Color.LightCoral;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.button2.Location = new System.Drawing.Point(33, 266);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(248, 31);
+            this.button2.TabIndex = 31;
+            this.button2.Text = "View stores\' actions history";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.BackColor = System.Drawing.Color.LightCoral;
+            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button3.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.button3.Location = new System.Drawing.Point(33, 340);
+            this.button3.Margin = new System.Windows.Forms.Padding(4);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(248, 31);
+            this.button3.TabIndex = 32;
+            this.button3.Text = "Add Product";
+            this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // merchantPanel
             // 
@@ -96,7 +111,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(316, 406);
-            this.Controls.Add(this.addProductBtn);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.LiveStatistics);
             this.Controls.Add(this.rAddStoreBtn);
@@ -119,6 +135,7 @@
         private System.Windows.Forms.Button rAddStoreBtn;
         private System.Windows.Forms.Button LiveStatistics;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button addProductBtn;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
     }
 }
