@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace OnlineStore
 {
@@ -25,7 +26,7 @@ namespace OnlineStore
             SqlDataReader reader = cmd.ExecuteReader();
             List<Store> stores = new List<Store>();
             StoreInfo storeInfo = new StoreInfo();
-
+            int idx = 0;
             while (reader.Read())
             {
                 storeInfo.SetName(reader.GetString(1));
@@ -33,9 +34,17 @@ namespace OnlineStore
                 int type = reader.GetByte(4);
                 storeInfo.SetType((STYPE)type);
                 Store store = new Store(storeInfo);
+                //Console.WriteLine(store.GetStoreInfo().GetName());
                 stores.Add(store);
+                //Console.WriteLine(stores[idx].GetStoreInfo().GetName());
+                idx++;
             }
             reader.Close();
+
+            for (int i = 0; i < stores.Count; i++)
+            {
+                Console.WriteLine(stores[i].GetStoreInfo().GetName());
+            }
 
             return stores;
         }
@@ -56,6 +65,68 @@ namespace OnlineStore
             reader.Close();
 
             return storesNames;
+        }
+
+        public bool AddProductToStore(string productName, string storeName, User merchant, int quantity)
+        {
+            int productID = 0;
+            int storeID = 0;
+            ProductInfo productInfo = new ProductInfo();
+            StoreInfo storeInfo = new StoreInfo();
+            string productQuery = "SELECT * FROM APPROVEDPRODUCTS WHERE PRODUCTNAME = '" + productName + "'";
+            SqlCommand productCmd = new SqlCommand(productQuery, sqlConnection);
+            SqlDataReader productReader = productCmd.ExecuteReader();
+            if (productReader.Read())
+            {
+                /*productInfo.SetName(productReader.GetString(2));
+                productInfo.SetPrice((float)productReader.GetDouble(3));
+                productInfo.SetCategory(productReader.GetString(4));*/
+                productID = productReader.GetInt32(0);
+                /*BrandInfo brandInfo = new BrandInfo();
+                string brandQuery = "SELECT * FROM BRAND WHERE BRANDNAME = '" + productReader.GetString(1) + "'";
+                SqlCommand brandCmd = new SqlCommand(brandQuery, dbConnection);
+                SqlDataReader brandReader = brandCmd.ExecuteReader();
+                if (brandReader.Read())
+                {
+                    brandInfo.SetName(brandReader.GetString(0));
+                    brandInfo.SetCategory(brandReader.GetString(1));
+                }
+                else
+                {
+                    return false;
+                }
+                productInfo.SetBrand(brandInfo);*/
+            }
+            else
+            {
+                return false;
+            }
+            string storeQuery = "SELECT * FROM STORES WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchant.GetUserInfo().GetUsername() + "'";
+            SqlCommand storeCmd = new SqlCommand(storeQuery, sqlConnection);
+            SqlDataReader storeReader = storeCmd.ExecuteReader();
+            if (storeReader.Read())
+            {
+                /*storeInfo.SetName(storeReader.GetString(1));
+                storeInfo.SetLocation(storeReader.GetString(2));
+                storeInfo.SetType((STYPE)storeReader.GetInt16(3));*/
+                storeID = storeReader.GetInt32(0);
+            }
+            else
+            {
+                return false;
+            }
+            string insertQuery = "INSERT INTO PRODUCTSTOCK(SID,PID,QTY) VALUES(" + storeID.ToString() + "," + productID.ToString() + "," + quantity.ToString() + ")";
+            SqlCommand insertCmd = new SqlCommand(insertQuery, sqlConnection);
+            try
+            {
+                insertCmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
         }
 
         public bool VerifyMerchant(User merchant)

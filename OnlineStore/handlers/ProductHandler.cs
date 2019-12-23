@@ -7,8 +7,9 @@ namespace OnlineStore
 {
     class ProductHandler
     {
-        private DBConnection dbConnection;
         private SqlConnection sqlConnection;
+        private DBConnection dbConnection;
+        //private Product product;
 
         public ProductHandler(string connString)
         {
@@ -38,13 +39,13 @@ namespace OnlineStore
                 return false;
             }
         }
-        public List<Product> GetAllApprovedProducts()
+        /*public List<Product> GetAllApprovedProducts()
         {
             List<Product> productList = new List<Product>();
             ProductInfo productInfo = new ProductInfo();
 
             String query = "SELECT * FROM APPROVEDPRODUCTS";
-            SqlCommand cmd = new SqlCommand(query, dbConnection.GetSqlConnection());
+            SqlCommand cmd = new SqlCommand(query,dbConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             BrandInfo brandInfo = new BrandInfo();
             int counter = 0;
@@ -56,7 +57,7 @@ namespace OnlineStore
                 productInfo.SetPrice((float)reader.GetDouble(3));
                 productInfo.SetCategory(reader.GetString(4));
                 String brandQuery = "SELECT * FROM BRAND WHERE BRANDNAME = '" + reader.GetString(1) + "'";
-                SqlCommand brandCmd = new SqlCommand(brandQuery, dbConnection.GetSqlConnection());
+                SqlCommand brandCmd = new SqlCommand(brandQuery,dbConnection);
                 SqlDataReader brandReader = brandCmd.ExecuteReader();
                 while(brandReader.Read())
                 {
@@ -75,14 +76,65 @@ namespace OnlineStore
             /*for(int i = 0; i < productList.Count; i++)
                 Console.WriteLine(productList[i].GetProductInfo().GetName());*/
 
+            //Console.WriteLine(counter);
+            //Console.WriteLine(productList.Count);
+            //Console.WriteLine(productList[productList.Count - 2].GetProductInfo().GetName());
+
+            //return productList;
+        //}*/
+        public List<string> GetAllApprovedProductsNames()
+        {
+            List<string> productList = new List<string>();
+            ProductInfo productInfo = new ProductInfo();
+
+            String query = "SELECT * FROM APPROVEDPRODUCTS";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            BrandInfo brandInfo = new BrandInfo();
+            int counter = 0;
+
+            while (reader.Read())
+            {
+                //Console.WriteLine(reader.GetString(2));
+                productList.Add(reader.GetString(2));
+                counter++;
+            }
+            reader.Close();
+
+            /*for(int i = 0; i < productList.Count; i++)
+                Console.WriteLine(productList[i].GetProductInfo().GetName());*/
+
             Console.WriteLine(counter);
             Console.WriteLine(productList.Count);
             //Console.WriteLine(productList[productList.Count - 2].GetProductInfo().GetName());
 
             return productList;
         }
-
-        public void BuyProduct(string productName,string brandName)
+        public Product GetProductWithName(string productName)
+        {
+            string query = "SELECT * FROM APPROVEDPRODUCTS WHERE PRODUCTNAME='" + productName + "'";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            ProductInfo productInfo = new ProductInfo();
+            while(reader.Read())
+            {
+                productInfo.SetName(reader.GetString(2));
+                productInfo.SetPrice((float)reader.GetDouble(3));
+                BrandInfo brandInfo = new BrandInfo();
+                string brandInfoQuery = "SELECT * FROM BRAND WHERE BRANDNAME='" + reader.GetString(1) + "'";
+                SqlCommand brandInfoCmd = new SqlCommand(brandInfoQuery, sqlConnection);
+                SqlDataReader brandInfoReader = brandInfoCmd.ExecuteReader();
+                while(brandInfoReader.Read())
+                {
+                    brandInfo.SetCategory(brandInfoReader.GetString(1));
+                    brandInfo.SetName(brandInfoReader.GetString(0));
+                }
+                productInfo.SetBrand(brandInfo);
+            }
+            Product returnedProduct = new Product(productInfo);
+            return returnedProduct;
+        }
+        public void BuyProduct(string productName,string brandName,int qty)
         {
             string query = "SELECT PID FROM APPROVEDPRODUCTS WHERE BRANDNAME = '" + brandName + "' AND PRODUCTNAME = '" + productName + "'";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
@@ -95,19 +147,31 @@ namespace OnlineStore
                 break;
             }
             reader.Close();
-            string stockQuery = "SELECT QTY FROM PRODUCTSTOCK WHERE PID = " + productID.ToString();
+            string stockQuery = "SELECT SID,QTY FROM PRODUCTSTOCK WHERE PID = " + productID.ToString();
             SqlCommand stockCmd = new SqlCommand(stockQuery, sqlConnection);
             SqlDataReader stockReader = stockCmd.ExecuteReader();
             int quantity = 0;
+            int storeID = 0;
             while (stockReader.Read())
             {
-                quantity = reader.GetInt32(0);
+                storeID = stockReader.GetInt32(0);
+                quantity = stockReader.GetInt32(1);
                 break;
             }
-            quantity--;
-            string updateQuery = "UPDATE PRODUCTSTOCK SET QTY = " + quantity + " WHERE PID = " + productID;
+            quantity -= qty; ;
+            string updateQuery = "UPDATE PRODUCTSTOCK SET QTY = " + quantity.ToString() + " WHERE PID = " + productID.ToString() +" AND SID = "+storeID.ToString();
             SqlCommand updateCmd = new SqlCommand(updateQuery, sqlConnection);
             updateCmd.ExecuteNonQuery();
+        }
+
+        public bool isValidQuantity(string quantity)
+        {
+            foreach(char c in quantity)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+            return true;
         }
 
         public int GetQuantity(Product product)
@@ -126,14 +190,29 @@ namespace OnlineStore
             int quantity = 0;
             while (quantityReader.Read())
             {
-                quantity = quantityReader.GetInt32(2);
+                quantity = Math.Max(quantity,quantityReader.GetInt32(2));
             }
             return quantity;
         }   
 
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing == true)
+            {
+                sqlConnection.Close();
+            }
+        }
+
         ~ProductHandler()
         {
-            dbConnection.Dispose(false);
+            Dispose(false);
         }
     }
+
 }
