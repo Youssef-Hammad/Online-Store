@@ -25,7 +25,7 @@ namespace OnlineStore
             purchaseErrorLabel.Hide();
             productHandler = new ProductHandler(connString);
 
-            productList = this.productHandler.GetAllApprovedProducts();
+            productList = productHandler.GetAllApprovedProducts();
 
             foreach (var iterator in productList)
             {

@@ -42,7 +42,7 @@
             this.lLoginBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.lLoginBtn.ForeColor = System.Drawing.SystemColors.HighlightText;
             this.lLoginBtn.Location = new System.Drawing.Point(13, 154);
-            this.lLoginBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lLoginBtn.Margin = new System.Windows.Forms.Padding(4);
             this.lLoginBtn.Name = "lLoginBtn";
             this.lLoginBtn.Size = new System.Drawing.Size(391, 31);
             this.lLoginBtn.TabIndex = 0;
@@ -71,11 +71,12 @@
             this.lUsrnameTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lUsrnameTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lUsrnameTxt.Location = new System.Drawing.Point(16, 37);
-            this.lUsrnameTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lUsrnameTxt.Margin = new System.Windows.Forms.Padding(4);
             this.lUsrnameTxt.Name = "lUsrnameTxt";
             this.lUsrnameTxt.Size = new System.Drawing.Size(390, 22);
             this.lUsrnameTxt.TabIndex = 2;
             this.lUsrnameTxt.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.lUsrnameTxt.TextChanged += new System.EventHandler(this.lUsrnameTxt_TextChanged);
             // 
             // label1
             // 
@@ -104,7 +105,7 @@
             this.lPwdTxt.BackColor = System.Drawing.Color.WhiteSmoke;
             this.lPwdTxt.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lPwdTxt.Location = new System.Drawing.Point(16, 110);
-            this.lPwdTxt.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lPwdTxt.Margin = new System.Windows.Forms.Padding(4);
             this.lPwdTxt.Name = "lPwdTxt";
             this.lPwdTxt.PasswordChar = '*';
             this.lPwdTxt.Size = new System.Drawing.Size(390, 22);
@@ -124,7 +125,7 @@
             this.Controls.Add(this.lRegisterBtn);
             this.Controls.Add(this.lLoginBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "login";

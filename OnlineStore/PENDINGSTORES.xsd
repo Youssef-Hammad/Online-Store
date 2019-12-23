@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<xs:schema id="OnlineStoreDataSet" targetNamespace="http://tempuri.org/OnlineStoreDataSet.xsd" xmlns:mstns="http://tempuri.org/OnlineStoreDataSet.xsd" xmlns="http://tempuri.org/OnlineStoreDataSet.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+<xs:schema id="PENDINGSTORES" targetNamespace="http://tempuri.org/PENDINGSTORES.xsd" xmlns:mstns="http://tempuri.org/PENDINGSTORES.xsd" xmlns="http://tempuri.org/PENDINGSTORES.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
   <xs:annotation>
     <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
       <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
         <Connections>
-          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="OnlineStoreConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="OnlineStoreConnectionString (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OnlineStore.Properties.Settings.GlobalReference.Default.OnlineStoreConnectionString" Provider="System.Data.SqlClient" />
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="okboomer_connectionstring" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="okboomer_connectionstring (Settings)" ParameterPrefix="@" PropertyReference="ApplicationSettings.OnlineStore.Properties.Settings.GlobalReference.Default.okboomer_connectionstring" Provider="System.Data.SqlClient" />
         </Connections>
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="PENDINGSTORESTableAdapter" GeneratorDataComponentClassName="PENDINGSTORESTableAdapter" Name="PENDINGSTORES" UserDataComponentName="PENDINGSTORESTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="OnlineStoreConnectionString (Settings)" DbObjectName="OnlineStore.dbo.PENDINGSTORES" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="okboomer_connectionstring (Settings)" DbObjectName="DB_A5061A_okboomer.dbo.PENDINGSTORES" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="true" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <DeleteCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
                     <CommandText>DELETE FROM [dbo].[PENDINGSTORES] WHERE (([STORENAME] = @Original_STORENAME) AND ([OWNERNAME] = @Original_OWNERNAME) AND ([STORELOC] = @Original_STORELOC) AND ([STYPE] = @Original_STYPE))</CommandText>
@@ -70,10 +70,10 @@ SELECT STORENAME, OWNERNAME, STORELOC, STYPE FROM PENDINGSTORES WHERE (STORELOC 
       </DataSource>
     </xs:appinfo>
   </xs:annotation>
-  <xs:element name="OnlineStoreDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="OnlineStoreDataSet" msprop:Generator_UserDSName="OnlineStoreDataSet">
+  <xs:element name="PENDINGSTORES" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="PENDINGSTORES" msprop:Generator_UserDSName="PENDINGSTORES">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="PENDINGSTORES" msprop:Generator_TableClassName="PENDINGSTORESDataTable" msprop:Generator_TableVarName="tablePENDINGSTORES" msprop:Generator_TablePropName="PENDINGSTORES" msprop:Generator_RowDeletingName="PENDINGSTORESRowDeleting" msprop:Generator_RowChangingName="PENDINGSTORESRowChanging" msprop:Generator_RowEvHandlerName="PENDINGSTORESRowChangeEventHandler" msprop:Generator_RowDeletedName="PENDINGSTORESRowDeleted" msprop:Generator_UserTableName="PENDINGSTORES" msprop:Generator_RowChangedName="PENDINGSTORESRowChanged" msprop:Generator_RowEvArgName="PENDINGSTORESRowChangeEvent" msprop:Generator_RowClassName="PENDINGSTORESRow">
+        <xs:element name="PENDINGSTORES" msprop:Generator_TableClassName="PENDINGSTORESDataTable" msprop:Generator_TableVarName="tablePENDINGSTORES" msprop:Generator_TablePropName="_PENDINGSTORES" msprop:Generator_RowDeletingName="PENDINGSTORESRowDeleting" msprop:Generator_RowChangingName="PENDINGSTORESRowChanging" msprop:Generator_RowEvHandlerName="PENDINGSTORESRowChangeEventHandler" msprop:Generator_RowDeletedName="PENDINGSTORESRowDeleted" msprop:Generator_UserTableName="PENDINGSTORES" msprop:Generator_RowChangedName="PENDINGSTORESRowChanged" msprop:Generator_RowEvArgName="PENDINGSTORESRowChangeEvent" msprop:Generator_RowClassName="PENDINGSTORESRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="STORENAME" msprop:Generator_ColumnVarNameInTable="columnSTORENAME" msprop:Generator_ColumnPropNameInRow="STORENAME" msprop:Generator_ColumnPropNameInTable="STORENAMEColumn" msprop:Generator_UserColumnName="STORENAME">

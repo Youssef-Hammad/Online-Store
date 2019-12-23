@@ -40,6 +40,24 @@ namespace OnlineStore
             return stores;
         }
 
+        public List<string> GetMerchantStoresNames(User merchant)
+        {
+            string m_username = merchant.GetUserInfo().GetUsername();
+            string query = "SELECT STORENAME FROM STORES WHERE OWNERUSR = '" + m_username + "'";
+
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<string> storesNames = new List<string>();
+
+            while (reader.Read())
+            {
+                storesNames.Add(reader.GetString(0));
+            }
+            reader.Close();
+
+            return storesNames;
+        }
+
         public bool VerifyMerchant(User merchant)
         {
             AuthenticationHandler AuthHandler = new AuthenticationHandler(sqlConnection.ConnectionString);
