@@ -105,6 +105,7 @@
             this.stockTextBox.Name = "stockTextBox";
             this.stockTextBox.Size = new System.Drawing.Size(167, 22);
             this.stockTextBox.TabIndex = 31;
+            this.stockTextBox.TextChanged += new System.EventHandler(this.stockTextBox_TextChanged);
             // 
             // AddProductErrorLabel
             // 

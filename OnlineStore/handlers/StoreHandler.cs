@@ -146,7 +146,7 @@ namespace OnlineStore
             }
         }
 
-		public bool RemoveProduct(Store store,Product product)
+		public bool RemoveProduct(Store store, Product product)
         {
             string pName = product.GetProductInfo().GetName();
             float pPrice = product.GetProductInfo().GetPrice();
@@ -163,7 +163,7 @@ namespace OnlineStore
                 return false;
 			else
             {
-                query = "DELETE FROM storeProducts WHERE STORENAME= '" + sName + "' AND PRODUCTNAME='" + pName + "'";
+                query = "DELETE FROM storeProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME ='" + pName + "'";
 
                 cmd = new SqlCommand(query, sqlConnection);
 

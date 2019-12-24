@@ -193,7 +193,7 @@ go
 /* Table: STORES                                                */
 /*==============================================================*/
 create table STORES (
-   [SID]                  int   identity(1,1)  not null,
+   [SID]                int   identity(1,1)  not null,
    STORENAME            varchar(30)          not null,
    STORELOC             varchar(30)          not null,
    OWNERUSR             varchar(30)          not null,
