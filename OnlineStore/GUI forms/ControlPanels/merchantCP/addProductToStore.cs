@@ -96,5 +96,10 @@ namespace OnlineStore
         {
 
         }
+
+        private void stockTextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace OnlineStore
             return cmd;
         }
 
-        public void StoreAddAction(string storeName, string productName)
+        /*public void SaveAction(string storeName, string productName, string action)
         {
             string query = "SELECT [SID] FROM STORES WHERE STORENAME = '" + storeName + "';";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
@@ -49,7 +49,7 @@ namespace OnlineStore
             cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
         }
-
+        */
         ~StoreActionHandler()
         {
             dbConnection.Dispose(false);
