@@ -128,6 +128,12 @@
     <Compile Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.Designer.cs">
       <DependentUpon>addStoreToPending.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\deleteProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\deleteProduct.Designer.cs">
+      <DependentUpon>deleteProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI forms\ControlPanels\merchantCP\LiveStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -139,6 +145,12 @@
     </Compile>
     <Compile Include="GUI forms\ControlPanels\merchantCP\merchantPanel.Designer.cs">
       <DependentUpon>merchantPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\Undo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\Undo.Designer.cs">
+      <DependentUpon>Undo.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI forms\landing\UserMainPlatform.cs">
       <SubType>Form</SubType>
@@ -242,8 +254,14 @@
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\addStoreToPending.resx">
       <DependentUpon>addStoreToPending.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\deleteProduct.resx">
+      <DependentUpon>deleteProduct.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\LiveStatistics.resx">
       <DependentUpon>LiveStatistics.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\Undo.resx">
+      <DependentUpon>Undo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\landing\mainPlatform.resx">
       <DependentUpon>mainPlatform.cs</DependentUpon>

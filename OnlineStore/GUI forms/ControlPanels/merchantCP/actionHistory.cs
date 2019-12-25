@@ -16,15 +16,16 @@ namespace OnlineStore
         private string connString;
         private MerchantHandler merchantHandler;
         private StoreActionHandler storeActionHandler;
-        private List<string> merchantStoresNames;
+        private List<Store> merchantStores;
+        private User currUser;
 
         private void InitStoresList(User currMerchant, ComboBox comboBox)
         {
             merchantHandler = new MerchantHandler(connString);
-            merchantStoresNames = merchantHandler.GetMerchantStoresNames(currMerchant);
-            foreach (var storeName in merchantStoresNames)
+            merchantStores = merchantHandler.GetMerchantStores(currMerchant);
+            foreach (Store store in merchantStores)
             {
-                comboBox1.Items.Add(storeName);
+                comboBox1.Items.Add(store.GetStoreInfo().GetName());
             }
         }
 
@@ -41,6 +42,7 @@ namespace OnlineStore
         public actionHistory(string connString, User currUser)
         {
             this.connString = connString;
+            this.currUser = currUser;
             merchantHandler = new MerchantHandler(connString);
             InitializeComponent();
             InitStoresList(currUser, comboBox1);
@@ -69,16 +71,17 @@ namespace OnlineStore
                 int selectedRowIndex = dataGridView1.SelectedCells[0].RowIndex;
                 DataGridViewRow row = dataGridView1.Rows[selectedRowIndex];
 
-                // col 0 -> action id, col 1 -> store id, col 2 -> product name, col 3 -> action statement
+                // col 0 -> action id, col 1 -> store id, col 2 -> product name, col 3 -> action statement, col 4 -> quantity
 
-                string storeId = row.Cells[1].Value.ToString();
+                Int32 storeId = (Int32) row.Cells[1].Value;
                 string productName = row.Cells[2].Value.ToString();
                 string actionStatement = row.Cells[3].Value.ToString();
-                
-                // [IN PROGRESS]
+                Int32 quantity = (Int32) row.Cells[4].Value;
 
-                //action actionForm = new action(connString, store, ownerName);
-                //actionForm.ShowDialog();
+                Undo actionForm = new Undo(connString, currUser, storeId, productName, quantity, actionStatement);
+                actionForm.ShowDialog();
+
+                actionHistory_Load(sender, e);
             }
         }
     }

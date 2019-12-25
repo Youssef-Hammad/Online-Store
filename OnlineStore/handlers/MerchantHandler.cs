@@ -9,61 +9,36 @@ namespace OnlineStore
     {
         private DBConnection dbConnection;
         private SqlConnection sqlConnection;
+        private string connString;
 
         public MerchantHandler(string connString)
         {
             dbConnection = new DBConnection(connString);
             dbConnection.Open();
             sqlConnection = dbConnection.GetSqlConnection();
+            this.connString = connString;
         }
 
         public List<Store> GetMerchantStores(User merchant)
         {
             String m_username = merchant.GetUserInfo().GetUsername();
-            String query = "SELECT * FROM STORES WHERE OWNERUSR = '" + m_username + "'";
+            String query = "SELECT STORENAME, STORELOC, STYPE FROM STORES WHERE OWNERUSR = '" + m_username + "'";
 
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             List<Store> stores = new List<Store>();
-            StoreInfo storeInfo = new StoreInfo();
-            int idx = 0;
+            
             while (reader.Read())
             {
-                storeInfo.SetName(reader.GetString(1));
-                storeInfo.SetLocation(reader.GetString(2));
-                int type = reader.GetByte(4);
+                StoreInfo storeInfo = new StoreInfo();
+                storeInfo.SetName(reader.GetString(0));
+                storeInfo.SetLocation(reader.GetString(1));
+                int type = reader.GetByte(2);
                 storeInfo.SetType((STYPE)type);
-                Store store = new Store(storeInfo);
-                //Console.WriteLine(store.GetStoreInfo().GetName());
-                stores.Add(store);
-                //Console.WriteLine(stores[idx].GetStoreInfo().GetName());
-                idx++;
+                stores.Add(new Store(storeInfo));
             }
             reader.Close();
-
-            for (int i = 0; i < stores.Count; i++)
-            {
-                Console.WriteLine(stores[i].GetStoreInfo().GetName());
-            }
             return stores;
-        }
-
-        public List<string> GetMerchantStoresNames(User merchant)
-        {
-            string m_username = merchant.GetUserInfo().GetUsername();
-            string query = "SELECT STORENAME FROM STORES WHERE OWNERUSR = '" + m_username + "'";
-
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            List<string> storesNames = new List<string>();
-
-            while (reader.Read())
-            {
-                storesNames.Add(reader.GetString(0));
-            }
-            reader.Close();
-
-            return storesNames;
         }
 
         public bool AddProductToStore(string productName, string storeName, User merchant, int quantity)
@@ -119,6 +94,8 @@ namespace OnlineStore
             try
             {
                 insertCmd.ExecuteNonQuery();
+                StoreActionHandler storeActionHandler = new StoreActionHandler(connString);
+                storeActionHandler.SaveAction(merchant, storeName, productName, quantity, "add");
                 return true;
             }
             catch (SqlException ex)
@@ -126,6 +103,29 @@ namespace OnlineStore
                 MessageBox.Show(ex.Message);
                 return false;
             }
+        }
+
+        public void DeleteProductFromStore(User merchant, string storeName, string productName)
+        {
+            string merchantName = merchant.GetUserInfo().GetUsername();
+            string query = "SELECT QTY FROM PRODUCTSTOCK " +
+                           "WHERE [SID] IN ( SELECT [SID] FROM STORES " +
+                           "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
+                           "AND PID IN ( SELECT PID FROM APPROVEDPRODUCTS " +
+                           "WHERE PRODUCTNAME = '" + productName + "');";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            int quantity = (int) cmd.ExecuteScalar();
+
+            query = "DELETE FROM PRODUCTSTOCK " +
+                           "WHERE [SID] IN ( SELECT [SID] FROM STORES " +
+                           "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
+                           "AND PID IN ( SELECT PID FROM APPROVEDPRODUCTS " +
+                           "WHERE PRODUCTNAME = '" + productName + "');";
+            cmd = new SqlCommand(query, sqlConnection);
+            cmd.ExecuteNonQuery();
+
+            StoreActionHandler storeActionHandler = new StoreActionHandler(connString);
+            storeActionHandler.SaveAction(merchant, storeName, productName, quantity, "delete");
         }
 
         public bool VerifyMerchant(User merchant)
