@@ -232,6 +232,7 @@ create table COLLABS (
 	primary key (OUSERNAME, CUSERNAME)
 )
 
+
 create table STOREACTIONS (
 	AID				int	identity(1,1)	not null,
 	[SID]			int					not null,
@@ -248,6 +249,8 @@ alter table STOREACTIONS
     add constraint FK_STOREACTIONS_REFERENCE_APPROVEDPRODUCT foreign key (PID)
 		references APPROVEDPRODUCTS (PID)
 
+alter table STOREACTIONS
+add QTY int null;
 
 
 alter table APPROVEDPRODUCTS

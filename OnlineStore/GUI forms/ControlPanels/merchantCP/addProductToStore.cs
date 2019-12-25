@@ -16,24 +16,26 @@ namespace OnlineStore
         private MerchantHandler merchHandler;
         private ProductHandler productHandler;
         private string connString;
-        private List<string> storeList;
+        private List<Store> storeList;
         private List<string> productList;
 
         public addProductToStore(User currUser, string connString)
         {
             InitializeComponent();
             AddProductErrorLabel.Hide();
+
             this.connString = connString;
             this.merchant = currUser;
+
             merchHandler = new MerchantHandler(connString);
             productHandler = new ProductHandler(connString);
-            storeList = merchHandler.GetMerchantStoresNames(currUser);
-            foreach (string iterator in storeList)
-            {
-                //Console.WriteLine(iterator.GetStoreInfo().GetName());
-                storeComboBox.Items.Add(iterator);
-            }
+
+            storeList = merchHandler.GetMerchantStores(currUser);
             productList = productHandler.GetAllApprovedProductsNames();
+            foreach (Store store in storeList)
+            {
+                storeComboBox.Items.Add(store.GetStoreInfo().GetName());
+            }
             foreach (string iterator in productList)
             {
                 productComboBox.Items.Add(iterator);

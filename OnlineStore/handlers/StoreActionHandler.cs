@@ -11,7 +11,9 @@ namespace OnlineStore
     {
         private DBConnection dbConnection;
         private SqlConnection sqlConnection;
-        private enum ACTIONTYPE { ADD, EDIT, DELETE };
+        private MerchantHandler merchantHandler;
+        private string connString;
+        //private enum ACTIONTYPE { ADD, EDIT, DELETE };
 
 
         public StoreActionHandler(string connString)
@@ -19,11 +21,12 @@ namespace OnlineStore
             dbConnection = new DBConnection(connString);
             dbConnection.Open();
             sqlConnection = dbConnection.GetSqlConnection();
+            this.connString = connString;
         }
 
         public SqlCommand GetActionHistory(string storeName)
         {
-            string query = "SELECT STOREACTIONS.AID, STOREACTIONS.[SID], APPROVEDPRODUCTS.PRODUCTNAME, STOREACTIONS.[STATEMENT] " +
+            string query = "SELECT STOREACTIONS.AID, STOREACTIONS.[SID], APPROVEDPRODUCTS.PRODUCTNAME, STOREACTIONS.[STATEMENT], STOREACTIONS.QTY " +
                            "FROM STOREACTIONS, APPROVEDPRODUCTS WHERE STOREACTIONS.PID = APPROVEDPRODUCTS.PID " +
                            "AND STOREACTIONS.[SID] IN (SELECT [SID] FROM STORES WHERE STORES.STORENAME = '" + storeName + "');";
 
@@ -31,25 +34,39 @@ namespace OnlineStore
             return cmd;
         }
 
-        /*public void SaveAction(string storeName, string productName, string action)
+        public void SaveAction(User merchant, string storeName, string productName, int quantity, string action)
         {
-            string query = "SELECT [SID] FROM STORES WHERE STORENAME = '" + storeName + "';";
+            string merchantName = merchant.GetUserInfo().GetUsername();
+            string query = "SELECT [SID] FROM STORES WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "';";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            SqlDataReader reader = cmd.ExecuteReader();
-            Int32 storeId = reader.GetInt32(0);
+            Int32 storeId = (Int32) cmd.ExecuteScalar();
 
-            query = "SELECT PID FROM STORES WHERE PRODUCTNAME = '" + productName + "';";
+            query = "SELECT PID FROM APPROVEDPRODUCTS WHERE PRODUCTNAME = '" + productName + "';";
             cmd = new SqlCommand(query, sqlConnection);
-            reader = cmd.ExecuteReader();
-            Int32 productId = reader.GetInt32(0);
+            Int32 productId = (Int32) cmd.ExecuteScalar();
 
-            string action = "ADD";
-
-            query = "INSERT INTO STOREACTIONS VALUES('" + storeId + "','" + productId + "','" + action + "');";
+            query = "INSERT INTO STOREACTIONS ([SID], PID, QTY, [STATEMENT]) VALUES ('" + storeId + "', '" + productId + "', '" + quantity + "', '" + action + "');";
             cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
         }
-        */
+
+        public void UndoAction(User merchant, Int32 storeId, string productName, Int32 quantity, string action)
+        {
+            merchantHandler = new MerchantHandler(connString);
+            string query = "SELECT STORENAME FROM STORES WHERE [SID] = '" + storeId + "';";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            string storeName = (string)cmd.ExecuteScalar();
+
+            if (action.Equals("add"))
+            {
+                merchantHandler.DeleteProductFromStore(merchant, storeName, productName);
+            }
+            else if (action.Equals("delete"))
+            {
+                merchantHandler.AddProductToStore(productName, storeName, merchant, quantity);
+            }
+        }
+        
         ~StoreActionHandler()
         {
             dbConnection.Dispose(false);

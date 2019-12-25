@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace OnlineStore
@@ -146,38 +147,23 @@ namespace OnlineStore
             }
         }
 
-		public bool RemoveProduct(Store store, Product product)
+        public List<string> GetStoreProducts(User merchant, string storeName)
         {
-            string pName = product.GetProductInfo().GetName();
-            float pPrice = product.GetProductInfo().GetPrice();
-            string pCategory = product.GetProductInfo().GetCategory();
-
-            StoreInfo sInfo = store.GetStoreInfo();
-            string sName = sInfo.GetName();
-
-            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME = '" + pName + "'";
-
+            string merchantName = merchant.GetUserInfo().GetUsername();
+            string query = "SELECT PRODUCTNAME " +
+                           "FROM APPROVEDPRODUCTS, PRODUCTSTOCK " +
+                           "WHERE APPROVEDPRODUCTS.PID = PRODUCTSTOCK.PID " +
+                           "AND PRODUCTSTOCK.[SID] IN ( SELECT [SID] FROM STORES " +
+                           "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "');";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
-
-            if (cmd.ExecuteScalar() == null)
-                return false;
-			else
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<string> productNames = new List<string>();
+            while (reader.Read())
             {
-                query = "DELETE FROM storeProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME ='" + pName + "'";
-
-                cmd = new SqlCommand(query, sqlConnection);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                catch (SqlException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                    return false;
-                }
+                productNames.Add(reader.GetString(0));
             }
+            reader.Close();
+            return productNames;
         }
 
         ~StoreHandler()
