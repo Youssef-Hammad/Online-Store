@@ -73,12 +73,13 @@ namespace OnlineStore
 
                 // col 0 -> action id, col 1 -> store id, col 2 -> product name, col 3 -> action statement, col 4 -> quantity
 
-                Int32 storeId = (Int32) row.Cells[1].Value;
+                Int32 actionId = (Int32)row.Cells[0].Value;
+                Int32 storeId = (Int32)row.Cells[1].Value;
                 string productName = row.Cells[2].Value.ToString();
                 string actionStatement = row.Cells[3].Value.ToString();
-                Int32 quantity = (Int32) row.Cells[4].Value;
+                Int32 quantity = (Int32)row.Cells[4].Value;
 
-                Undo actionForm = new Undo(connString, currUser, storeId, productName, quantity, actionStatement);
+                Undo actionForm = new Undo(connString, actionId, currUser, storeId, productName, quantity, actionStatement);
                 actionForm.ShowDialog();
 
                 actionHistory_Load(sender, e);

@@ -13,13 +13,14 @@ namespace OnlineStore
     public partial class Undo : Form
     {
         private string connString, productName, actionStatement;
-        private Int32 storeId, quantity;
+        private Int32 storeId, quantity, actionId;
         private User currUser;
         private StoreActionHandler storeActionHandler;
 
-        public Undo(string connString, User currUser, Int32 storeId, string productName, Int32 quantity, string actionStatement)
+        public Undo(string connString, Int32 actionId, User currUser, Int32 storeId, string productName, Int32 quantity, string actionStatement)
         {
             this.connString = connString;
+            this.actionId = actionId;
             this.storeId = storeId;
             this.productName = productName;
             this.actionStatement = actionStatement;
@@ -31,7 +32,7 @@ namespace OnlineStore
 
         private void button1_Click(object sender, EventArgs e)
         {
-            storeActionHandler.UndoAction(currUser, storeId, productName, quantity, actionStatement);
+            storeActionHandler.UndoAction(currUser, actionId, storeId, productName, quantity, actionStatement);
             MessageBox.Show("Action Reverted");
         }
     }
