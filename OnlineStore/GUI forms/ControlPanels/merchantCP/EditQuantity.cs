@@ -74,9 +74,13 @@ namespace OnlineStore
         {
             choosemProductName = comboBox2.Text;
             newQty = Convert.ToInt32(textBox1.Text);
-            merchantHandler.EditProductQty(currUser, choosenStoreName, choosemProductName, newQty);
-            MessageBox.Show("Product quantity updated successfuly");
-
+            if (newQty <= 0)
+                MessageBox.Show("Quantity must be higher than 0, else delete the product");
+            else
+            {
+                merchantHandler.EditProductQty(currUser, choosenStoreName, choosemProductName, newQty);
+                MessageBox.Show("Product quantity updated successfuly");
+            }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)

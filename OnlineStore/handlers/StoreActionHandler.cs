@@ -72,7 +72,14 @@ namespace OnlineStore
             }
         }
 
-        public void UndoAction(User merchant, Int32 storeId, string productName, Int32 quantity, string action)
+        private void DeleteAction(int actionId)
+        {
+            string query = "DELETE FROM STOREACTIONS WHERE AID = '" + actionId + "';";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.ExecuteNonQuery();
+        }
+
+        public void UndoAction(User merchant, Int32 actionId,Int32 storeId, string productName, Int32 quantity, string action)
         {
             merchantHandler = new MerchantHandler(connString);
             string query = "SELECT STORENAME FROM STORES WHERE [SID] = '" + storeId + "';";
@@ -82,20 +89,21 @@ namespace OnlineStore
             if (action.Equals("add"))
             {
                 merchantHandler.DeleteProductFromStore(merchant, storeName, productName);
-                DeleteLastAction(2);
+                DeleteLastAction(1);
             }
             else if (action.Equals("delete"))
             {
                 merchantHandler.AddProductToStore(productName, storeName, merchant, quantity);
-                DeleteLastAction(2);
+                DeleteLastAction(1);
             }
             else if (action.Equals("edit"))
             {
                 merchantHandler.DeleteProductFromStore(merchant, storeName, productName);
                 int lastQty = GetLatestQty(storeId, productName);
                 merchantHandler.AddProductToStore(productName, storeName, merchant, lastQty);
-                DeleteLastAction(3);
+                DeleteLastAction(2);
             }
+            DeleteAction(actionId);
         }
         
         ~StoreActionHandler()
