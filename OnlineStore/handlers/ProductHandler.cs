@@ -219,7 +219,7 @@ namespace OnlineStore
                 quantity = Math.Max(quantity,quantityReader.GetInt32(2));
             }
             return quantity;
-        }   
+        }
 
         public void Dispose()
         {

@@ -33,6 +33,7 @@
             this.Delete = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -49,7 +50,7 @@
             // 
             this.comboBox2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(12, 140);
+            this.comboBox2.Location = new System.Drawing.Point(12, 111);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(196, 24);
             this.comboBox2.TabIndex = 1;
@@ -60,10 +61,10 @@
             this.Delete.BackColor = System.Drawing.Color.LightCoral;
             this.Delete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.Delete.ForeColor = System.Drawing.SystemColors.HighlightText;
-            this.Delete.Location = new System.Drawing.Point(12, 193);
+            this.Delete.Location = new System.Drawing.Point(12, 168);
             this.Delete.Margin = new System.Windows.Forms.Padding(4);
             this.Delete.Name = "Delete";
-            this.Delete.Size = new System.Drawing.Size(244, 31);
+            this.Delete.Size = new System.Drawing.Size(271, 31);
             this.Delete.TabIndex = 30;
             this.Delete.Text = "Delete Product";
             this.Delete.UseVisualStyleBackColor = false;
@@ -81,17 +82,28 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 120);
+            this.label2.Location = new System.Drawing.Point(12, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(109, 17);
             this.label2.TabIndex = 32;
             this.label2.Text = "Choose Product";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(214, 49);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(69, 24);
+            this.button1.TabIndex = 33;
+            this.button1.Text = "Refresh";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // deleteProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(269, 237);
+            this.ClientSize = new System.Drawing.Size(294, 214);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.Delete);
@@ -112,5 +124,6 @@
         private System.Windows.Forms.Button Delete;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -60,7 +60,7 @@ namespace OnlineStore
 
         public UTYPE GetUserType(User usr)
         {
-            UTYPE retType = UTYPE.CONSUMER;
+            //UTYPE retType = UTYPE.CONSUMER;
             string username = usr.GetUserInfo().GetUsername();
             /*this.entity = "user";
             this.param = $"username={username}";
@@ -70,12 +70,13 @@ namespace OnlineStore
             retType = responseBody[0].UTYPE;
             return retType;*/
             byte utype;
-            string query = "SELECT UTYPE FROM[USER] WHERE USERNAME = '" + username + "'";
+            string query = "SELECT UTYPE FROM [USER] WHERE USERNAME = '" + username + "'";
             SqlCommand cmd = new SqlCommand(query, dbConnection);
             SqlDataReader reader = cmd.ExecuteReader();
             if (reader.Read())
             {
                 utype = reader.GetByte(0);
+                reader.Close();
                 return (UTYPE)utype;
             }
             else return (UTYPE)(-1);

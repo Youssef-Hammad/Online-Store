@@ -10,15 +10,16 @@ using System.Windows.Forms;
 
 namespace OnlineStore
 {
-    public partial class deleteProduct : Form
+    public partial class EditQuantity : Form
     {
         private User currUser;
-        private List<Store> stores;
-        private List<string> productNames;
         private MerchantHandler merchantHandler;
         private StoreHandler storeHandler;
+        private List<Store> stores;
+        private List<string> productNames;
         private string choosenStoreName;
-        private string productToDelete;
+        private string choosemProductName;
+        private int newQty;
 
         private void InitStoreList(List<Store> storeList, ComboBox comboBox)
         {
@@ -37,9 +38,9 @@ namespace OnlineStore
             }
         }
 
-        public deleteProduct(string connString, User merchant)
+        public EditQuantity(string connString, User currUser)
         {
-            currUser = merchant;
+            this.currUser = currUser;
             merchantHandler = new MerchantHandler(connString);
             storeHandler = new StoreHandler(connString);
             stores = merchantHandler.GetMerchantStores(currUser);
@@ -47,25 +48,9 @@ namespace OnlineStore
             InitStoreList(stores, comboBox1);
         }
 
-        private void deleteProduct_Load(object sender, EventArgs e)
+        private void EditQuantity_Load(object sender, EventArgs e)
         {
 
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void LiveStatistics_Click(object sender, EventArgs e)
-        {
-            productToDelete = comboBox2.Text;
-            merchantHandler.DeleteProductFromStore(currUser, choosenStoreName, productToDelete);
-            MessageBox.Show("Product deleted successfuly");
-        }
-
-        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -73,6 +58,30 @@ namespace OnlineStore
             choosenStoreName = comboBox1.Text;
             productNames = storeHandler.GetStoreProducts(currUser, choosenStoreName);
             InitProductList(productNames, comboBox2);
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, EventArgs e)
+        {
+            choosemProductName = comboBox2.Text;
+            newQty = Convert.ToInt32(textBox1.Text);
+            merchantHandler.EditProductQty(currUser, choosenStoreName, choosemProductName, newQty);
+            MessageBox.Show("Product quantity updated successfuly");
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

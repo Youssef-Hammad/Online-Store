@@ -72,5 +72,11 @@ namespace OnlineStore
             deleteProduct deleteWindow = new deleteProduct(connString, currUser);
             deleteWindow.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            EditQuantity editWindow = new EditQuantity(connString, currUser);
+            editWindow.Show();
+        }
     }
 }

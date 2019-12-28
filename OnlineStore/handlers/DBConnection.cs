@@ -13,7 +13,7 @@ namespace OnlineStore
 
         public DBConnection(string connString)
         {
-            this.dbConnection = new SqlConnection(connString);
+            dbConnection = new SqlConnection(connString);
         }
 
         public void Open()
