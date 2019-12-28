@@ -112,41 +112,6 @@ namespace OnlineStore
 
         }
 
-        public bool AddProduct(Store store, Product product)
-        {
-            string pName = product.GetProductInfo().GetName();
-            float pPrice = product.GetProductInfo().GetPrice();
-            string pCategory = product.GetProductInfo().GetCategory();
-
-            StoreInfo sInfo = store.GetStoreInfo();
-            string sName = sInfo.GetName();
-
-            string query = "SELECT FROM storesProducts WHERE STORENAME = '" + sName + "' AND PRODUCTNAME = '" + pName + "'";
-
-            SqlCommand cmd = new SqlCommand(query, sqlConnection);
-			if(cmd.ExecuteScalar() == null)
-            {
-                query = "INSERT INTO storeProducts(STORENAME,PRODUCTNAME) VALUES('" + sName + "','" + pName + "')";
-
-                cmd = new SqlCommand(query, sqlConnection);
-
-                try
-                {
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                catch (SqlException ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                    return false;
-                }
-            }
-			else
-            {
-                return false;
-            }
-        }
-
         public List<string> GetStoreProducts(User merchant, string storeName)
         {
             string merchantName = merchant.GetUserInfo().GetUsername();

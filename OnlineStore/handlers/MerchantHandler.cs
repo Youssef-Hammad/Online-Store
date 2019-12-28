@@ -9,6 +9,7 @@ namespace OnlineStore
     {
         private DBConnection dbConnection;
         private SqlConnection sqlConnection;
+        private StoreActionHandler storeActionHandler;
         private string connString;
 
         public MerchantHandler(string connString)
@@ -94,7 +95,7 @@ namespace OnlineStore
             try
             {
                 insertCmd.ExecuteNonQuery();
-                StoreActionHandler storeActionHandler = new StoreActionHandler(connString);
+                storeActionHandler = new StoreActionHandler(connString);
                 storeActionHandler.SaveAction(merchant, storeName, productName, quantity, "add");
                 return true;
             }
@@ -108,23 +109,27 @@ namespace OnlineStore
         public void DeleteProductFromStore(User merchant, string storeName, string productName)
         {
             string merchantName = merchant.GetUserInfo().GetUsername();
+            Console.WriteLine(merchantName + storeName + productName);
             string query = "SELECT QTY FROM PRODUCTSTOCK " +
                            "WHERE [SID] IN ( SELECT [SID] FROM STORES " +
                            "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
                            "AND PID IN ( SELECT PID FROM APPROVEDPRODUCTS " +
                            "WHERE PRODUCTNAME = '" + productName + "');";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            //SqlDataReader reader = cmd.ExecuteReader();
+            //while (reader.Read()) Console.WriteLine(reader.GetString(0));
+            //reader.Close();
             int quantity = (int) cmd.ExecuteScalar();
 
             query = "DELETE FROM PRODUCTSTOCK " +
-                           "WHERE [SID] IN ( SELECT [SID] FROM STORES " +
-                           "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
-                           "AND PID IN ( SELECT PID FROM APPROVEDPRODUCTS " +
-                           "WHERE PRODUCTNAME = '" + productName + "');";
+                    "WHERE [SID] IN ( SELECT [SID] FROM STORES " +
+                    "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
+                    "AND PID IN ( SELECT PID FROM APPROVEDPRODUCTS " +
+                    "WHERE PRODUCTNAME = '" + productName + "');";
             cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
 
-            StoreActionHandler storeActionHandler = new StoreActionHandler(connString);
+            storeActionHandler = new StoreActionHandler(connString);
             storeActionHandler.SaveAction(merchant, storeName, productName, quantity, "delete");
         }
 
@@ -132,6 +137,22 @@ namespace OnlineStore
         {
             AuthenticationHandler AuthHandler = new AuthenticationHandler(sqlConnection.ConnectionString);
             return AuthHandler.VerifyUser(merchant) && merchant.GetUserInfo().GetUserType() == UTYPE.MERCHANT;
+        }
+
+        public void EditProductQty(User merchant, string storeName, string productName, int newQty)
+        {
+            string merchantName = merchant.GetUserInfo().GetUsername();
+            string query = "UPDATE PRODUCTSTOCK " +
+                           "SET QTY = '" + newQty + "' " +
+                           "WHERE [SID] IN (SELECT [SID] FROM STORES " +
+                           "WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "') " +
+                           "AND PID IN (SELECT PID FROM APPROVEDPRODUCTS " +
+                           "WHERE PRODUCTNAME = '" + productName + "');";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            cmd.ExecuteNonQuery();
+
+            storeActionHandler = new StoreActionHandler(connString);
+            storeActionHandler.SaveAction(merchant, storeName, productName, newQty, "edit");
         }
 
         ~MerchantHandler()

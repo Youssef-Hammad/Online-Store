@@ -37,17 +37,39 @@ namespace OnlineStore
         public void SaveAction(User merchant, string storeName, string productName, int quantity, string action)
         {
             string merchantName = merchant.GetUserInfo().GetUsername();
+
             string query = "SELECT [SID] FROM STORES WHERE STORENAME = '" + storeName + "' AND OWNERUSR = '" + merchantName + "';";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
             Int32 storeId = (Int32) cmd.ExecuteScalar();
 
             query = "SELECT PID FROM APPROVEDPRODUCTS WHERE PRODUCTNAME = '" + productName + "';";
             cmd = new SqlCommand(query, sqlConnection);
-            Int32 productId = (Int32) cmd.ExecuteScalar();
+            int productId = (int) cmd.ExecuteScalar();
 
             query = "INSERT INTO STOREACTIONS ([SID], PID, QTY, [STATEMENT]) VALUES ('" + storeId + "', '" + productId + "', '" + quantity + "', '" + action + "');";
             cmd = new SqlCommand(query, sqlConnection);
             cmd.ExecuteNonQuery();
+        }
+
+        private int GetLatestQty(int storeId, string productName)
+        {
+            string query = "SELECT QTY FROM STOREACTIONS " +
+                           "WHERE [SID] = '" + storeId + "' AND PID IN (SELECT PID FROM APPROVEDPRODUCTS " +
+                           "WHERE PRODUCTNAME = '" + productName + "' )" +
+                           "AND AID IN (SELECT MAX(AID) FROM STOREACTIONS);";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            int qty = (int) cmd.ExecuteScalar();
+            return qty;
+        }
+
+        private void DeleteLastAction(int rowNum)
+        {
+            string query = "DELETE FROM STOREACTIONS WHERE AID IN (SELECT MAX(AID) FROM STOREACTIONS)";
+            SqlCommand cmd = new SqlCommand(query, sqlConnection);
+            for (int i = 0; i < rowNum; ++i)
+            {
+                cmd.ExecuteNonQuery();
+            }
         }
 
         public void UndoAction(User merchant, Int32 storeId, string productName, Int32 quantity, string action)
@@ -55,15 +77,24 @@ namespace OnlineStore
             merchantHandler = new MerchantHandler(connString);
             string query = "SELECT STORENAME FROM STORES WHERE [SID] = '" + storeId + "';";
             SqlCommand cmd = new SqlCommand(query, sqlConnection);
-            string storeName = (string)cmd.ExecuteScalar();
+            string storeName = (string) cmd.ExecuteScalar();
 
             if (action.Equals("add"))
             {
                 merchantHandler.DeleteProductFromStore(merchant, storeName, productName);
+                DeleteLastAction(2);
             }
             else if (action.Equals("delete"))
             {
                 merchantHandler.AddProductToStore(productName, storeName, merchant, quantity);
+                DeleteLastAction(2);
+            }
+            else if (action.Equals("edit"))
+            {
+                merchantHandler.DeleteProductFromStore(merchant, storeName, productName);
+                int lastQty = GetLatestQty(storeId, productName);
+                merchantHandler.AddProductToStore(productName, storeName, merchant, lastQty);
+                DeleteLastAction(3);
             }
         }
         

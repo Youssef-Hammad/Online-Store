@@ -32,6 +32,7 @@ namespace OnlineStore
         private void button1_Click(object sender, EventArgs e)
         {
             storeActionHandler.UndoAction(currUser, storeId, productName, quantity, actionStatement);
+            MessageBox.Show("Action Reverted");
         }
     }
 }

@@ -134,6 +134,12 @@
     <Compile Include="GUI forms\ControlPanels\merchantCP\deleteProduct.Designer.cs">
       <DependentUpon>deleteProduct.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\EditQuantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI forms\ControlPanels\merchantCP\EditQuantity.Designer.cs">
+      <DependentUpon>EditQuantity.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI forms\ControlPanels\merchantCP\LiveStatistics.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\deleteProduct.resx">
       <DependentUpon>deleteProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\EditQuantity.resx">
+      <DependentUpon>EditQuantity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI forms\ControlPanels\merchantCP\LiveStatistics.resx">
       <DependentUpon>LiveStatistics.cs</DependentUpon>
